@@ -1,1 +1,14 @@
 les raffinages c’est chiant…
+
+Comment utiliser git ?
+
+git add .
+git commit -a -m "test 3"
+git push
+
+
+NE PAS OUBLIER DE TOUJOURS FAIRE
+
+git pull
+
+POUR METTRE SON REPO À JOUR
