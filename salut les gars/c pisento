@@ -12,3 +12,10 @@ NE PAS OUBLIER DE TOUJOURS FAIRE
 git pull
 
 POUR METTRE SON REPO À JOUR
+
+CONVENTIONS
+Noms de modules majuscules au début des mots
+Noms des fonctions avec une majuscule au début
+Variables en minuscules
+Types en majuscules
+Toujours mettre un underscore entre les noms
