@@ -24,8 +24,8 @@ package Liste_Chainee is
 
 
 	-- Enregistrer un élément dans une Liste.
-	procedure Enregistrer (Liste : in out T_LC ; Element : in T_Element ; Donnee : in T_Donnee) with
-		Post => Est_Present (Liste, Element)                -- élémen insérée
+	procedure Enregistrer (Liste : in out T_LC ; Element : in T_Element) with
+		Post => Est_Present (Liste, Element);                -- élémen insérée
 
 	-- Supprimer un élément dans une Liste.
 	procedure Supprimer (Liste : in out T_LC ; Element : in T_Element) with
@@ -35,10 +35,6 @@ package Liste_Chainee is
 
 	-- Savoir si un Element est présent dans une Liste.
 	function Est_Present (Liste : in T_LC ; Element : in T_Element) return Boolean;
-
-
-	-- Obtenir la donnée associée à un Element dans la Liste.
-	function La_Donnee (Liste : in T_LC ; Element : in T_Element) return T_Donnee;
 
 
 	-- Supprimer tous les éléments d'une Liste.
