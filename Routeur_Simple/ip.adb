@@ -2,6 +2,7 @@ with My_Strings;         use My_Strings;
 with Str_Split;
 
 package body IP is
+  UN_OCTET: constant T_IP := 2 ** 8;       -- 256
 
   procedure Entier_Vers_IP (ip : out T_IP; n : in Integer) is
   begin
@@ -15,7 +16,6 @@ package body IP is
       new Str_Split (NbrArgs => 4);
     use Split4;
 
-    UN_OCTET: constant T_IP := 2 ** 8;       -- 256
     buffer : T_TAB;
     new_ip : T_IP;
     temp_ip : T_IP;
@@ -43,8 +43,12 @@ package body IP is
 
 
   function IP_Vers_Texte (ip : T_IP) return Unbounded_String is
+    s4 : constant String := Entier_Positif_Vers_Texte(Integer(ip mod 256));
+    s3 : constant String := Entier_Positif_Vers_Texte(Integer(ip / (2 ** 8) mod 256));
+    s2 : constant String := Entier_Positif_Vers_Texte(Integer(ip / (2 ** 16) mod 256));
+    s1 : constant String := Entier_Positif_Vers_Texte(Integer(ip / (2 ** 24) mod 256));
   begin
-    return To_Unbounded_String("12") & To_Unbounded_String("." & Entier_Positif_Vers_Texte(24));
+    return To_Unbounded_String(s1 & "." & s2 & "." & s3 & "." & s4);
   end IP_Vers_Texte;
 
 
