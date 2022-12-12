@@ -1,0 +1,86 @@
+V "GNAT Lib v12"
+M P W=b
+A -gnata
+A -gnatwa
+P SS ZX
+
+RN
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+
+U test_ip%b		test_ip.adb		6532e0b1 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.strings%s		a-string.ads		a-string.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W ip%s			ip.adb			ip.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+
+D ada.ads		20221121095525 76789da1 ada%s
+D a-charac.ads		20221121095525 2d3ec45b ada.characters%s
+D a-chlat1.ads		20221121095525 e0d72e76 ada.characters.latin_1%s
+D a-except.ads		20221121095525 2a7d8d70 ada.exceptions%s
+D a-finali.ads		20221121095525 bf4f806b ada.finalization%s
+D a-ioexce.ads		20221121095525 40018c65 ada.io_exceptions%s
+D a-stream.ads		20221121095525 119b8fb3 ada.streams%s
+D a-string.ads		20221121095525 90ac6797 ada.strings%s
+D a-strmap.ads		20221121095525 233229cd ada.strings.maps%s
+D a-sttebu.ads		20221121095525 18209c64 ada.strings.text_buffers%s
+D a-strunb.ads		20221121095525 5837d881 ada.strings.unbounded%s
+D a-stuten.ads		20221121095525 33c54060 ada.strings.utf_encoding%s
+D a-tags.ads		20221121095525 9eaa38c6 ada.tags%s
+D a-textio.ads		20221121095525 deada98a ada.text_io%s
+D a-unccon.ads		20221121095525 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20221121095525 edec285f interfaces%s
+D i-cstrea.ads		20221121095525 e53d8b8e interfaces.c_streams%s
+D ip.ads		20221212103132 5fe97928 ip%s
+D system.ads		20221121095525 a2da961d system%s
+D s-atocou.ads		20221121095525 dc18efc3 system.atomic_counters%s
+D s-crtl.ads		20221121095525 8a0692f8 system.crtl%s
+D s-exctab.ads		20221121095525 91bef6ef system.exception_table%s
+D s-ficobl.ads		20221121095525 dc5161d4 system.file_control_block%s
+D s-finroo.ads		20221121095525 4ff27390 system.finalization_root%s
+D s-parame.ads		20221121095525 d494a4a6 system.parameters%s
+D s-putima.ads		20221121095525 4e095881 system.put_images%s
+D s-secsta.ads		20221121095525 62cd9202 system.secondary_stack%s
+D s-soflin.ads		20221121095525 df77073e system.soft_links%s
+D s-stache.ads		20221121095525 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20221121095525 1c9580f6 system.standard_library%s
+D s-stoele.ads		20221121095525 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20221121095525 8f5a9db6 system.storage_elements%b
+D s-stratt.ads		20221121095525 f7dfd786 system.stream_attributes%s
+D s-traent.ads		20221121095525 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20221121095525 fa2a7f59 system.unsigned_types%s
+D s-wchcon.ads		20221121095525 d9032363 system.wch_con%s
+D test_ip.adb		20221212103304 bc41e892 test_ip%b
+D unchconv.ads		20221121095525 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z b b [test_ip standard 5 11 none]
+G r c none [test_ip standard 5 11 none] [texte_vers_ip ip 19 13 none]
+G r c none [test_ip standard 5 11 none] [ip_vers_texte ip 23 12 none]
+X 1 ada.ads
+16K9*Ada 20e8 37|2r6 2r36 3r6 3r28
+X 8 a-string.ads
+16K13*Strings 35e16 37|2r10 2r40
+X 11 a-strunb.ads
+85K21*Unbounded 765e26 37|2w18 2r48
+107V13*To_Unbounded_String{90R9} 37|8s22
+120V13*To_String{string} 37|10s7
+X 14 a-textio.ads
+58K13*Text_IO 727e16 37|3w10 3r32
+464U14*Put 37|10s3
+X 18 ip.ads
+5K9*IP 36e7 37|1w6 1r19
+7M14*T_IP 37|6r9
+19U13*Texte_Vers_IP 37|8s3
+23V12*IP_Vers_Texte{11|90R9} 37|10s17
+X 37 test_ip.adb
+5U11*test_ip 5b11 11l5 11t12
+6m3 IP1{18|7M14} 8m17 10r31
+

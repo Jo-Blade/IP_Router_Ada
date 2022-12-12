@@ -2,7 +2,7 @@ with Ada.Strings.Unbounded;    use Ada.Strings.Unbounded;
 with Ada.Text_IO;              use Ada.Text_IO;
 with Str_Split;
 
-with Str2Int;                  use Str2Int;
+with My_Strings;                  use My_Strings;
 with Ada.Integer_Text_IO;      use Ada.Integer_Text_IO;
 
 procedure split_exemple is
@@ -10,7 +10,7 @@ procedure split_exemple is
   exemple_chaine_error : constant String := "ceci est test";
   exemple_chaine_error2 : constant String := "ceci est un mauvais test";
 
-  exemple_chaine_ip : constant String := "192.168.1.200";
+  exemple_chaine_ip : constant String := "192.168.0.200";
 
   package Split4 is
     new Str_Split (NbrArgs => 4);
@@ -49,7 +49,7 @@ begin
     n := Texte_Vers_Entier( To_String(tab(i)) );
 
     New_Line;
-    Put( n );
+    Put( Entier_Positif_Vers_Texte(n) );
   end loop;
 
 end split_exemple;

@@ -1,4 +1,4 @@
-with Str2Int;         use Str2Int;
+with My_Strings;         use My_Strings;
 with Str_Split;
 
 package body IP is
@@ -44,7 +44,7 @@ package body IP is
 
   function IP_Vers_Texte (ip : T_IP) return Unbounded_String is
   begin
-    return To_Unbounded_String("12") & To_Unbounded_String("." & Integer'Image(24));
+    return To_Unbounded_String("12") & To_Unbounded_String("." & Entier_Positif_Vers_Texte(24));
   end IP_Vers_Texte;
 
 

@@ -1,0 +1,100 @@
+V "GNAT Lib v12"
+A -gnata
+A -gnatwa
+P SS ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTIONS
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_ELABORATION_CODE
+
+U my_strings%b		my_strings.adb		0ca17bc4 NE OO PK
+Z ada.exceptions%s	a-except.adb		a-except.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+Z system.assertions%s	s-assert.adb		s-assert.ali
+Z system.img_int%s	s-imgint.ads		s-imgint.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+
+U my_strings%s		my_strings.ads		51513efa EE OO PK
+W ada%s			ada.ads			ada.ali
+W ada.strings%s		a-string.ads		a-string.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+Z system%s		system.ads		system.ali
+Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20221121095525 76789da1 ada%s
+D a-assert.ads		20221121095525 ba465f5c ada.assertions%s
+D a-charac.ads		20221121095525 2d3ec45b ada.characters%s
+D a-chlat1.ads		20221121095525 e0d72e76 ada.characters.latin_1%s
+D a-except.ads		20221121095525 2a7d8d70 ada.exceptions%s
+D a-finali.ads		20221121095525 bf4f806b ada.finalization%s
+D a-stream.ads		20221121095525 119b8fb3 ada.streams%s
+D a-string.ads		20221121095525 90ac6797 ada.strings%s
+D a-strmap.ads		20221121095525 233229cd ada.strings.maps%s
+D a-sttebu.ads		20221121095525 18209c64 ada.strings.text_buffers%s
+D a-strunb.ads		20221121095525 5837d881 ada.strings.unbounded%s
+D a-stuten.ads		20221121095525 33c54060 ada.strings.utf_encoding%s
+D a-tags.ads		20221121095525 9eaa38c6 ada.tags%s
+D a-unccon.ads		20221121095525 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20221121095525 edec285f interfaces%s
+D my_strings.ads	20221212105709 0966e67b my_strings%s
+D my_strings.adb	20221212110041 05c79dbf my_strings%b
+D system.ads		20221121095525 a2da961d system%s
+D s-assert.ads		20221121095525 9c4520c7 system.assertions%s
+D s-atocou.ads		20221121095525 dc18efc3 system.atomic_counters%s
+D s-exctab.ads		20221121095525 91bef6ef system.exception_table%s
+D s-finroo.ads		20221121095525 4ff27390 system.finalization_root%s
+D s-imagei.ads		20221121095525 0d3f86a7 system.image_i%s
+D s-imgint.ads		20221121095525 bdb6f5ec system.img_int%s
+D s-parame.ads		20221121095525 d494a4a6 system.parameters%s
+D s-putima.ads		20221121095525 4e095881 system.put_images%s
+D s-secsta.ads		20221121095525 62cd9202 system.secondary_stack%s
+D s-soflin.ads		20221121095525 df77073e system.soft_links%s
+D s-stache.ads		20221121095525 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20221121095525 1c9580f6 system.standard_library%s
+D s-stoele.ads		20221121095525 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20221121095525 8f5a9db6 system.storage_elements%b
+D s-stratt.ads		20221121095525 f7dfd786 system.stream_attributes%s
+D s-traent.ads		20221121095525 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20221121095525 fa2a7f59 system.unsigned_types%s
+D unchconv.ads		20221121095525 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z s b [to_unbounded_string_n my_strings 9 12 none]
+G c Z s b [caractere_vers_entier my_strings 16 12 none]
+G c Z s b [texte_vers_entier my_strings 25 14 none]
+G c Z s b [entier_positif_vers_texte my_strings 30 14 none]
+X 1 ada.ads
+16K9*Ada 20e8 16|1r6 1r36
+X 8 a-string.ads
+16K13*Strings 35e16 16|1r10 1r40
+X 11 a-strunb.ads
+85K21*Unbounded 765e26 16|1w18 1r48
+90R9*Unbounded_String<6|43R9> 744e15 16|10r28 17|4r28
+107V13*To_Unbounded_String{90R9} 17|13s12
+X 16 my_strings.ads
+3K9*My_Strings 34l5 34e15 17|1b14 73l5 73t15
+5X3*Erreur_Pas_Un_Entier 17|43r19 50r19 57r17
+9V12*To_Unbounded_String_N{11|90R9} 9>35 10>5 17|3b12 14l7 14t28
+9a35 chaine{string} 11r18 17|3b35 6r26 6r41 9r14 9r29 10r25
+10i5 n{integer} 11r13 17|4b5 6r56 9r44
+16V12*Caractere_Vers_Entier{integer} 16>35 18r19 19r8 17|17b12 21l7 21t28
+. 54s33
+16e35 c{character} 17r20 17r28 17|17b35 20r26
+25V14*Texte_Vers_Entier{integer} 25>33 17|24b12 63l7 63t24
+25a33 texte{string} 17|24b31 33r14 33r29 34r12 40r18 47r18
+30V14*Entier_Positif_Vers_Texte{string} 30>41 17|66b12 71l7 71t32
+30i41 n{integer} 32r20 17|66b39 68r52
+X 17 my_strings.adb
+6a5 temp_chaine{string} 10m7 13r32
+9i9 i{integer} 10r19 10r32
+26e5 c{character} 34m7 36r12 54r55
+27i5 signe{integer} 30m5 48m13 54r25
+28i5 s{integer} 31m5 54m11 54r16 61r12
+33i9 i{integer} 34r18 40r14 47r14
+68a5 temp_chaine{string} 70r12 70r29
+

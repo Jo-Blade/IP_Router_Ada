@@ -1,20 +1,6 @@
+with My_Strings;      use My_Strings;
+
 package body Str_Split is
-
-  -- créer un Unbounded_String avec les n premiers caractères
-  -- de chaine
-  function To_Unbounded_String_N (chaine : in String;
-    n : in Integer) return Unbounded_String is
-
-    temp_chaine : String(chaine'First..(chaine'First + n - 1));
-  begin
-
-    for i in chaine'First..(chaine'First + n - 1) loop
-      temp_chaine(i) := chaine(i);
-    end loop;
-
-    return To_Unbounded_String(temp_chaine);
-  end To_Unbounded_String_N;
-
 
   procedure Split(Tableau : out T_TAB; 
     chaine : in Unbounded_String; c : in Character) is
