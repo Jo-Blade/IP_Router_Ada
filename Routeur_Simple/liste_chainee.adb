@@ -15,64 +15,85 @@ package body Liste_Chainee is
 		return Liste = null;
 	end;
 
-
-    function Taille (Liste : in T_LC) return Integer is
-        L : T_LC;
-        Compteur : Integer;
+    procedure Ajouter_Debut (Liste: in out T_LC; Element: T_Element) is
     begin
-        Compteur := 0;
-        L := Liste;
-        while not Est_Vide(L) loop
-            Compteur := Compteur + 1;
-            L := L.all.Suivant;
-        end loop;
-
-        return Compteur;
-	end Taille;
-
-
-    procedure Enregistrer (Liste : in out T_LC ; Element : in T_Element ; Donnee : in T_Donnee) is
+        Liste := new T_Cellule'(Element, Liste);
+    end Ajouter_Debut;
+    
+    function Premier (Liste: in T_LC) return T_Element is
     begin
-        if Est_Vide(Liste) then
-            Liste := new T_Cellule'(Element, Donnee, null);
+        if Liste = null then
+            raise Element_Absent_Error;
+        end if;
+        return Liste.all.Element;
+    end Premier;
+        
+    function Taille(Liste: in T_LC) return Integer is
+    begin
+        if Liste = null then
+            return 0;
+        else
+            return 1 + Taille(Liste.all.Suivante);
+        end if;
+    end Taille;
+
+
+
+    function Est_Present(Liste: in T_LC; Element: in T_Element) return Boolean is
+    begin
+        if Liste = Null then
+            return False;
         elsif Liste.all.Element = Element then
-            Liste.all.Donnee := Donnee;
+            return True;
         else
-            Enregistrer(Liste.all.suivant, Element, Donnee);
+            return Est_Present(Liste.all.Suivante, Element);
         end if;
-	end Enregistrer;
+    end Est_Present;
 
 
-    function Est_Presente (Liste : in T_LC ; Element : in T_Element) return Boolean is
-        L : T_LC;
+    procedure Supprimer(Liste: in out T_LC; Indice: in Integer) is
+        A_Detruire: T_LC;
     begin
-        L := Liste;
-        while not Est_Vide(L) loop
-            if L.all.element = Element then
-                return True;
-            else
-                null;
-            end if;
-            L := L.all.Suivant;
-        end loop;
-        return False;
-	end;
-
-
-    procedure Supprimer (Liste : in out T_LC ; Element : in T_Element) is
-        det : T_LC;
-    begin
-        if Est_Vide(Liste) then
-            raise Element_Absente_Exception;
-        elsif  Liste.all.element = Element then
-            det := Liste;
-            Liste := Liste.all.Suivant;
-            free(det);
+        if Liste = null or Indice < 0 then
+            raise Indice_Error;
+        elsif Indice = 0 then
+            A_Detruire := Liste;
+            Liste := Liste.all.Suivante;
+            Free (A_Detruire);
         else
-            Supprimer(Liste.all.Suivant, Element);
+            Supprimer(Liste.all.Suivante, Indice - 1);
         end if;
-	end Supprimer;
+    end Supprimer;
+    
+    function Cellule_Contenant(Element: T_Element; Liste: in T_LC) return T_LC is
+    begin
+        if Liste = null then
+            raise Element_Absent_Error;
+        elsif Liste.all.Element = Element then
+            return Liste;
+        else
+            return Cellule_Contenant(Element, Liste.all.Suivante);
+        end if;
+    end Cellule_Contenant;
 
+    procedure Inserer_Apres (Liste: in out T_Liste ; Nouveau, Element: in T_Element) is
+        Reference: T_Liste;
+    begin
+        Reference := Cellule_Contenant (Element, Liste);
+        --! peut lever Element_Absent_Error que l'on laisse se propager.
+        Reference.all.Suivante := new T_Cellule'(Nouveau, Reference.all.Suivante);
+    end Inserer_Apres;
+
+    function Ieme(Liste: in T_LC; Indice: in Integer) return T_Element is
+    begin
+        if Liste = null or Indice < 0 then
+            raise Indice_Error;
+        elsif Indice = 0 then
+            return Liste.all.Element;
+        else
+            return Ieme(Liste.all.Suivante, Indice - 1);
+        end if;
+    end Ieme;
 
     procedure Vider (Liste : in out T_LC) is
         L : T_LC;
