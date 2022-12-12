@@ -13,6 +13,10 @@ package Str_Split is
 
   -- Permet de couper une chaine sur le caractère c
   -- et remplit un tableau de NbrArgs éléments.
+  --
+  -- si on a plusieurs fois c d’affilé dans la chaine,
+  -- on ne coupe qu’une seule fois.
+  --
   -- exception si pas le bon nombre d’arguments
   -- dans la chaine
   -- Tableau : Tableau où on récupère les élements découpés

@@ -17,13 +17,17 @@ package body Str_Split is
     while j < str'Last loop
       if str(j) = c then
 
-        if n > NbrArgs then
-          raise Erreur_Nombre_Arguments;
+        if (i = 0) then
+          Null;
         else
-          Tableau(n) := To_Unbounded_String_N(buffer, i);
-          i := 0;
+          if n > NbrArgs then
+            raise Erreur_Nombre_Arguments;
+          else
+            Tableau(n) := To_Unbounded_String_N(buffer, i);
+            i := 0;
+          end if;
+          n := n + 1;
         end if;
-        n := n + 1;
 
       else
         i := i + 1;

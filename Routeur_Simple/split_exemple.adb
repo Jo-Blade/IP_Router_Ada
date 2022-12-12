@@ -6,11 +6,13 @@ with My_Strings;                  use My_Strings;
 with Ada.Integer_Text_IO;      use Ada.Integer_Text_IO;
 
 procedure split_exemple is
-  exemple_chaine : constant String := "ceci est un test";
+  exemple_chaine : constant String := "ceci    est un test";
   exemple_chaine_error : constant String := "ceci est test";
   exemple_chaine_error2 : constant String := "ceci est un mauvais test";
 
-  exemple_chaine_ip : constant String := "192.168.0.200";
+  -- même si on a plusieurs points, ça reste correct car Split
+  -- va couper qu’une seule fois sur les points
+  exemple_chaine_ip : constant String := "192.....168.0.200";
 
   package Split4 is
     new Str_Split (NbrArgs => 4);
