@@ -48,7 +48,7 @@ begin
     begin 
         Texte_Vers_IP(IP2, To_Unbounded_String("192.168.a.20"));
     exception
-        when others=>
+        when Erreur_Chaine_Non_IP =>
             put(" Erreur_Chaine_Non_IP levée");
     end;
     

@@ -39,6 +39,8 @@ package body IP is
     exception
         when Erreur_Nombre_Arguments =>
             raise Erreur_Chaine_Non_IP;
+        when Erreur_Pas_Un_Entier =>
+            raise Erreur_Chaine_Non_IP;
     end Texte_Vers_IP;
 
 

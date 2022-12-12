@@ -1,5 +1,7 @@
 V "GNAT Lib v9"
 M P W=b
+A -gnata
+A -gnatwa
 P ZX
 
 RN
@@ -12,7 +14,7 @@ RV NO_STANDARD_STORAGE_POOLS
 RV NO_DEFAULT_INITIALIZATION
 RV SPARK_05
 
-U test_ip%b		test_ip.adb		391f5677 NE OO SU IL
+U test_ip%b		test_ip.adb		4800441a NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -22,6 +24,7 @@ Z ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W ip%s			ip.adb			ip.ali
 W my_strings%s		my_strings.adb		my_strings.ali
+Z system.assertions%s	s-assert.adb		s-assert.ali
 Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 Z system.soft_links%s	s-soflin.adb		s-soflin.ali
 Z system.standard_library%s  s-stalib.adb	s-stalib.ali
@@ -46,6 +49,7 @@ D i-cstrea.ads		20210601075304 e53d8b8e interfaces.c_streams%s
 D ip.ads		20221212141216 5fe97928 ip%s
 D my_strings.ads	20221212141216 0966e67b my_strings%s
 D system.ads		20210601075304 4635ec04 system%s
+D s-assert.ads		20210601075304 cd8d2c94 system.assertions%s
 D s-atocou.ads		20210601075304 b45c2d8d system.atomic_counters%s
 D s-crtl.ads		20210601075304 0ebbdb71 system.crtl%s
 D s-exctab.ads		20210601075304 54135002 system.exception_table%s
@@ -66,42 +70,43 @@ D s-stratt.ads		20210601075304 aedef97e system.stream_attributes%s
 D s-traent.ads		20210601075304 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20210601075304 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20210601075304 1b7d22d2 system.wch_con%s
-D test_ip.adb		20221212173557 915e3ac5 test_ip%b
+D test_ip.adb		20221212174253 e04128a8 test_ip%b
 X 1 ada.ads
-16K9*Ada 20e8 41|1r6 1r36 2r6 2r28 3r6 3r36
+16K9*Ada 20e8 42|1r6 1r36 2r6 2r28 3r6 3r36
 X 6 a-inteio.ads
-18K13*Integer_Text_IO[14|46] 41|3w10 3r40
+18K13*Integer_Text_IO[14|46] 42|3w10 3r40
 X 9 a-string.ads
-16K13*Strings 35e16 41|1r10 1r40
+16K13*Strings 35e16 42|1r10 1r40
 X 11 a-strunb.ads
-76K21*Unbounded 491e26 41|1w18 1r48
-79R9*Unbounded_String<5|43R9> 474e14 41|15r12 16r12
-94V13*To_Unbounded_String{79R9} 41|22s24 23s24 24s24 25s28 26s28 33s22 42s24
+76K21*Unbounded 491e26 42|1w18 1r48
+79R9*Unbounded_String<5|43R9> 474e14 42|15r12 16r12
+94V13*To_Unbounded_String{79R9} 42|22s24 23s24 24s24 25s28 26s28 33s22 42s24
 . 44s24 46s26 47s26 49s28 57s24 60s24 61s24
-166V14*"="{boolean} 41|46s24 47s24
+166V14*"="{boolean} 42|46s24 47s24
 X 13 a-textio.ads
-49K13*Text_IO 471e16 41|2w10 2r32
-242U14*Put 41|52s13
+49K13*Text_IO 471e16 42|2w10 2r32
+242U14*Put 42|52s13
 X 18 ip.ads
-5K9*IP 36e7 41|4w6 4r19
-7M14*T_IP 41|8r11 9r11 10r11 11r9 12r15 13r15 14r17
-14U13*Entier_Vers_IP 41|56s5 59s5
-19U13*Texte_Vers_IP 41|22s5 23s5 24s5 25s5 26s5 33s5 42s5 44s5 49s9 57s5
+5K9*IP 36e7 42|4w6 4r19
+7M14*T_IP 42|8r11 9r11 10r11 11r9 12r15 13r15 14r17
+9X3*Erreur_Chaine_Non_IP 42|51r14
+14U13*Entier_Vers_IP 42|56s5 59s5
+19U13*Texte_Vers_IP 42|22s5 23s5 24s5 25s5 26s5 33s5 42s5 44s5 49s9 57s5
 . 60s5 61s5
-23V12*IP_Vers_Texte{11|79R9} 41|43s13 45s13
-26V12*Lire_Bit{integer} 41|35s24 38s24
-30V12*Egalite_IP{boolean} 41|27s19 28s19 29s23 30s19 58s19 62s19 63s19
+23V12*IP_Vers_Texte{11|79R9} 42|43s13 45s13
+26V12*Lire_Bit{integer} 42|35s24 38s24
+30V12*Egalite_IP{boolean} 42|27s19 28s19 29s23 30s19 58s19 62s19 63s19
 X 19 my_strings.ads
-3K9*My_Strings 34e15 41|5w6 5r30
+3K9*My_Strings 34e15 42|5w6 5r30
 X 20 system.ads
 67M9*Address
-X 27 s-memory.ads
+X 28 s-memory.ads
 53V13*Alloc{20|67M9} 103i<c,__gnat_malloc>22
 68U14*Free 104i<c,__gnat_free>22
 76V13*Realloc{20|67M9} 105i<c,__gnat_realloc>22
-X 33 s-stalib.adb
+X 34 s-stalib.adb
 93U14 Break_Start 94i<c,__gnat_break_start>22
-X 41 test_ip.adb
+X 42 test_ip.adb
 7U11*test_ip 7b11 65l5 65t12
 8m5 IP1{18|7M14} 22m19 27r30 28r30 29r34 30r30
 9m5 IP2{18|7M14} 23m19 27r34 28r34 42m19 43r27 49m23 57m19 58r30 60m19 62r30

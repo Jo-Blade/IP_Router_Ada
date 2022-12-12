@@ -1,4 +1,6 @@
 V "GNAT Lib v9"
+A -gnata
+A -gnatwa
 P ZX
 
 RN
