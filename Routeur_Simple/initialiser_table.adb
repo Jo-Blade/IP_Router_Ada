@@ -11,12 +11,12 @@ function Initialiser_Table (Fichier : in File_Type) is
     new Str_Split (NbrArgs => 3);
     use Split3;
 
-    package Liste_Chainee_record is new Liste_Chainee(Element => T_Valeur);
+    package Liste_Chainee_record is new Liste_Chainee(Element => T_Routage_Valeur);
     use Liste_Chainee_record;
     Tab : T_TAB;
     Table : T_LC;
     Ligne : Unbounded_String;
-    Elem : T_Valeur;
+    Elem : T_Routage_Valeur;
 begin
     open(Fichier, In_File, "");
     loop
