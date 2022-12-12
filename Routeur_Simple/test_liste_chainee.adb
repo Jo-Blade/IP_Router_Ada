@@ -5,27 +5,27 @@ with Liste_Chainee;
 procedure Test_Liste_Chainee is
 
 	package Liste_Chainee_String is
-		new Liste_Chainee (T_Element => String);
+		new Liste_Chainee (T_Element => Unbounded_String);
 	use Liste_Chainee_String;
 
 
 	-- Retourner une chaîne avec des guillemets autour de S
-	function Avec_Guillemets (S: String) return String is
+	function Avec_Guillemets (S: Unbounded_String) return String is
 	begin
 		return '"' & To_String (S) & '"';
 	end;
 
 	-- Utiliser & entre String à gauche et String à droite.  Des
-	-- guillemets sont ajoutées autour de la String
+	-- guillemets sont ajoutées autour de la Unbounded_String
 	-- Il s'agit d'un masquage de l'opérateur `&` défini dans Strings.Unbounded
-	function "&" (Left: String; Right: String) return String is
+	function "&" (Left: String; Right: Unbounded_String) return String is
 	begin
 		return Left & Avec_Guillemets (Right);
 	end;
 
 
 	-- Afficher une String et un entier.
-	procedure Afficher (S : in String; N: in Integer) is
+	procedure Afficher (S : in Unbounded_String; N: in Integer) is
 	begin
 		Put (Avec_Guillemets (S));
 		Put (" : ");
@@ -39,10 +39,10 @@ procedure Test_Liste_Chainee is
 
 
 	Nb_Element : constant Integer := 7;
-	Element : constant array (1..Nb_Element) of String
+	Element : constant array (1..Nb_Element) of Unbounded_String
 			:= (+"un", +"deux", +"trois", +"quatre", +"cinq",
 				+"quatre-vingt-dix-neuf", +"vingt-et-un");
-	Inconnu : constant  String := "Inconnu";
+	Inconnu : constant  Unbounded_String := To_Unbounded_String ("Inconnu");
 
 
 
