@@ -30,7 +30,7 @@ package Liste_Chainee is
 			and (Taille'Result = 0) = Est_Vide (Liste);
 
     -- Retourner vrai ssi Element est dans Liste.
-    function Est_Present (Liste: in T_Liste; Element: in T_Element) return Boolean;
+    function Est_Present (Liste: in T_LC; Element: in T_Element) return Boolean;
 
 	-- Supprimer un élément dans une Liste.
 	procedure Supprimer (Liste : in out T_LC ; Element : in T_Element) with

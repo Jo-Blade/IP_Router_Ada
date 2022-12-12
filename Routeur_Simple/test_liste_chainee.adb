@@ -1,321 +1,132 @@
 with Ada.Text_IO;           use Ada.Text_IO;
 with Ada.Integer_Text_IO;   use Ada.Integer_Text_IO;
+with Ada.Strings.Unbounded;    use Ada.Strings.Unbounded;
 with Liste_Chainee;
+
+
 
 procedure Test_Liste_Chainee is
 
 	package Liste_Chainee_String is
 		new Liste_Chainee (T_Element => Unbounded_String);
-	use Liste_Chainee_String;
+    use Liste_Chainee_String;
+
+    procedure Afficher_T(T : in T_LC) is
+    begin
+        while not T.all.Suivant = Null loop
+            put(To_Unbounded_String(T.all.Element));
+            New_Line;
+            T := T.all.Suivant;
+        end loop;
+    end Afficher_T;
+
+    procedure Tester_Initiialiser is
+        T : T_LC;
+    begin
+        Initialiser(T);
+        pragma Assert(T = Null);
+        put("Initialiser fonctionne !");
+        New_Line;
+    end Tester_Initiialiser;
+
+    procedure Tester_Est_Vide is
+        T : T_LC;
+    begin
+        Initialiser(T);
+        pragma Assert(Est_Vide(T));
+        put("Est_Vide fonctionne !");
+        New_Line;
+    end Tester_Est_Vide;
+
+    procedure Tester_Ajouter_Debut_Premier_Supprimer is
+        elem1 : Unbounded_String;
+        elem2 : Unbounded_String;
+        elem3 : Unbounded_String;
+        T : T_LC;
+    begin
+        elem1 := To_Unbounded_String("1");
+        elem2 := To_Unbounded_String("2");
+        elem3 := To_Unbounded_String("3");
+        Initialiser(T);
+        Ajouter_Debut(T,elem1);
+        put("Après ajout de l'élément '1'");
+        New_Line;
+        Afficher_T(T);
+        Ajouter_Debut(T,elem2);
+        put("Après ajout de l'élément '2'");
+        New_Line;
+        Afficher_T(T);
+        Ajouter_Debut(T,elem3);
+        put("Après ajout de l'élément '3'");
+        New_Line;
+        Afficher_T(T);
+        Put("Le premier élément est ");
+        put(To_String(Premier(T)));
+        New_Line;
+        Put("Après suppression de l'élément '3'");
+        Supprimer(T, To_Unbounded_String("3"));
+        Afficher_T(T);
+        Put("Après suppression de l'élément '1'");
+        Supprimer(T, To_Unbounded_String("1"));
+        Afficher_T(T);
+        Put("Après suppression de l'élément '2'");
+        Supprimer(T, To_Unbounded_String("2"));
+        Afficher_T(T);
+    End Tester_Ajouter_Debut_Premier_Supprimer;
+
+    procedure Tester_Taille_Est_Present_Vider is
+        T : T_LC;
+        elem1 : Unbounded_String;
+        elem2 : Unbounded_String;
+    begin
+        elem1 := To_Unbounded_String("1");
+        elem2 := To_Unbounded_String("2");
+        Initialiser(T);
+        Ajouter_Debut(T,elem1);
+        Ajouter_Debut(T,elem2);
+        pragma Assert(Taille(T) = 2);
+        Put("La fonction Taille fonctionne !");
+        New_Line;
+        Vider(T);
+        pragma Assert(T = Null);
+        Put("La fonction Vider fonctionne bien !");
+        New_Line;
+    end Tester_Taille_Est_Present_Vider;
+
+    procedure Tester_Inserer_Apres_Ieme is
+        T : T_LC;
+        elem1 : Unbounded_String;
+        elem2 : Unbounded_String;
+        elem3 : Unbounded_String;
+        elem4 : Unbounded_String;
+    begin
+        Initialiser(T);
+        elem1 := To_Unbounded_String("1");
+        elem2 := To_Unbounded_String("2");
+        elem3 := To_Unbounded_String("3");
+        elem4 := To_Unbounded_String("4");
+        Ajouter_Debut(T,elem1);
+        Ajouter_Debut(T,elem2);
+        Ajouter_Debut(T,elem4);
+        Inserer_Apres(T, elem3, elem4);
+        pragma Assert(Ieme(T,2) = To_Unbounded_String("2"));
+        Put("La fontion Ieme fonctionne bien !");
+        New_Line;
+        pragma Assert(Ieme(3) = To_Unbounded_String("3"));
+        Put("La fonction Inserer_apres fonctionne bien !");
+        New_Line;
+    end Tester_Inserer_Apres_Ieme;
 
 
-	-- Retourner une chaîne avec des guillemets autour de S
-	function Avec_Guillemets (S: Unbounded_String) return String is
-	begin
-		return '"' & To_String (S) & '"';
-	end;
 
-	-- Utiliser & entre String à gauche et String à droite.  Des
-	-- guillemets sont ajoutées autour de la Unbounded_String
-	-- Il s'agit d'un masquage de l'opérateur `&` défini dans Strings.Unbounded
-	function "&" (Left: String; Right: Unbounded_String) return String is
-	begin
-		return Left & Avec_Guillemets (Right);
-	end;
-
-
-	-- Afficher une String et un entier.
-	procedure Afficher (S : in Unbounded_String; N: in Integer) is
-	begin
-		Put (Avec_Guillemets (S));
-		Put (" : ");
-		Put (N, 1);
-		New_Line;
-	end Afficher;
-
-	-- Afficher la Liste.
-	procedure Afficher is
-		new Pour_Chaque (Afficher);
-
-
-	Nb_Element : constant Integer := 7;
-	Element : constant array (1..Nb_Element) of Unbounded_String
-			:= (+"un", +"deux", +"trois", +"quatre", +"cinq",
-				+"quatre-vingt-dix-neuf", +"vingt-et-un");
-	Inconnu : constant  Unbounded_String := To_Unbounded_String ("Inconnu");
-
-
-
-	-- Initialiser l'annuaire avec les Donnees et Element ci-dessus.
-	-- Attention, c'est à l'appelant de libérer la mémoire associée en
-	-- utilisant Vider.
-	-- Si Bavard est vrai, les insertions sont tracées (affichées).
-	procedure Construire_Exemple_Sujet (Annuaire : out T_Liste_Chainee; Bavard: Boolean := False) is
-	begin
-		Initialiser (Annuaire);
-		pragma Assert (Est_Vide (Annuaire));
-		pragma Assert (Taille (Annuaire) = 0);
-
-		for I in 1..Nb_Element loop
-			Enregistrer (Annuaire, Element (I));
-
-			if Bavard then
-				Put_Line ("Après insertion de l'element " & Element(I));
-				Afficher (Annuaire); New_Line;
-			else
-				null;
-			end if;
-
-			pragma Assert (not Est_Vide (Annuaire));
-			pragma Assert (Taille (Annuaire) = I);
-			for J in I+1..Nb_Element loop
-				pragma Assert (not Est_Presente (Annuaire, Element (J)));
-			end loop;
-
-		end loop;
-	end Construire_Exemple_Sujet;
-
-
-	procedure Tester_Exemple_Sujet is
-		Annuaire : T_Liste_Chainee;
-	begin
-		Construire_Exemple_Sujet (Annuaire, True);
-		Vider (Annuaire);
-	end Tester_Exemple_Sujet;
-
-
-	-- Tester suppression en commençant par les derniers éléments ajoutés
-	procedure Tester_Supprimer_Inverse is
-		Annuaire : T_Liste_Chainee;
-	begin
-		Put_Line ("=== Tester_Supprimer_Inverse..."); New_Line;
-
-		Construire_Exemple_Sujet (Annuaire);
-
-		for I in reverse 1..Nb_Element loop
-
-			Supprimer (Annuaire, Element (I));
-
-			Put_Line ("Après suppression de " & Element (I) & " :");
-			Afficher (Annuaire); New_Line;
-
-			for J in 1..I-1 loop
-				pragma Assert (Est_Presente (Annuaire, Element (J)));
-			end loop;
-
-			for J in I..Nb_Element loop
-				pragma Assert (not Est_Presente (Annuaire, Element (J)));
-			end loop;
-		end loop;
-
-		Vider (Annuaire);
-	end Tester_Supprimer_Inverse;
-
-
-	-- Tester suppression en commençant les les premiers éléments ajoutés
-	procedure Tester_Supprimer is
-		Annuaire : T_Liste_Chainee;
-	begin
-		Put_Line ("=== Tester_Supprimer..."); New_Line;
-
-		Construire_Exemple_Sujet (Annuaire);
-
-		for I in 1..Nb_Element loop
-			Put_Line ("Suppression de " & Element (I) & " :");
-
-			Supprimer (Annuaire, Element (I));
-
-			Afficher (Annuaire); New_Line;
-
-			for J in 1..I loop
-				pragma Assert (not Est_Presente (Annuaire, Element (J)));
-			end loop;
-
-			for J in I+1..Nb_Element loop
-				pragma Assert (Est_Presente (Annuaire, Element (J)));
-			end loop;
-		end loop;
-
-		Vider (Annuaire);
-	end Tester_Supprimer;
-
-
-	procedure Tester_Supprimer_Un_Element is
-
-		-- Tester supprimer sur un élément, celui à Indice dans Element.
-		procedure Tester_Supprimer_Un_Element (Indice: in Integer) is
-			Annuaire : T_Liste_Chainee;
-		begin
-			Construire_Exemple_Sujet (Annuaire);
-
-			Put_Line ("Suppression de " & Element (Indice) & " :");
-			Supprimer (Annuaire, Element (Indice));
-
-			Afficher (Annuaire); New_Line;
-
-			for J in 1..Nb_Element loop
-				if J = Indice then
-					pragma Assert (not Est_Presente (Annuaire, Element (J)));
-				else
-					pragma Assert (Est_Presente (Annuaire, Element (J)));
-				end if;
-			end loop;
-
-			Vider (Annuaire);
-		end Tester_Supprimer_Un_Element;
-
-	begin
-		Put_Line ("=== Tester_Supprimer_Un_Element..."); New_Line;
-
-		for I in 1..Nb_Element loop
-			Tester_Supprimer_Un_Element (I);
-		end loop;
-	end Tester_Supprimer_Un_Element;
-
-
-	procedure Tester_Remplacer_Un_Element is
-
-		-- Tester enregistrer sur un élément présent, celui à Indice dans Element.
-		procedure Tester_Remplacer_Un_Element (Indice: in Integer; Nouveau: in Integer) is
-			Annuaire : T_Liste_Chainee;
-		begin
-			Construire_Exemple_Sujet (Annuaire);
-
-			Put_Line ("Remplacement de " & Element (Indice)
-					& " par " & Integer'Image(Nouveau) & " :");
-			enregistrer (Annuaire, Element (Indice), Nouveau);
-
-			Afficher (Annuaire); New_Line;
-
-			for J in 1..Nb_Element loop
-				pragma Assert (Est_Presente (Annuaire, Element (J)));
-				if J = Indice then
-					pragma Assert (La_Donnee (Annuaire, Element (J)) = Nouveau);
-				else
-					pragma Assert (La_Donnee (Annuaire, Element (J)) = Donnees (J));
-				end if;
-			end loop;
-
-			Vider (Annuaire);
-		end Tester_Remplacer_Un_Element;
-
-	begin
-		Put_Line ("=== Tester_Remplacer_Un_Element..."); New_Line;
-
-		for I in 1..Nb_Element loop
-			Tester_Remplacer_Un_Element (I, 0);
-			null;
-		end loop;
-	end Tester_Remplacer_Un_Element;
-
-
-	procedure Tester_Supprimer_Erreur is
-		Annuaire : T_Liste_Chainee;
-	begin
-		begin
-			Put_Line ("=== Tester_Supprimer_Erreur..."); New_Line;
-
-			Construire_Exemple_Sujet (Annuaire);
-			Supprimer (Annuaire, Inconnu);
-
-		exception
-			when others =>
-				pragma Assert (False);
-		end;
-		Vider (Annuaire);
-	end Tester_Supprimer_Erreur;
-
-
-	procedure Tester_La_Donnee_Erreur is
-		Annuaire : T_Liste_Chainee;
-		Inutile: Integer;
-	begin
-		begin
-			Put_Line ("=== Tester_La_Donnee_Erreur..."); New_Line;
-
-			Construire_Exemple_Sujet (Annuaire);
-		exception
-			when others =>
-				pragma Assert (False);
-		end;
-		Vider (Annuaire);
-	end Tester_La_Donnee_Erreur;
-
-
-	procedure Tester_Pour_chaque is
-		Annuaire : T_Liste_Chainee;
-
-		Somme: Integer;
-
-		procedure Sommer (Element: String) is
-		begin
-			Put (" + ");
-			Put (Element, 2);
-			New_Line;
-
-			Somme := Somme + Element;
-		end;
-
-		procedure Sommer is
-			new Pour_Chaque (Sommer);
-
-	begin
-		Put_Line ("=== Tester_Pour_Chaque..."); New_Line;
-		Construire_Exemple_Sujet(Annuaire);
-		Somme := 0;
-		Sommer (Annuaire);
-		pragma Assert (Somme = Somme_Donnees);
-		Vider(Annuaire);
-		New_Line;
-	end Tester_Pour_chaque;
-
-
-
-
-
-	procedure Tester_Pour_chaque_Somme_Len4_Erreur is
-		Annuaire : T_Liste_Chainee;
-
-		Somme: Integer;
-
-		procedure Sommer_Len4_Erreur (Element: String) is
-			Nouvelle_Exception: Exception;
-		begin
-			if Length (Element) = 4 then
-				Put (" + ");
-				Put (Element, 2);
-				New_Line;
-
-				Somme := Somme + Element;
-			else
-				raise Nouvelle_Exception;
-			end if;
-		end;
-
-		procedure Sommer is
-			new Pour_Chaque (Sommer_Len4_Erreur);
-
-	begin
-		Put_Line ("=== Tester_Pour_Chaque_Somme_Len4_Erreur..."); New_Line;
-		Construire_Exemple_Sujet(Annuaire);
-		Somme := 0;
-		Sommer (Annuaire);
-		pragma Assert (Somme = Somme_Donnees_Len4);
-		Vider(Annuaire);
-		New_Line;
-	end Tester_Pour_chaque_Somme_Len4_Erreur;
 
 
 
 begin
-	Tester_Exemple_Sujet;
-	Tester_Supprimer_Inverse;
-	Tester_Supprimer;
-	Tester_Supprimer_Un_Element;
-	Tester_Remplacer_Un_Element;
-	Tester_Supprimer_Erreur;
-	Tester_La_Donnee_Erreur;
-	Tester_Pour_chaque;
-	Tester_Pour_chaque_Somme_Len4_Erreur;
+    Tester_Initiialiser;
+    Tester_Ajouter_Debut_Premier_Supprimer;
+    Tester_Taille_Est_Present_Vider;
+    Tester_Inserer_Apres_Ieme;
+
 	Put_Line ("Fin des tests : OK.");
 end Test_Liste_Chainee;

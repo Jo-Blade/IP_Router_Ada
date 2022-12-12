@@ -1,0 +1,19 @@
+test_liste_chainee.adb:16:21: error: prefix of dereference must be an access type
+test_liste_chainee.adb:17:13: error: no candidate interpretations match the actuals:
+test_liste_chainee.adb:17:13: error: missing argument for parameter "Item" in call to "Put" declared at a-tiinio.ads:97, instance at a-inteio.ads:18
+test_liste_chainee.adb:17:13: error: missing argument for parameter "Item" in call to "Put" declared at a-tiinio.ads:68, instance at a-inteio.ads:18
+test_liste_chainee.adb:17:13: error: missing argument for parameter "Item" in call to "Put" declared at a-textio.ads:457
+test_liste_chainee.adb:17:13: error: missing argument for parameter "Item" in call to "Put" declared at a-textio.ads:384
+test_liste_chainee.adb:17:17: error:   ==> in call to "Put" at a-tiinio.ads:80, instance at a-inteio.ads:18
+test_liste_chainee.adb:17:17: error:   ==> in call to "Put" at a-textio.ads:463
+test_liste_chainee.adb:17:17: error:   ==> in call to "Put" at a-textio.ads:390
+test_liste_chainee.adb:17:39: error: prefix of dereference must be an access type
+test_liste_chainee.adb:19:13: error: assignment to "in" mode parameter not allowed
+test_liste_chainee.adb:19:20: error: prefix of dereference must be an access type
+test_liste_chainee.adb:27:24: error: invalid operand types for operator "="
+test_liste_chainee.adb:27:24: error: left operand has private type "T_LC" defined at liste_chainee.ads:8, instance at line 10
+test_liste_chainee.adb:27:24: error: right operand has an access type
+test_liste_chainee.adb:91:25: error: invalid operand types for operator "="
+test_liste_chainee.adb:91:25: error: left operand has private type "T_LC" defined at liste_chainee.ads:8, instance at line 10
+test_liste_chainee.adb:91:25: error: right operand has an access type
+test_liste_chainee.adb:115:23: error: missing argument for parameter "Indice" in call to "Ieme" declared at liste_chainee.ads:49, instance at line 10

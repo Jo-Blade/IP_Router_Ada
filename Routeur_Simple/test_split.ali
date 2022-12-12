@@ -1,0 +1,122 @@
+V "GNAT Lib v2021"
+M P W=b
+A -O2
+A -gnatA
+A -g
+A -mtune=generic
+A -march=x86-64
+P SS ZX
+
+RN
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTION_PROPAGATION
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_NESTED_FINALIZATION
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV NO_IMPLICIT_LOOPS
+
+U test_split%b		test_split.adb		1656b5e6 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.strings%s		a-string.ads		a-string.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+Z my_strings%s		my_strings.adb		my_strings.ali
+W str_split%s		str_split.adb		str_split.ali
+Z system%s		system.ads		system.ali
+Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20210520051132 76789da1 ada%s
+D a-charac.ads		20210520051128 2d3ec45b ada.characters%s
+D a-chlat1.ads		20210520051128 66457d31 ada.characters.latin_1%s
+D a-except.ads		20210520051128 946f3014 ada.exceptions%s
+D a-finali.ads		20210520051128 bf4f806b ada.finalization%s
+D a-ioexce.ads		20210520051128 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20210520051130 119b8fb3 ada.streams%s
+D a-string.ads		20210520051130 90ac6797 ada.strings%s
+D a-strmap.ads		20210520051130 5a88892a ada.strings.maps%s
+D a-sttebu.ads		20210520051130 18209c64 ada.strings.text_buffers%s
+D a-strunb.ads		20210520051130 03325227 ada.strings.unbounded%s
+D a-stuten.ads		20210520051130 808c40ad ada.strings.utf_encoding%s
+D a-tags.ads		20210520051130 9eaa38c6 ada.tags%s
+D a-textio.ads		20210520051130 aef4d56d ada.text_io%s
+D a-unccon.ads		20210520051130 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20210520051132 edec285f interfaces%s
+D i-cstrea.ads		20210520051132 e53d8b8e interfaces.c_streams%s
+D my_strings.ads	20221212131734 0966e67b my_strings%s
+D str_split.ads		20221212133212 c080db2c str_split%s
+D str_split.adb		20221212133212 e2890e39 str_split%b
+D system.ads		20210520051136 2ffa5114 system%s
+D s-atocou.ads		20210520051132 b45c2d8d system.atomic_counters%s
+D s-crtl.ads		20210520051132 0ebbdb71 system.crtl%s
+D s-exctab.ads		20210520051132 54135002 system.exception_table%s
+D s-ficobl.ads		20210520051132 078245e4 system.file_control_block%s
+D s-finroo.ads		20210520051132 4ff27390 system.finalization_root%s
+D s-memory.ads		20210520051134 597d6634 system.memory%s
+D s-parame.ads		20210520051134 4752c4cb system.parameters%s
+D s-putima.ads		20210520051134 4e095881 system.put_images%s
+D s-secsta.ads		20210520051134 9b3ab94b system.secondary_stack%s
+D s-soflin.ads		20210520051134 a7318a92 system.soft_links%s
+D s-stache.ads		20210520051134 a37c21ec system.stack_checking%s
+D s-stalib.ads		20210520051134 472fbca8 system.standard_library%s
+D s-stalib.adb		20210520051134 977290bf system.standard_library%b
+D s-stoele.ads		20210520051134 2dc34a04 system.storage_elements%s
+D s-stoele.adb		20210520051134 ed88f8fb system.storage_elements%b
+D s-stratt.ads		20210520051134 7bdda3fa system.stream_attributes%s
+D s-traent.ads		20210520051134 26a8d361 system.traceback_entries%s
+D s-unstyp.ads		20210520051134 2b077493 system.unsigned_types%s
+D s-wchcon.ads		20210520051136 1b7d22d2 system.wch_con%s
+D test_split.adb	20221212170316 7b10e980 test_split%b
+D unchconv.ads		20210520051136 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z b b [test_split standard 6 11 none]
+G r i none [test_split standard 6 11 none] [str_split standard 6 9 none]
+G r c none [test_split standard 6 11 none] [to_unbounded_string_n my_strings 9 12 none]
+X 1 ada.ads
+16K9*Ada 20e8 41|1r6 1r36 2r6 2r36
+X 8 a-string.ads
+16K13*Strings 35e16 41|1r10 1r40
+X 11 a-strunb.ads
+83K21*Unbounded 765e26 41|1w18 1r48
+104V13*To_Unbounded_String{88R9} 41|23s16 24s19 25s19 26s19 27s19 35s20 42s20
+. 50s16 51s19 52s19 53s19 54s19
+239V14*"="{boolean} 41|30s29 57s29
+X 14 a-textio.ads
+58K13*Text_IO 725e16 41|2w10 2r40
+506U14*Put_Line 41|38s13 45s13 62s5 63s5 64s5 65s5 66s5 67s5
+X 19 str_split.ads
+4i3 NbrArgs{integer} 41|16r24
+6k9*Str_Split 28e14 41|3w6 16r13
+7A8 T_TAB(11|88R9)<integer> 41|19r11[15] 20r15[15]
+12X3 Erreur_Nombre_Arguments 41|37r14[15] 44r14[15]
+25U13 Split 41|23s5[15] 35s9[15] 42s9[15] 50s5[15]
+X 21 system.ads
+67M9*Address
+X 27 s-memory.ads
+53V13*Alloc{21|67M9} 103i<c,__gnat_malloc>22
+68U14*Free 104i<c,__gnat_free>22
+76V13*Realloc{21|67M9} 105i<c,__gnat_realloc>22
+X 34 s-stalib.adb
+89U14 Break_Start 90i<c,__gnat_break_start>22
+X 41 test_split.adb
+6U11*test_split 6b11 69l5 69t15
+7a5 exemple_chaine{string} 23r36
+8a5 exemple_chaine_error{string} 35r40
+9a5 exemple_chaine_error2{string} 42r40
+13a5 exemple_chaine_ip{string} 50r36
+15K13 Split4[19|6] 17r9
+19a5 tab{19|7A8[15]} 23m11 30r23 35m15 42m15 50m11 57r23
+20a5 correct{19|7A8[15]} 24m5 25m5 26m5 27m5 30r30 51m5 52m5 53m5 54m5 57r30
+29i9 i{integer} 30r27 30r38
+56i9 i{integer} 57r27 57r38
+
