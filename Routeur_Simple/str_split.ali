@@ -2,28 +2,17 @@ V "GNAT Lib v9"
 P ZX
 
 RN
-RV NO_DIRECT_BOOLEAN_OPERATORS
 RV NO_EXCEPTIONS
-RV NO_SECONDARY_STACK
-RV NO_STANDARD_STORAGE_POOLS
 RV NO_DYNAMIC_SIZED_OBJECTS
-RV NO_ELABORATION_CODE
 RV SPARK_05
 
-U my_strings%b		my_strings.adb		0ca17bc4 NE OO PK
-Z ada.exceptions%s	a-except.adb		a-except.ali
-Z ada.tags%s		a-tags.adb		a-tags.ali
-Z system.img_int%s	s-imgint.adb		s-imgint.ali
-Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+U str_split%b		str_split.adb		2b6f336e NE OO PK GE
+W my_strings%s		my_strings.adb		my_strings.ali
 
-U my_strings%s		my_strings.ads		89fe2f64 EE OO PK
+U str_split%s		str_split.ads		40181233 BN EE NE OO PK GE
 W ada%s			ada.ads			ada.ali
 W ada.strings%s		a-string.ads		a-string.ali
 W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
-Z ada.tags%s		a-tags.adb		a-tags.ali
-Z system%s		system.ads		system.ali
-Z system.exception_table%s  s-exctab.adb	s-exctab.ali
-Z system.standard_library%s  s-stalib.adb	s-stalib.ali
 
 D ada.ads		20210601075304 76789da1 ada%s
 D a-charac.ads		20210601075304 2d3ec45b ada.characters%s
@@ -37,13 +26,13 @@ D a-strunb.ads		20210601075304 8098c91f ada.strings.unbounded%s
 D a-tags.ads		20210601075304 491b781d ada.tags%s
 D a-unccon.ads		20210601075304 0e9b276f ada.unchecked_conversion%s
 D my_strings.ads	20221212141216 0966e67b my_strings%s
-D my_strings.adb	20221212141216 05c79dbf my_strings%b
+D str_split.ads		20221212141216 c080db2c str_split%s
+D str_split.adb		20221212141216 e2890e39 str_split%b
 D system.ads		20210601075304 4635ec04 system%s
 D s-atocou.ads		20210601075304 b45c2d8d system.atomic_counters%s
 D s-exctab.ads		20210601075304 54135002 system.exception_table%s
 D s-finmas.ads		20210601075304 7811a767 system.finalization_masters%s
 D s-finroo.ads		20210601075304 4ff27390 system.finalization_root%s
-D s-imgint.ads		20210601075304 02dbe0c2 system.img_int%s
 D s-parame.ads		20210601075304 48ec542b system.parameters%s
 D s-secsta.ads		20210601075304 20bbe636 system.secondary_stack%s
 D s-soflin.ads		20210601075304 a7318a92 system.soft_links%s
@@ -56,32 +45,29 @@ D s-stratt.ads		20210601075304 aedef97e system.stream_attributes%s
 D s-traent.ads		20210601075304 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20210601075304 34867c83 system.unsigned_types%s
 X 1 ada.ads
-16K9*Ada 20e8 12|1r6 1r36
+16K9*Ada 20e8 13|1r6 1r36
 X 7 a-string.ads
-16K13*Strings 35e16 12|1r10 1r40
+16K13*Strings 35e16 13|1r10 1r40
 X 9 a-strunb.ads
-76K21*Unbounded 491e26 12|1w18 1r48
-79R9*Unbounded_String<5|43R9> 474e14 12|10r28 13|4r28
-94V13*To_Unbounded_String{79R9} 13|13s12
+76K21*Unbounded 491e26 13|1w18 1r48
+79R9*Unbounded_String<5|43R9> 474e14 13|7r39 26r17 14|6r17
+100V13*To_String{string} 14|8s24 10s30
 X 12 my_strings.ads
-3K9*My_Strings 34l5 34e15 13|1b14 73l5 73t15
-5X3*Erreur_Pas_Un_Entier 13|43r19 50r19 57r17
-9V12*To_Unbounded_String_N{9|79R9} 9>35 10>5 13|3b12 14l7 14t28
-9a35 chaine{string} 11r18 13|3b35 6r26 6r41 9r14 9r29 10r25
-10i5 n{integer} 11r13 13|4b5 6r56 9r44
-16V12*Caractere_Vers_Entier{integer} 16>35 18r19 19r8 13|17b12 21l7 21t28
-. 54s33
-16e35 c{character} 17r20 17r28 13|17b35 20r26
-25V14*Texte_Vers_Entier{integer} 25>33 13|24b12 63l7 63t24
-25a33 texte{string} 13|24b31 33r14 33r29 34r12 40r18 47r18
-30V14*Entier_Positif_Vers_Texte{string} 30>41 13|66b12 71l7 71t32
-30i41 n{integer} 32r20 13|66b39 68r52
-X 13 my_strings.adb
-6a5 temp_chaine{string} 10m7 13r32
-9i9 i{integer} 10r19 10r32
-26e5 c{character} 34m7 36r12 54r55
-27i5 signe{integer} 30m5 48m13 54r25
-28i5 s{integer} 31m5 54m11 54r16 61r12
-33i9 i{integer} 34r18 40r14 47r14
-68a5 temp_chaine{string} 70r12 70r29
+3K9*My_Strings 34e15 14|1w6 1r27
+9V12*To_Unbounded_String_N{9|79R9} 14|26s27 43s21
+X 13 str_split.ads
+4i3 NbrArgs{integer} 7r27 14|23r18 40r12
+6k9*Str_Split 4z3 28l5 28e14 14|3b14 49l5 49t14
+7A8*T_TAB(9|79R9)<integer> 25r33 14|5r33
+12X3*Erreur_Nombre_Arguments 14|24r19 45r13
+25U13*Split 25<19 26>5 26>35 14|5b13 47l7 47t12
+25a19 Tableau{7A8} 14|5b19 26m13 43m7
+26r5 chaine{9|79R9} 14|6b5 8r34 10r40
+26e35 c{character} 14|6b35 18r19
+X 14 str_split.adb
+8a5 buffer{string} 26r49 34m9 42m7 43r43
+9i5 i{integer} 15m5 20r13 26r57 27m13 33m9 33r14 34r16 41m7 41r12 42r14 43r51
+10a5 str{string} 16r10 17r15 18r10 34r22 42r20
+11i5 j{integer} 16m5 17r11 18r14 34r26 37m7 37r12 42r24
+12i5 n{integer} 14m5 23r14 26r21 29m11 29r16 40r8 43r15
 
