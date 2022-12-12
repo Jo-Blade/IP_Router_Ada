@@ -1,9 +1,38 @@
 <?xml version="1.0"?>
 <Locations >
-  <Project >
+  <Project>
+    <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_file>
     <file_marker column=" 1" line=" 27" >
       <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
       <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_initialiser_table.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\initialiser_table.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\routage.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\determiner_interface.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 84" line=" 24" >
+      <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\routage.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\initialiser_table.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\split_exemple.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 77" line=" 12" >
+      <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\routage.ads</vfs_file>
     </file_marker>
     <file_marker current="true" column=" 1" line=" 1" >
       <vfs_project />
