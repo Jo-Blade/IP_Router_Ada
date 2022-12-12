@@ -1,9 +1,22 @@
 <?xml version="1.0"?>
 <Locations >
-  <Project >
+  <Project>
+    <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_file>
     <file_marker column=" 1" line=" 1" >
       <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\determiner_interface.ads</vfs_file>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 18" line=" 107" >
+      <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 319" >
+      <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 18" line=" 107" >
+      <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
     </file_marker>
     <file_marker column=" 1" line=" 1" >
       <vfs_project />
@@ -11,147 +24,23 @@
     </file_marker>
     <file_marker column=" 1" line=" 1" >
       <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\initialiser_table.ads</vfs_file>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\split_exemple.adb</vfs_file>
     </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\ecrire_resultat.ads</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\ecrire_resultat.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 14" >
+    <file_marker column=" 55" line=" 14" >
       <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\ecrire_resultat.adb</vfs_file>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\initialiser_table.adb</vfs_file>
     </file_marker>
     <file_marker column=" 1" line=" 1" >
       <vfs_project />
       <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\ip.ads</vfs_file>
     </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\lire_parametres.ads</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\lire_parametre.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_lire_parametre.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 15" line=" 4" >
+    <file_marker column=" 55" line=" 14" >
       <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_lire_parametre.adb</vfs_file>
+      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\initialiser_table.adb</vfs_file>
     </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_str2int.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_initialiser_table.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 13" line=" 6" >
-      <vfs_project>C:\Users\matth\Desktop\pim2022\Routeur_Simple\default.gpr</vfs_project>
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_initialiser_table.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
+    <file_marker current="true" column=" 1" line=" 1" >
       <vfs_project />
       <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\initialiser_table.ads</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\ecrire_resultat.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.ads</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\PIM\PR02-20221112T185920Z-001\PR02\lca.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 11" line=" 10" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 24" line=" 13" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 21" line=" 15" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 10" line=" 19" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 29" line=" 51" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 18" line=" 107" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 1" line=" 1" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\PIM\PR02-20221112T185920Z-001\PR02\test_lca.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 53" line=" 2" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 6" line=" 3" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 14" line=" 5" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 20" line=" 36" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 12" line=" 37" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 40" line=" 41" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 39" line=" 156" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 29" line=" 157" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 40" line=" 158" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker column=" 9" line=" 176" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
-    </file_marker>
-    <file_marker current="true" column=" 18" line=" 221" >
-      <vfs_project />
-      <vfs_file>C:\Users\matth\Desktop\pim2022\Routeur_Simple\test_liste_chainee.adb</vfs_file>
     </file_marker>
   </Project>
 </Locations>
