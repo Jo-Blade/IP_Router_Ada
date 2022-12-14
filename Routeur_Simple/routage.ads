@@ -9,32 +9,33 @@ package Routage is
 
 
   -- Initialiser la table de routage avec le fichier dédié
-  function Initialiser_Table (Fichier : in File_Type) return T_Table; -- with
-    --Pre => Est_Present (Fichier),
-    --Post => not Est_Vide (Table)
-    --and Contient (Table, Texte_Vers_IP("0.0.0.0"), "eth0");
+  procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type);-- with
+--  Pre => Est_Present (Fichier),
+--  Post => not Est_Vide (Initialiser_Table'Result)
+--  and Contient (Table, Texte_Vers_IP("0.0.0.0"), Texte_Vers_IP("0.0.0.0"), "eth0");
 
+  function Trouver_Interface(Table_Routage : T_Table ; IP : T_IP) return Unbounded_String;
 
-    function Trouver_Interface(Table_Routage : in T_Table ; IP : in T_IP) return Unbounded_String;
+  --Afficher tous les élément de la table de routage
+  procedure Afficher_Table(Table_Routage: in T_Table);
 
+  function Contient(Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP;
+    Interface_Nom : in Unbounded_String) return Boolean;
 
+	function Est_Vide (Table_Routage : T_Table) return Boolean;
 
-    --Afficher tous les élément de la table de routage
-    procedure Afficher_Table(Table_Routage: in T_Table);
+  private
 
+  type T_Cellule is
+    record
+      Adresse : Integer;
+      Masque : Integer;
+      Interface_Nom : Unbounded_String;
+    end record;
 
-    private
+  package Table_Routage is new Liste_Chainee(T_Element => T_Cellule);
+  use Table_Routage;
 
-    type T_Cellule is
-      record
-        Adresse : Integer;
-        Masque : Integer;
-        Interface_Nom : Unbounded_String;
-      end record;
+  type T_Table is new T_LC;
 
-    package Table_Routage is new Liste_Chainee(T_Element => T_Cellule);
-    use Table_Routage;
-
-    type T_Table is new T_LC;
-
-  end Routage;
+end Routage;
