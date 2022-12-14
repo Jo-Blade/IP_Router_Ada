@@ -79,9 +79,23 @@ package body Routage is
    
     procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP;
       Masque : in T_IP; Interface_Nom : in Unbounded_String) is
-      test : T_LC;
+
+      function Selection (Cellule : in T_Cellule) return Boolean is
+        test : Boolean;
+      begin
+        if (Cellule.Adresse = Adresse) and (Cellule.Masque = Masque) then
+          test := True;
+        else
+          test := False;
+        end if;
+        return test;
+      end Selection;
+
+      procedure Ajouter_Element_Bis is new Enregistrer(Selection => Selection);
+
+      Nouvelle_Cellule : constant T_Cellule := T_Cellule'(Adresse, Masque, Interface_Nom);
     begin
-        Null;
+      Ajouter_Element_Bis(T_LC(Table_Routage), Nouvelle_Cellule);
     end Ajouter_Element;
     
     
