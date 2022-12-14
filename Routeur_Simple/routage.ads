@@ -14,15 +14,19 @@ package Routage is
   Post => not Est_Vide (Table_Routage);
 --  and Contient (Table_Routage, Texte_Vers_IP(To_Unbounded_String("0.0.0.0")), Texte_Vers_IP("0.0.0.0"), "eth0");
 
-  function Trouver_Interface(Table_Routage : T_Table ; IP : T_IP) return Unbounded_String;
+  function Trouver_Interface(Table_Routage : in T_Table ; IP : in T_IP) return Unbounded_String;
 
   --Afficher tous les élément de la table de routage
   procedure Afficher_Table(Table_Routage: in T_Table);
 
+  function Contient(Table_Routage : in T_Table; Adresse : in T_IP) return Boolean;
+
+  function Contient(Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP) return Boolean;
+
   function Contient(Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP;
     Interface_Nom : in Unbounded_String) return Boolean;
 
-	function Est_Vide (Table_Routage : T_Table) return Boolean;
+	function Est_Vide (Table_Routage : in T_Table) return Boolean;
 
   private
 
