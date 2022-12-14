@@ -12,13 +12,12 @@ package IP is
   -- convertit un entier en ip 
   -- on ne peut pas représenter toutes les ip par des
   -- entiers, car ils sont trop petits
-  procedure Entier_Vers_IP (ip : out T_IP; n : in Integer)
+  function Entier_Vers_IP (n : in Integer) return T_IP
     with Pre => (n >= 0);
   -- pas besoin de tester n <= 2 ** 32 car toujours vrai
 
   -- convertit une chaine du type 192.168.0.1 en ip
-  procedure Texte_Vers_IP (ip: out T_IP;
-    chaine : in Unbounded_String);
+  function Texte_Vers_IP (chaine : in Unbounded_String) return T_IP;
 
   -- convertit une ip en une chaine du type 192.168.0.1
   function IP_Vers_Texte (ip : T_IP) return Unbounded_String;
