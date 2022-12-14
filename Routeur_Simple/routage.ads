@@ -3,6 +3,7 @@ with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with IP;                        use IP;
 with Liste_Chainee;
 
+
 package Routage is
 
   type T_Table is limited private;
@@ -11,8 +12,8 @@ package Routage is
   -- Initialiser la table de routage avec le fichier dédié
   procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) with
   Pre => Is_Open(Fichier),
-  Post => not Est_Vide (Table_Routage);
---  and Contient (Table_Routage, Texte_Vers_IP(To_Unbounded_String("0.0.0.0")), Texte_Vers_IP("0.0.0.0"), "eth0");
+  Post => not Est_Vide (Table_Routage)
+  and Contient_Interface_Defaut (Table_Routage);
 
   function Trouver_Interface(Table_Routage : in T_Table ; IP : in T_IP) return Unbounded_String;
 
@@ -28,6 +29,8 @@ package Routage is
 
 	function Est_Vide (Table_Routage : in T_Table) return Boolean;
 
+  function Contient_Interface_Defaut (Table_Routage : in T_Table) return Boolean;
+
   private
 
   type T_Cellule is
@@ -41,5 +44,6 @@ package Routage is
   use Table_LC;
 
   type T_Table is new T_LC;
+
 
 end Routage;
