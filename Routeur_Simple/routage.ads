@@ -25,6 +25,7 @@ package Routage is
     
     
     
+    --Afficher tous les élément de la table de routage
     procedure Afficher_Table(Table_Routage: in T_LC);
     
     
