@@ -24,14 +24,14 @@ package Routage is
 
     function Est_Vide (Table_Routage : in T_Table) return Boolean;
 
-    private
+private
 
-    type T_Cellule is limited
-      record
-        Adresse : T_IP;
-        Masque : T_IP;
-        Interface_Nom : Unbounded_String;
-      end record;
+    type T_Cellule is
+        record
+            Adresse : T_IP;
+            Masque : T_IP;
+            Interface_Nom : Unbounded_String;
+        end record;
 
     package Table_LC is new Liste_Chainee(T_Element => T_Cellule);
     use Table_LC;

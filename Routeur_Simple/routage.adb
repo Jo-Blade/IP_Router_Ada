@@ -34,7 +34,7 @@ package body Routage is
         procedure Pour_Chaque_Element is new Pour_Chaque (Traiter => Trouver);
     begin
         Est_Present := False;
-        Pour_Chaque_Element (Table_Routage);
+        Pour_Chaque_Element (T_LC(Table_Routage));
         return Est_Present;
     end Contient_IP_Nulle;
 
@@ -46,9 +46,8 @@ package body Routage is
 
 
     procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) is
-        Table_Routage : T_Table;
     begin
-         return Initialiser(Table_Routage);
+         Initialiser(T_LC(Table_Routage));
     end Initialiser_Table; 
 
 
