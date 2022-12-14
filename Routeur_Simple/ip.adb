@@ -76,30 +76,20 @@ package body IP is
 
     function Longueur_IP(ip : T_IP) return Integer is
         Compteur_1 : Integer;
-        Compteur_0 : Integer;
-        Est_1 : Boolean;
-        Est_0 : Boolean;
     begin
-        Est_1 := True;
         Compteur_1 := 0;
-        Compteur_0 := 0;
-        Est_0 := True;
-        while Est_1 loop
-            if Lire_Bit(ip, Compteur_1) = 1 then
-                Compteur_1 := Compteur_1 +  1;
-            else
-                Est_1 := False;
-                while Est_0 loop
-                    Compteur_0 := Compteur_1 + 1;
-                    if Lire_Bit(ip, Compteur_0) = 0 then
-                        Compteur_0 := Compteur_0 + 1;
-                    else
-                        raise Erreur_Masque_Invalide;
-                        Est_0 := False;
-                    end if;
-                end loop;
-            end if;
+        while Lire_Bit(ip, Compteur_1) = 1 loop
+          Compteur_1 := Compteur_1 +  1;
         end loop;
+
+        for i in (Compteur_1 + 1)..32 loop
+          if Lire_Bit(ip, i) = 0 then
+            Null;
+          else
+            raise Erreur_Masque_Invalide;
+          end if;
+        end loop;
+
         return Compteur_1;
     end Longueur_IP;
 
