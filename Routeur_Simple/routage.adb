@@ -18,6 +18,12 @@ package body Routage is
         -- On passe pour chaque élément dans traiter la condition de validité du masque et s'il passe,
         -- on stocke sa longueure et l'interface qui lui est associée
         -- Après le passage de Pour_Chaque, on renvoie l'interface
+        --
+        -- il faut prendre en compte l’exception Erreur_Masque_Invalide levée dans Longueur_IP
+        -- dans le code de la fonction Traiter 
+        -- en affichant un message d’erreur: 
+        -- "Le masque <adresse_du_masque> n’est pas un masque valide, l’interface <nom_interface> sera ignorée"
+        -- et ignorer cette ligne de la table
     end Trouver_Interface;
 
 
