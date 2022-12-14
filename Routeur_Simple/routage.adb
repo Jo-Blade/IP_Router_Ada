@@ -18,14 +18,28 @@ package body Routage is
 
     function Contient(Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP;
         Interface_Nom : in Unbounded_String) return Boolean is
+        Est_Present : Boolean;
+        -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
+        procedure Trouver (Element : T_Cellule) is
+        begin
+            if Adresse = Element.Adresse then
+                Est_Present := True;
+            else
+                Null;
+            end if;
+        end Trouver;
+
+        procedure Pour_Chaque_Element is new Pour_Chaque (Traiter => Trouver);
     begin
-        return True;
+        Est_Present := False;
+        Pour_Chaque_Element (Table_Routage);
+        return Est_Present;
     end Contient;
 
 
     function Est_Vide (Table_Routage : in T_Table) return Boolean is
     begin
-        return Table_Routage = Null;
+        return Table_LC.Est_Vide(T_LC(Table_Routage));
     end Est_Vide;
 
 
