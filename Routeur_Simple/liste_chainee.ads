@@ -4,7 +4,9 @@ generic
 	type T_Element is private;
 	
 package Liste_Chainee is
-
+    Element_Absent_Error : Exception;
+     Indice_Error : Exception;
+    
 	type T_LC is limited private;
 
 	-- Initialiser une Liste_Chainee. Elle est vide.
@@ -33,9 +35,7 @@ package Liste_Chainee is
     function Est_Present (Liste: in T_LC; Element: in T_Element) return Boolean;
 
 	-- Supprimer un élément dans une Liste.
-	procedure Supprimer (Liste : in out T_LC ; Element : in T_Element) with
-		Post =>  Taille (Liste) = Taille (Liste)'Old - 1    -- un élément de moins
-			and not Est_Present (Liste, Element);           -- l'élément a été supprimée
+    procedure Supprimer (Liste: in out T_LC; Element: in T_Element);
 
 
     -- Insérer un nouvel élément (Nouveau) dans la liste (Liste) après un

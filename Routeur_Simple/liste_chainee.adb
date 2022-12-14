@@ -2,7 +2,8 @@ with Ada.Text_IO;            use Ada.Text_IO;
 with Ada.Unchecked_Deallocation;
 
 package body Liste_Chainee is
-
+	procedure Free is
+		new Ada.Unchecked_Deallocation (Object => T_Cellule, Name => T_LC);
 
 	procedure Initialiser(Liste: out T_LC) is
 	begin
@@ -51,17 +52,17 @@ package body Liste_Chainee is
     end Est_Present;
 
 
-    procedure Supprimer(Liste: in out T_LC; Indice: in Integer) is
+    procedure Supprimer(Liste: in out T_LC; Element: in T_Element) is
         A_Detruire: T_LC;
     begin
-        if Liste = null or Indice < 0 then
-            raise Indice_Error;
-        elsif Indice = 0 then
+        if Liste = null then
+            raise Element_Absent_Error;
+        elsif Liste.all.Element = Element then
             A_Detruire := Liste;
             Liste := Liste.all.Suivante;
             Free (A_Detruire);
         else
-            Supprimer(Liste.all.Suivante, Indice - 1);
+            Supprimer(Liste.all.Suivante, Element);
         end if;
     end Supprimer;
     
@@ -76,8 +77,8 @@ package body Liste_Chainee is
         end if;
     end Cellule_Contenant;
 
-    procedure Inserer_Apres (Liste: in out T_Liste ; Nouveau, Element: in T_Element) is
-        Reference: T_Liste;
+    procedure Inserer_Apres (Liste: in out T_LC ; Nouveau, Element: in T_Element) is
+        Reference: T_LC;
     begin
         Reference := Cellule_Contenant (Element, Liste);
         --! peut lever Element_Absent_Error que l'on laisse se propager.
@@ -101,7 +102,7 @@ package body Liste_Chainee is
     begin
         L := Liste;
         while not Est_Vide(L) loop
-            suiv := L.all.Suivant;
+            suiv := L.all.Suivante;
             Supprimer(Liste, L.all.Element);
             L := Suiv;
         end loop;
@@ -120,7 +121,7 @@ package body Liste_Chainee is
                     Put("Il y a une erreur.");
                     New_Line;
             end;
-            L := L.all.Suivant;
+            L := L.all.Suivante;
         end loop;
 	end Pour_Chaque;
 
