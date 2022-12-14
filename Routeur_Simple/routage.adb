@@ -1,20 +1,12 @@
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
-with Ada.Text_IO;              use Ada.Text_IO;
+with Ada.Text_IO;               use Ada.Text_IO;
 with IP;                        use IP;
+with Ada.Exceptions;            use Ada.Exceptions;
 with Liste_Chainee;
 with Str_Split;
 
 package body Routage is
     
-    type T_Element is record
-        Adresse : T_IP;
-        Masque : T_IP;
-        Interface_Nom : Unbounded_String;
-    end record;
-
-    package Table_Routage is new Liste_Chainee (T_Cellule => T_Element);
-    use Liste_Chainee;
-
     procedure Afficher_Table (Element : Unbounded_String) is
     begin
         put(To_String(Element));
@@ -22,21 +14,35 @@ package body Routage is
     end Afficher_Table;
 
     procedure Afficher_Table is new Pour_Chaque (Traiter => Afficher_Table);
+    
+
+    function Contient(Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP;
+        Interface_Nom : in Unbounded_String) return Boolean is
+    begin
+        return True;
+    end Contient;
 
 
-    -- function Initialiser_Table (Fichier : in File_Type) return access is
-    -- begin
-    --     return Null;
-    -- end Initialiser_Table; 
+    function Est_Vide (Table_Routage : in T_Table) return Boolean is
+    begin
+        return Table_Routage = Null;
+    end Est_Vide;
 
 
-    function Trouver_Interface (Table_Routage : in Table_Routage.T_LC; IP : in T_IP) return Unbounded_String is
+    procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) is
+        Table_Routage : T_Table;
+    begin
+         return Initialiser(Table_Routage);
+    end Initialiser_Table; 
+
+
+    function Trouver_Interface (Table_Routage : in T_Table; IP : in T_IP) return Unbounded_String is
         -- Variables locales
         Longueur_Max : Integer;              -- Plus grande longueur de masque
         Interface_Nom : Unbounded_String;    -- Nom de l'interface vers laquelle sera routé le paquet, "eth0" de base
 
         -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
-        procedure Trouver (IP : T_IP; Element : T_Cellule) is
+        procedure Trouver (Element : T_Cellule) is
             Taille_Masque : Integer;    -- Taille du masque courant
         begin
             Taille_Masque := Longueur_IP(Element.Masque);
@@ -44,7 +50,12 @@ package body Routage is
                 Longueur_Max := Taille_Masque;
                 Interface_Nom := Element.Interface_Nom;
             else
-                null;
+                Null;
+            end if;
+            if Longueur_Max = 0 then
+                raise Interface_Par_Defaut;
+            else
+                Null;
             end if;
         end Trouver;
 
@@ -68,8 +79,8 @@ package body Routage is
         -- "Le masque <adresse_du_masque> n’est pas un masque valide, l’interface <nom_interface> sera ignorée"
         -- et ignorer cette ligne de la table
         Longueur_Max := 0;
-        Interface_Nom := "eth0";
-        Pour_Chaque_Interface (IP, Table_Routage);
+        Interface_Nom := To_Unbounded_String("eth0");
+        Pour_Chaque_Interface (Table_Routage);
         return Interface_Nom;
     end Trouver_Interface;
 
