@@ -7,46 +7,49 @@ with Str_Split;
 
 package body Routage is
     
-    procedure Afficher (Element : Unbounded_String) is
+  procedure Afficher_Table(Table_Routage: in T_Table) is
+    procedure Afficher (Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String) is
     begin
-        put(To_String(Element));
+        Put("A MODIFIER");
         New_Line;
     end Afficher;
 
-    procedure Afficher_Table is new Table_LC.Pour_Chaque (Traiter => Afficher);
+    procedure Afficher_Table_Bis is new Pour_Chaque (Traiter => Afficher);
+  begin
+    Afficher_Table_Bis (Table_Routage);
+  end Afficher_Table;
     
 
-    function Contient_IP_Nulle(Table_Routage : in T_Table) return Boolean is
-        Est_Present : Boolean;
-        Adresse_Nulle : T_IP;
-        Masque_Nul : T_IP;
-        Masque_Parfait : T_IP;
-        -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
-        procedure Trouver (Element : T_Cellule) is
-        begin
-            if Egalite_IP(Adresse_Nulle, Element.Adresse, Masque_Parfait) and Egalite_IP(Masque_Nul, Element.Masque, Masque_Parfait) then
-                Est_Present := True;
-            else
-                Null;
-            end if;
-        end Trouver;
-
-        procedure Pour_Chaque_Element is new Table_LC.Pour_Chaque (Traiter => Trouver);
-    begin
-        Est_Present := False;
-        Texte_Vers_IP(Adresse_Nulle, To_Unbounded_String("0.0.0.0"));
-        Texte_Vers_IP(Masque_Nul, To_Unbounded_String("0.0.0.0"));
-        Texte_Vers_IP(Masque_Parfait, To_Unbounded_String("255.255.255.255"));
-        Pour_Chaque_Element (T_LC(Table_Routage));
-        return Est_Present;
-    end Contient_IP_Nulle;
+--     function Contient_IP_Nulle(Table_Routage : in T_Table) return Boolean is
+--         Est_Present : Boolean;
+--         Adresse_Nulle : T_IP;
+--         Masque_Nul : T_IP;
+--         Masque_Parfait : T_IP;
+--         -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
+--         procedure Trouver (Element : T_Cellule) is
+--         begin
+--             if Egalite_IP(Adresse_Nulle, Element.Adresse, Masque_Parfait) and Egalite_IP(Masque_Nul, Element.Masque, Masque_Parfait) then
+--                 Est_Present := True;
+--             else
+--                 Null;
+--             end if;
+--         end Trouver;
+-- 
+--         procedure Pour_Chaque_Element is new Table_LC.Pour_Chaque (Traiter => Trouver);
+--     begin
+--         Est_Present := False;
+--         Texte_Vers_IP(Adresse_Nulle, To_Unbounded_String("0.0.0.0"));
+--         Texte_Vers_IP(Masque_Nul, To_Unbounded_String("0.0.0.0"));
+--         Texte_Vers_IP(Masque_Parfait, To_Unbounded_String("255.255.255.255"));
+--         Pour_Chaque_Element (T_LC(Table_Routage));
+--         return Est_Present;
+--     end Contient_IP_Nulle;
 
 
     function Est_Vide (Table_Routage : in T_Table) return Boolean is
     begin
         return Table_LC.Est_Vide(T_LC(Table_Routage));
     end Est_Vide;
-
 
     procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) is
     begin
@@ -60,16 +63,16 @@ package body Routage is
 
         -- Variables locales
         Longueur_Max : Integer;              -- Plus grande longueur de masque
-        Interface_Nom : Unbounded_String;    -- Nom de l'interface vers laquelle sera routé le paquet, "eth0" de base
+        Interface_Trouve : Unbounded_String;    -- Nom de l'interface vers laquelle sera routé le paquet, "eth0" de base
 
         -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
-        procedure Trouver (Element : T_Cellule) is
+        procedure Trouver (Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String) is
             Taille_Masque : Integer;    -- Taille du masque courant
         begin
-            Taille_Masque := Longueur_IP(Element.Masque);
-            if Egalite_IP(IP, Element.Adresse, Element.Masque) and then (Taille_Masque > Longueur_Max) then
+            Taille_Masque := Longueur_IP(Masque);
+            if Egalite_IP(IP, Adresse, Masque) and then (Taille_Masque > Longueur_Max) then
                 Longueur_Max := Taille_Masque;
-                Interface_Nom := Element.Interface_Nom;
+                Interface_Trouve := Interface_Nom;
             else
                 Null;
             end if;
@@ -80,7 +83,7 @@ package body Routage is
             end if;
         end Trouver;
 
-        procedure Pour_Chaque_Interface is new Table_LC.Pour_Chaque (Traiter => Trouver);
+        procedure Pour_Chaque_Interface is new Pour_Chaque (Traiter => Trouver);
 
     begin
         -- Instanciation de Pour_Chaque avec Traiter qui prend l'ip et l'élément courant de Table_Routage
@@ -100,11 +103,23 @@ package body Routage is
         -- "Le masque <adresse_du_masque> n’est pas un masque valide, l’interface <nom_interface> sera ignorée"
         -- et ignorer cette ligne de la table
         Longueur_Max := 0;
-        Interface_Nom := To_Unbounded_String("eth0");
-        Pour_Chaque_Interface (T_LC(Table_Routage));
-        return Interface_Nom;
+        Interface_Trouve := To_Unbounded_String("eth0");
+        Pour_Chaque_Interface (Table_Routage);
+        return Interface_Trouve;
     end Trouver_Interface;
 
+
+
+    procedure Pour_Chaque(Table_Routage : in T_Table) is
+      procedure Traiter_LC (Cellule : T_Cellule) is
+      begin
+        Traiter(Cellule.Adresse, Cellule.Masque, Cellule.Interface_Nom);
+      end Traiter_LC;
+
+      procedure Pour_Chaque_LC is new Table_LC.Pour_Chaque(Traiter => Traiter_LC);
+    begin
+      Pour_Chaque_LC(T_LC(Table_Routage));
+    end Pour_Chaque;
 
 
 end Routage;

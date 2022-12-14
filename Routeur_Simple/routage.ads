@@ -12,15 +12,15 @@ package Routage is
   -- Initialiser la table de routage avec le fichier dédié
   procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) with
     Pre => Is_Open(Fichier),
-    Post => not Est_Vide (Table_Routage)
-    and Contient_IP_Nulle (Table_Routage);
+    Post => not Est_Vide (Table_Routage);
+    -- and Contient_IP_Nulle (Table_Routage);
 
     function Trouver_Interface(Table_Routage : in T_Table ; IP : in T_IP) return Unbounded_String;
 
     --Afficher tous les élément de la table de routage
-    procedure Afficher_Table(Table_Routage: in T_Table);
+    -- procedure Afficher_Table(Table_Routage: in T_Table);
 
-    function Contient_IP_Nulle(Table_Routage : in T_Table) return Boolean;
+    -- function Contient_IP_Nulle(Table_Routage : in T_Table) return Boolean;
 
     function Est_Vide (Table_Routage : in T_Table) return Boolean;
 
