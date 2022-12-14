@@ -34,6 +34,10 @@ package body Routage is
         -- on stocke sa longueure et l'interface qui lui est associée
         -- Après le passage de Pour_Chaque, on renvoie l'interface
         --
+        -- FAUDRA PAS OUBLIER DE RENVOYER UNE EXCEPTION SI ON NE TROUVE PAS D’INTERFACE (ce qui est censé être
+        -- impossible dans le cas du routeur simple car la table contient toujours 0.0.0.0 mais ça sera utile
+        -- pour le routeur avec cache)
+        --
         -- il faut prendre en compte l’exception Erreur_Masque_Invalide levée dans Longueur_IP
         -- dans le code de la fonction Traiter 
         -- en affichant un message d’erreur: 
