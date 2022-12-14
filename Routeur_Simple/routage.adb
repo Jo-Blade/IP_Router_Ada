@@ -13,14 +13,14 @@ package body Routage is
         New_Line;
     end Afficher;
 
-    procedure Afficher_Table is new Pour_Chaque (Traiter => Afficher);
+    procedure Afficher_Table is new Table_LC.Pour_Chaque (Traiter => Afficher);
     
 
     function Contient_IP_Nulle(Table_Routage : in T_Table) return Boolean is
         Est_Present : Boolean;
-        Adresse_Nulle : constant T_IP := Texte_Vers_IP(To_Unbounded_String("0.0.0.0"));
-        Masque_Nul : constant T_IP := Texte_Vers_IP(To_Unbounded_String("0.0.0.0"));
-        Masque_Parfait : constant T_IP := Texte_Vers_IP(To_Unbounded_String("255.255.255.255"));
+        Adresse_Nulle : T_IP;
+        Masque_Nul : T_IP;
+        Masque_Parfait : T_IP;
         -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
         procedure Trouver (Element : T_Cellule) is
         begin
@@ -31,9 +31,12 @@ package body Routage is
             end if;
         end Trouver;
 
-        procedure Pour_Chaque_Element is new Pour_Chaque (Traiter => Trouver);
+        procedure Pour_Chaque_Element is new Table_LC.Pour_Chaque (Traiter => Trouver);
     begin
         Est_Present := False;
+        Texte_Vers_IP(Adresse_Nulle, To_Unbounded_String("0.0.0.0"));
+        Texte_Vers_IP(Masque_Nul, To_Unbounded_String("0.0.0.0"));
+        Texte_Vers_IP(Masque_Parfait, To_Unbounded_String("255.255.255.255"));
         Pour_Chaque_Element (T_LC(Table_Routage));
         return Est_Present;
     end Contient_IP_Nulle;
@@ -47,11 +50,14 @@ package body Routage is
 
     procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) is
     begin
-         Initialiser(T_LC(Table_Routage));
+         Table_LC.Initialiser(T_LC(Table_Routage));
     end Initialiser_Table; 
 
 
     function Trouver_Interface (Table_Routage : in T_Table; IP : in T_IP) return Unbounded_String is
+        -- Exception
+        Interface_Par_Defaut : Exception;
+
         -- Variables locales
         Longueur_Max : Integer;              -- Plus grande longueur de masque
         Interface_Nom : Unbounded_String;    -- Nom de l'interface vers laquelle sera routé le paquet, "eth0" de base
@@ -74,7 +80,7 @@ package body Routage is
             end if;
         end Trouver;
 
-        procedure Pour_Chaque_Interface is new Pour_Chaque (Traiter => Trouver);
+        procedure Pour_Chaque_Interface is new Table_LC.Pour_Chaque (Traiter => Trouver);
 
     begin
         -- Instanciation de Pour_Chaque avec Traiter qui prend l'ip et l'élément courant de Table_Routage
@@ -95,7 +101,7 @@ package body Routage is
         -- et ignorer cette ligne de la table
         Longueur_Max := 0;
         Interface_Nom := To_Unbounded_String("eth0");
-        Pour_Chaque_Interface (Table_Routage);
+        Pour_Chaque_Interface (T_LC(Table_Routage));
         return Interface_Nom;
     end Trouver_Interface;
 
