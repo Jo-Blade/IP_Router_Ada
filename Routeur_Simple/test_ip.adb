@@ -29,7 +29,7 @@ begin
     pragma Assert(not Egalite_IP(IP1,IP3,Masque1));
     pragma Assert(Egalite_IP(IP1,IP3,Masque2));
     
-    --Tests Lire_Bit
+    -- Tests Lire_Bit
     Nb := Texte_Vers_IP(To_Unbounded_String("255.0.0.0"));
     for i in 1..8 loop
         Pragma Assert( Lire_Bit(Nb, i) = 1);
@@ -53,7 +53,7 @@ begin
             put(" Erreur_Chaine_Non_IP levée");
     end;
     
-    -- tests Entier_Vers_IP
+    -- Tests Entier_Vers_IP
     IP_Entier := Entier_Vers_IP(6);
     IP2 := Texte_Vers_IP(To_Unbounded_String("0.0.0.6"));
     pragma Assert(Egalite_IP(IP2,IP_Entier,Masque1));
@@ -63,6 +63,17 @@ begin
     pragma Assert(Egalite_IP(IP2,IP_Entier,Masque1));
     pragma Assert(Egalite_IP(IP3,IP_Entier,Masque1));
 
+    -- Tests Longueur_IP
+    IP1 := Texte_Vers_IP(To_Unbounded_String("0.0.0.0"));
+    pragma Assert (Longueur_IP(IP1) = 0);
+    IP1 := Texte_Vers_IP(To_Unbounded_String("255.255.255.255"));
+    pragma Assert (Longueur_IP(IP1) = 32);
+    begin
+      IP1 := Texte_Vers_IP(To_Unbounded_String("192.168.0.1"));
+    exception 
+        when Erreur_Masque_Invalide =>
+            put(" Erreur_Masque_Invalide levée");
+    end;
 
     Put_Line("");
     Put_Line("");

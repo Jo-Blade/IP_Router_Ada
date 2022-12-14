@@ -1,3 +1,5 @@
+with Ada.Text_IO;      use Ada.Text_IO;
+with Ada.Integer_Text_IO;      use Ada.Integer_Text_IO;
 with My_Strings;         use My_Strings;
 with Str_Split;
 
@@ -71,14 +73,15 @@ package body IP is
       return (ip1 and masque) = (ip2 and masque);
     end Egalite_IP;
 
+
     function Longueur_IP(ip : T_IP) return Integer is
       Compteur_1 : Integer;
     begin
-      Compteur_1 := 0;
-      while Lire_Bit(ip, Compteur_1) = 1 loop
+      Compteur_1 := 1;
+      while (Compteur_1 <= 32) and then Lire_Bit(ip, Compteur_1) = 1 loop
         Compteur_1 := Compteur_1 +  1;
       end loop;
-
+        
       for i in (Compteur_1 + 1)..32 loop
         if Lire_Bit(ip, i) = 0 then
           Null;
@@ -87,7 +90,7 @@ package body IP is
         end if;
       end loop;
 
-      return Compteur_1;
+      return Compteur_1 - 1;
     end Longueur_IP;
 
 end IP;
