@@ -1,10 +1,10 @@
 with Ada.Strings.Unbounded;    use Ada.Strings.Unbounded;
 with Ada.Text_IO;      use Ada.Text_IO;
-with Ada.Integer_Text_IO;      use Ada.Integer_Text_IO;
 with IP;      use IP;
-with My_Strings;         use My_Strings;
 
 procedure test_ip is
+    Erreur_Exception_Non_Levee : Exception;
+
     IP1 : T_IP;
     IP2 : T_IP;
     IP3 : T_IP;
@@ -47,6 +47,7 @@ begin
     Pragma Assert(txt2 = To_Unbounded_String("192.168.1.20"));    
     begin 
         Texte_Vers_IP(IP2, To_Unbounded_String("192.168.a.20"));
+        raise Erreur_Exception_Non_Levee;
     exception
         when Erreur_Chaine_Non_IP =>
             put(" Erreur_Chaine_Non_IP levée");
@@ -61,5 +62,14 @@ begin
     Texte_Vers_IP(IP3, To_Unbounded_String("0.0.001.233"));
     pragma Assert(Egalite_IP(IP2,IP_Entier,Masque1));
     pragma Assert(Egalite_IP(IP3,IP_Entier,Masque1));
+
+
+    Put_Line("");
+    Put_Line("");
+    Put_Line("##################################################");
+    Put_Line("#################### ALL OK ! ####################");
+    Put_Line("##################################################");
+    Put_Line("");
+
 
 end test_ip;
