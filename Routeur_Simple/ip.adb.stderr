@@ -1,2 +1,0 @@
-ip.adb:98:31: warning: unreachable code [enabled by default]
-ip.ads:36:19: error: "Result" is undefined (more references follow)

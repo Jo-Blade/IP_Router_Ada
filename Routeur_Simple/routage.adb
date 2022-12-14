@@ -1,6 +1,21 @@
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
+with Liste_Chainee;
 
 package body Routage is
+    
+    package LC_bis is new Liste_Chainee( T_Element => Unbounded_String);
+    use LC_bis;
+
+    procedure Afficher(Element : Unbounded_String) is
+    begin
+        put(To_String(Element));
+        New_Line;
+    end Afficher;
+
+    procedure Afficher_Table is new Pour_Chaque(Traiter => Afficher);
+    
+    
+    
     
     -- function Initialiser_Table (Fichier : in File_Type) return T_LC is
     --     Table_Routage : T_LC;
@@ -27,7 +42,5 @@ package body Routage is
     end Trouver_Interface;
 
 
-    procedure Afficher_Table(Table_Routage : T_LC) is
-        
 
 end Routage;
