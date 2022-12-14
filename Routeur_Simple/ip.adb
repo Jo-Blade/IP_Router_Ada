@@ -1,5 +1,3 @@
-with Ada.Text_IO;      use Ada.Text_IO;
-with Ada.Integer_Text_IO;      use Ada.Integer_Text_IO;
 with My_Strings;         use My_Strings;
 with Str_Split;
 
