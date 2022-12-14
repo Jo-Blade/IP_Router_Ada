@@ -1,7 +1,6 @@
 with Ada.Text_IO;               use Ada.Text_IO;
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with IP;                        use IP;
-with Str_Split;
 with Liste_Chainee;
 
 
@@ -15,7 +14,7 @@ package Routage is
 
     -- Ajouter une interface dans la table de routage
     -- Modifie l’interface existante si elle existe déjà
-    procedure Ajouter_Interface (Table_Routage : out T_Table; Adresse : in T_IP;
+    procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP;
       Masque : in T_IP; Interface_Nom : in Unbounded_String) with
       Post => Contient (Table_Routage, Adresse, Masque);
 

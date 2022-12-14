@@ -1,3 +1,5 @@
+with Str_Split;
+
 package body Routage is
     
   procedure Afficher_Table(Table_Routage: in T_Table) is
@@ -31,7 +33,6 @@ package body Routage is
     Contient_Bis (Table_Routage);
     return Resultat_Test;
   end Contient;
-
 
 
   function Contient (Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP) return Boolean is
@@ -75,7 +76,12 @@ package body Routage is
         Initialiser(Table_Routage);
     end Initialiser_Table_Vide;
     
-    
+   
+    procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP;
+      Masque : in T_IP; Interface_Nom : in Unbounded_String) is
+    begin
+        Null;
+    end Ajouter_Element;
     
     
   procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) is   
@@ -83,19 +89,18 @@ package body Routage is
     package Split3 is new Str_Split(NbrArgs => 3);
     use Split3;
 
-    F : File_Type;
-    tab : T_TAB; --tableau pour la fonction texte_vers_ip
-    ligne : Unbounded_String;
-    elem : T_Cellule;    
+    Tableau : T_TAB;    --tableau pour la fonction Texte_Vers_IP
+    Ligne : Unbounded_String;
+    Element : T_Cellule;    
   begin
-        loop
-        ligne := To_Unbounded_String(Get_Line(F));  --recupération de la ligne courante
-        Split(tab,ligne, ' ');  --séparation des éléments
-        elem.adresse := Texte_Vers_IP(tab(1)); -- transformation en IP et affectation à elem
-        elem.Masque := Texte_Vers_IP(tab(2));
-        elem.Interface_Nom := tab(3); -- affectation de l'interface dans la dernière case de elem
-        Ajouter_Debut(Table_Routage, elem); --enregistrement de elem danss la table
-    exit when End_Of_File(F);
+    loop
+        Ligne := To_Unbounded_String(Get_Line(Fichier));    -- recupération de la ligne courante
+        Split(Tableau, Ligne, ' ');                              -- séparation des éléments
+        Element.Adresse := Texte_Vers_IP(Tableau(1));       -- transformation en IP et affectation à élément
+        Element.Masque := Texte_Vers_IP(Tableau(2));        -- Idem pour le masque
+        Element.Interface_Nom := Tableau(3);                -- affectation de l'interface dans la dernière case d'élement
+        Table_LC.Ajouter_Debut (T_LC(Table_Routage), Element);
+    exit when End_Of_File(Fichier);
     end loop;
   end Initialiser_Table; 
 
