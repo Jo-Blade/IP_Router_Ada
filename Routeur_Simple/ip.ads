@@ -4,7 +4,7 @@ with Ada.Strings.Unbounded;    use Ada.Strings.Unbounded;
 
 package IP is
 
-	type T_IP is limited private;
+	type T_IP is private;
 
   Erreur_Chaine_Non_IP : Exception;
   Erreur_Masque_Invalide : Exception;
