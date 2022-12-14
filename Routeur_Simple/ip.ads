@@ -33,7 +33,7 @@ package IP is
 
   -- renvoie la longueur max de 1 dans ip en partant de la gauche
   function Longueur_IP(ip : T_IP) return Integer 
-    with Post => (Result >= 0) and (Result <= 32);   
+    with Post => (Longueur_IP'Result >= 0) and (Longueur_IP'Result <= 32);   
 
                        
 private
