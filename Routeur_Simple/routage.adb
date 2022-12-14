@@ -57,22 +57,9 @@ package body Routage is
 
   function Contient (Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP;
     Interface_Nom : Unbounded_String) return Boolean is
-    Resultat_Test : Boolean := False;
-
-    procedure Traiter (Adresse_El : in T_IP; Masque_El : in T_IP; Interface_Nom_El : in Unbounded_String) is
-    begin
-      if (Adresse = Adresse_El) and (Masque = Masque_El) and (Interface_Nom = Interface_Nom_El) then
-        Resultat_Test := True;
-      else
-        Null;
-      end if;
-    end Traiter;
-
-    procedure Contient_Bis is new Pour_Chaque_3 (Traiter => Traiter);
-
+    Cellule : constant T_Cellule := T_Cellule'(Adresse, Masque, Interface_Nom);
   begin
-    Contient_Bis (Table_Routage);
-    return Resultat_Test;
+    return Table_LC.Est_Present(T_LC(Table_Routage), Cellule);
   end Contient;
 
 
