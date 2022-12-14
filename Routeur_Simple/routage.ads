@@ -24,6 +24,12 @@ package Routage is
 
     function Est_Vide (Table_Routage : in T_Table) return Boolean;
 
+	-- Appliquer un traitement (Traiter) pour chaque élement d'une Liste.
+    generic
+      with procedure Traiter (Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String);
+    procedure Pour_Chaque (Table_Routage : in T_Table);
+
+
 private
 
     type T_Cellule is
