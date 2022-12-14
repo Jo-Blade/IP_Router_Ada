@@ -5,7 +5,7 @@ package Routage is
 
   -- CE TYPE DEVRAIT ÊTRE DÉFINI EN LIMITED PRIVATE
     type T_Routage_Valeur is record
-        Destination : Integer;
+        Adresse : Integer;
         Masque : Integer;
         Interface_Nom : String;
         end record;
