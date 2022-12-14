@@ -23,12 +23,12 @@ package Routage is
 
     function Est_Vide (Table_Routage : in T_Table) return Boolean;
 
-    private
+private
 
     type T_Cellule is
         record
-            Adresse : Integer;
-            Masque : Integer;
+            Adresse : T_IP;
+            Masque : T_IP;
             Interface_Nom : Unbounded_String;
         end record;
 
