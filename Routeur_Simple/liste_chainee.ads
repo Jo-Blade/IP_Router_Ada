@@ -58,6 +58,15 @@ package Liste_Chainee is
 		with procedure Traiter (Element : in T_Element);
 	procedure Pour_Chaque (Liste : in T_LC);
 
+  -- Ajoute un nouvel élément dans la liste.
+  -- Si un élément déja présent vérifie la condition "Selection", cet
+  -- élément sera remplacé plutôt que d’en ajouter un nouveau.
+  -- Cette fonction s’arrête dès la première fois que la fonction Selection
+  -- renvoie True
+  generic
+    with function Selection (Element : in T_Element) return Boolean;
+  procedure Enregistrer (Liste : in out T_LC; Element : in T_ELement);
+
 private
 
 	type T_Cellule;

@@ -126,4 +126,19 @@ package body Liste_Chainee is
 	end Pour_Chaque;
 
 
+  -- La fonction "Enregistrer" est la seule que nous avons écrite dans ce module.
+  -- Toutes les autres sont directement copiées depuis le cours de PIM
+  -- si elles sont moins jolies, c’est pas de ma faute :)
+  --
+  procedure Enregistrer (Liste : in out T_LC; Element : in T_ELement) is
+  begin
+    if Est_Vide(Liste) then
+      Ajouter_Debut(Liste, Element);
+    elsif Selection(Liste.all.Element) then
+      Liste.all.Element := Element;
+    else
+      Enregistrer(Liste.all.Suivante, Element);
+    end if;
+  end Enregistrer;
+
 end Liste_Chainee;

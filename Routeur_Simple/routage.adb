@@ -79,6 +79,7 @@ package body Routage is
    
     procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP;
       Masque : in T_IP; Interface_Nom : in Unbounded_String) is
+      test : T_LC;
     begin
         Null;
     end Ajouter_Element;
