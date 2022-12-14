@@ -7,22 +7,24 @@ with Str_Split;
 
 package body Routage is
     
-    procedure Afficher_Table (Element : Unbounded_String) is
+    procedure Afficher (Element : Unbounded_String) is
     begin
         put(To_String(Element));
         New_Line;
-    end Afficher_Table;
+    end Afficher;
 
-    procedure Afficher_Table is new Pour_Chaque (Traiter => Afficher_Table);
+    procedure Afficher_Table is new Pour_Chaque (Traiter => Afficher);
     
 
-    function Contient(Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP;
-        Interface_Nom : in Unbounded_String) return Boolean is
+    function Contient_IP_Nulle(Table_Routage : in T_Table) return Boolean is
         Est_Present : Boolean;
+        Adresse_Nulle : constant T_IP := Texte_Vers_IP(To_Unbounded_String("0.0.0.0"));
+        Masque_Nul : constant T_IP := Texte_Vers_IP(To_Unbounded_String("0.0.0.0"));
+        Masque_Parfait : constant T_IP := Texte_Vers_IP(To_Unbounded_String("255.255.255.255"));
         -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
         procedure Trouver (Element : T_Cellule) is
         begin
-            if Adresse = Element.Adresse then
+            if Egalite_IP(Adresse_Nulle, Element.Adresse, Masque_Parfait) and Egalite_IP(Masque_Nul, Element.Masque, Masque_Parfait) then
                 Est_Present := True;
             else
                 Null;
@@ -34,7 +36,7 @@ package body Routage is
         Est_Present := False;
         Pour_Chaque_Element (Table_Routage);
         return Est_Present;
-    end Contient;
+    end Contient_IP_Nulle;
 
 
     function Est_Vide (Table_Routage : in T_Table) return Boolean is
