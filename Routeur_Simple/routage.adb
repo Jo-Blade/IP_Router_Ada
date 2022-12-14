@@ -1,7 +1,7 @@
 with Str_Split;
 
 package body Routage is
-    
+
   procedure Afficher_Table(Table_Routage: in T_Table) is
     procedure Afficher (Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String) is
     begin
@@ -70,37 +70,43 @@ package body Routage is
     return Table_LC.Est_Vide(T_LC(Table_Routage));
   end Est_Vide;
 
-    
-    procedure Initialiser_Table_Vide(Table_Routage : out T_Table) is
+
+  procedure Vider_Table (Table_Routage : in out T_Table) is
+  begin
+    Table_LC.Vider(T_LC(Table_Routage));
+  end Vider_Table;
+
+
+  procedure Initialiser_Table_Vide(Table_Routage : out T_Table) is
+  begin
+    Initialiser(Table_Routage);
+  end Initialiser_Table_Vide;
+
+
+  procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP;
+    Masque : in T_IP; Interface_Nom : in Unbounded_String) is
+
+    function Selection (Cellule : in T_Cellule) return Boolean is
+      test : Boolean;
     begin
-        Initialiser(Table_Routage);
-    end Initialiser_Table_Vide;
-    
-   
-    procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP;
-      Masque : in T_IP; Interface_Nom : in Unbounded_String) is
+      if (Cellule.Adresse = Adresse) and (Cellule.Masque = Masque) then
+        test := True;
+      else
+        test := False;
+      end if;
+      return test;
+    end Selection;
 
-      function Selection (Cellule : in T_Cellule) return Boolean is
-        test : Boolean;
-      begin
-        if (Cellule.Adresse = Adresse) and (Cellule.Masque = Masque) then
-          test := True;
-        else
-          test := False;
-        end if;
-        return test;
-      end Selection;
+    procedure Ajouter_Element_Bis is new Enregistrer(Selection => Selection);
 
-      procedure Ajouter_Element_Bis is new Enregistrer(Selection => Selection);
+    Nouvelle_Cellule : constant T_Cellule := T_Cellule'(Adresse, Masque, Interface_Nom);
+  begin
+    Ajouter_Element_Bis(T_LC(Table_Routage), Nouvelle_Cellule);
+  end Ajouter_Element;
 
-      Nouvelle_Cellule : constant T_Cellule := T_Cellule'(Adresse, Masque, Interface_Nom);
-    begin
-      Ajouter_Element_Bis(T_LC(Table_Routage), Nouvelle_Cellule);
-    end Ajouter_Element;
-    
-    
+
   procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) is   
-        
+
     package Split3 is new Str_Split(NbrArgs => 3);
     use Split3;
 
@@ -109,13 +115,13 @@ package body Routage is
     Element : T_Cellule;    
   begin
     loop
-        Ligne := To_Unbounded_String(Get_Line(Fichier));    -- recupération de la ligne courante
-        Split(Tableau, Ligne, ' ');                              -- séparation des éléments
-        Element.Adresse := Texte_Vers_IP(Tableau(1));       -- transformation en IP et affectation à élément
-        Element.Masque := Texte_Vers_IP(Tableau(2));        -- Idem pour le masque
-        Element.Interface_Nom := Tableau(3);                -- affectation de l'interface dans la dernière case d'élement
-        Table_LC.Ajouter_Debut (T_LC(Table_Routage), Element);
-    exit when End_Of_File(Fichier);
+      Ligne := To_Unbounded_String(Get_Line(Fichier));    -- recupération de la ligne courante
+      Split(Tableau, Ligne, ' ');                              -- séparation des éléments
+      Element.Adresse := Texte_Vers_IP(Tableau(1));       -- transformation en IP et affectation à élément
+      Element.Masque := Texte_Vers_IP(Tableau(2));        -- Idem pour le masque
+      Element.Interface_Nom := Tableau(3);                -- affectation de l'interface dans la dernière case d'élement
+      Table_LC.Ajouter_Debut (T_LC(Table_Routage), Element);
+      exit when End_Of_File(Fichier);
     end loop;
   end Initialiser_Table; 
 
