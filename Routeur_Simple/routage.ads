@@ -1,6 +1,7 @@
 with Ada.Text_IO;               use Ada.Text_IO;
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with IP;                        use IP;
+with Str_Split;
 with Liste_Chainee;
 
 

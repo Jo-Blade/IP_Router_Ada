@@ -69,9 +69,34 @@ package body Routage is
     return Table_LC.Est_Vide(T_LC(Table_Routage));
   end Est_Vide;
 
-  procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) is
+    
+    procedure Initialiser_Table_Vide(Table_Routage : out T_Table) is
+    begin
+        Initialiser(Table_Routage);
+    end Initialiser_Table_Vide;
+    
+    
+    
+    
+  procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) is   
+        
+    package Split3 is new Str_Split(NbrArgs => 3);
+    use Split3;
+
+    F : File_Type;
+    tab : T_TAB; --tableau pour la fonction texte_vers_ip
+    ligne : Unbounded_String;
+    elem : T_Cellule;    
   begin
-    Table_LC.Initialiser(T_LC(Table_Routage));
+        loop
+        ligne := To_Unbounded_String(Get_Line(F));  --recupération de la ligne courante
+        Split(tab,ligne, ' ');  --séparation des éléments
+        elem.adresse := Texte_Vers_IP(tab(1)); -- transformation en IP et affectation à elem
+        elem.Masque := Texte_Vers_IP(tab(2));
+        elem.Interface_Nom := tab(3); -- affectation de l'interface dans la dernière case de elem
+        Ajouter_Debut(Table_Routage, elem); --enregistrement de elem danss la table
+    exit when End_Of_File(F);
+    end loop;
   end Initialiser_Table; 
 
 
