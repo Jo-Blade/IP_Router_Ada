@@ -3,6 +3,7 @@ with Liste_Chainee;
 
 package Routage is
 
+  -- CE TYPE DEVRAIT ÊTRE DÉFINI EN LIMITED PRIVATE
     type T_Routage_Valeur is record
         Destination : Integer;
         Masque : Integer;
@@ -10,6 +11,7 @@ package Routage is
         end record;
 
 
+    -- CE PACKAGE DEVRAIT ÊTRE INSTANTIÉ DANS LE BLOC PRIVATE
     package Table_Routage is new Liste_Chainee(T_Element => T_Routage_Valeur);
 
     -- Initialiser la table de routage avec le fichier dédié
