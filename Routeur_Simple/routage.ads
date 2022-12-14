@@ -9,10 +9,10 @@ package Routage is
 
 
   -- Initialiser la table de routage avec le fichier dédié
-  procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type);-- with
---  Pre => Est_Present (Fichier),
---  Post => not Est_Vide (Initialiser_Table'Result)
---  and Contient (Table, Texte_Vers_IP("0.0.0.0"), Texte_Vers_IP("0.0.0.0"), "eth0");
+  procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) with
+  Pre => Is_Open(Fichier),
+  Post => not Est_Vide (Table_Routage);
+--  and Contient (Table_Routage, Texte_Vers_IP(To_Unbounded_String("0.0.0.0")), Texte_Vers_IP("0.0.0.0"), "eth0");
 
   function Trouver_Interface(Table_Routage : T_Table ; IP : T_IP) return Unbounded_String;
 
@@ -33,8 +33,8 @@ package Routage is
       Interface_Nom : Unbounded_String;
     end record;
 
-  package Table_Routage is new Liste_Chainee(T_Element => T_Cellule);
-  use Table_Routage;
+  package Table_LC is new Liste_Chainee(T_Element => T_Cellule);
+  use Table_LC;
 
   type T_Table is new T_LC;
 
