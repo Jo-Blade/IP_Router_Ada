@@ -7,6 +7,7 @@ package IP is
 	type T_IP is limited private;
 
   Erreur_Chaine_Non_IP : Exception;
+  Erreur_Masque_Invalide : Exception;
 
   -- convertit un entier en ip 
   -- on ne peut pas représenter toutes les ip par des
@@ -30,6 +31,11 @@ package IP is
   function Egalite_IP (ip1 : T_IP; ip2: T_IP; masque : T_IP)
     return Boolean;
 
+  -- renvoie la longueur max de 1 dans ip en partant de la gauche
+  function Longueur_IP(ip : T_IP) return Integer 
+    with Post => (Result >= 0) and (Result <= 32);   
+
+                       
 private
 	type T_IP is mod 2 ** 32;
 

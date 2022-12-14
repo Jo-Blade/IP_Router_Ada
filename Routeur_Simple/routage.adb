@@ -21,9 +21,7 @@ package body Routage is
     end Trouver_Interface;
 
 
-    -- procedure Afficher_Table (Table_Routage : in T_LC) is
-    -- begin
-    --     null;
-    -- end Afficher_Table;
+    procedure Afficher_Table(Table_Routage : T_LC) is
+        
 
 end Routage;

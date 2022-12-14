@@ -78,22 +78,24 @@ package body IP is
         Compteur_1 : Integer;
         Compteur_0 : Integer;
         Est_1 : Boolean;
+        Est_0 : Boolean;
     begin
         Est_1 := True;
         Compteur_1 := 0;
         Compteur_0 := 0;
         Est_0 := True;
         while Est_1 loop
-            if Lire_Bit(ip, Compteur) = 1 then
-                Compteur := Compteur +  1;
+            if Lire_Bit(ip, Compteur_1) = 1 then
+                Compteur_1 := Compteur_1 +  1;
             else
                 Est_1 := False;
                 while Est_0 loop
                     Compteur_0 := Compteur_1 + 1;
                     if Lire_Bit(ip, Compteur_0) = 0 then
-                        Compteur := Compteur + 1;
+                        Compteur_0 := Compteur_0 + 1;
                     else
                         raise Erreur_Masque_Invalide;
+                        Est_0 := False;
                     end if;
                 end loop;
             end if;
