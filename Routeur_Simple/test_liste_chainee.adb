@@ -13,10 +13,10 @@ procedure Test_Liste_Chainee is
 
     procedure Afficher_T(T : in T_LC) is
     begin
-        while not T.all.Suivant = Null loop
-            put(To_Unbounded_String(T.all.Element));
+        while not Est_Vide(T) loop
+            put(To_String(T.all.Element));
             New_Line;
-            T := T.all.Suivant;
+            T := T.all.Suivante;
         end loop;
     end Afficher_T;
 
@@ -24,7 +24,7 @@ procedure Test_Liste_Chainee is
         T : T_LC;
     begin
         Initialiser(T);
-        pragma Assert(T = Null);
+        pragma Assert(Est_Vide(T));
         put("Initialiser fonctionne !");
         New_Line;
     end Tester_Initiialiser;
@@ -88,7 +88,7 @@ procedure Test_Liste_Chainee is
         Put("La fonction Taille fonctionne !");
         New_Line;
         Vider(T);
-        pragma Assert(T = Null);
+        pragma Assert(Est_Vide(T));
         Put("La fonction Vider fonctionne bien !");
         New_Line;
     end Tester_Taille_Est_Present_Vider;
@@ -112,7 +112,7 @@ procedure Test_Liste_Chainee is
         pragma Assert(Ieme(T,2) = To_Unbounded_String("2"));
         Put("La fontion Ieme fonctionne bien !");
         New_Line;
-        pragma Assert(Ieme(3) = To_Unbounded_String("3"));
+        pragma Assert(Ieme(T, 3) = To_Unbounded_String("3"));
         Put("La fonction Inserer_apres fonctionne bien !");
         New_Line;
     end Tester_Inserer_Apres_Ieme;

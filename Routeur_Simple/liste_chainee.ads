@@ -67,7 +67,7 @@ private
 	type T_Cellule is
 		record
 			Element : T_Element;
-			Suivant : T_LC;
+			Suivante : T_LC;
 		end record;
     function Cellule_Contenant (Element: T_Element; Liste: in T_LC) return T_LC with
         Post => Cellule_Contenant'Result /= null
