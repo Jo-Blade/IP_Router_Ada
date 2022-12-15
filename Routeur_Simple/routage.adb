@@ -134,6 +134,7 @@ package body Routage is
         if Contient(Table_Routage, Texte_Vers_IP(To_Unbounded_String("0.0.0.0")), Texte_Vers_IP(To_Unbounded_String("255.255.255.255"))) then
             Null;
         else
+            Vider_Table (Table_Routage);
             raise Route_De_Base_Inconnue; 
         end if;
     end Initialiser_Table; 

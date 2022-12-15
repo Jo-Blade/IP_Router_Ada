@@ -23,6 +23,7 @@ procedure Routeur_Simple is
     Interface_Nom : Unbounded_String;   -- Nom de l'interface du paquet routé
     Parametre_Inconnu : Exception;      -- Exception lorsque un paramètre inconnu est mis en ligne de commande
     Commande_Inconnue : Exception;      -- Exception lorsque une commande inconnue est mis lue dans Fichier_Paquet
+    Erreur_Dernier_Argument : Exception;-- Exception lorsque le dernier argument rentré en requiert un suivant inexistant
     Fichier_Paquet : File_Type;         -- Fichier où sont les paquets à router
     Fichier_Resultat : File_Type;       -- Fichier où les résultats seront écrits
     Fichier_Table : File_Type;          -- Fichier où est stockée la table de routage
@@ -36,33 +37,41 @@ begin
                 Cle := To_Unbounded_String (Argument(i));
                 -- Traitement du i-ième paramètre
                 i := i + 1;
-                if Cle = "-p" then
-                    Nom_Fichier_Paquet := To_Unbounded_String(Argument(i));
-                elsif Cle = "-S" then
-                    Afficher_Stats := False;
-                    i := i - 1;
-                elsif Cle = "-s" then
-                    Afficher_Stats := True;
-                    i := i - 1;
-                elsif Cle = "-t" then
-                    Nom_Fichier_Table := To_Unbounded_String(Argument(i));
-                elsif Cle = "-p" then
-                    Nom_Fichier_Resultat := To_Unbounded_String(Argument(i));
+                if (i > Argument_Count) and (Cle = "-p" or Cle = "-t" or Cle = "-r") then
+                    raise Erreur_Dernier_Argument;
                 else
-                    raise Parametre_Inconnu;
+                    if Cle = "-p" then
+                        Nom_Fichier_Paquet := To_Unbounded_String(Argument(i));
+                    elsif Cle = "-S" then
+                        Afficher_Stats := False;
+                        i := i - 1;
+                    elsif Cle = "-s" then
+                        Afficher_Stats := True;
+                        i := i - 1;
+                    elsif Cle = "-t" then
+                        Nom_Fichier_Table := To_Unbounded_String(Argument(i));
+                    elsif Cle = "-r" then
+                        Nom_Fichier_Resultat := To_Unbounded_String(Argument(i));
+                    else
+                        raise Parametre_Inconnu;
+                    end if;
+                    i := i + 1;
                 end if;
-                i := i + 1;
             exception
                 when Parametre_Inconnu => Put_Line ("Le "& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
+                when Erreur_Dernier_Argument => Put_Line ("Le dernier argument est incorrect, il sera ignoré.");
             end;
         end loop;
 
     -- Initialisaton de la table de routage
+    New_Line;
+    Put_Line ("### Init ####");
     Open (Fichier_Table, In_File, To_String(Nom_Fichier_Table));
     Initialiser_Table (Table, Fichier_Table);
     Close (Fichier_Table);
 
     -- Gestion des paquets et écriture des résultats
+    Put_Line ("### Gestion ####");
     Open (Fichier_Paquet, In_File, To_String(Nom_Fichier_Paquet));
     Create (Fichier_Resultat, Out_File, To_String(Nom_Fichier_Resultat));
     i := 0;
@@ -105,5 +114,6 @@ begin
     Close (Fichier_Resultat);
     Vider_Table (Table);
 
-exception when Route_De_Base_Inconnue => Put_Line ("La route de base 0.0.0.0 255.255.255.255 n'existe pas, cette erreur est fatale.");
+exception 
+    when Route_De_Base_Inconnue => Put_Line ("La route de base 0.0.0.0 255.255.255.255 n'existe pas, cette erreur est fatale.");
 end Routeur_Simple;
