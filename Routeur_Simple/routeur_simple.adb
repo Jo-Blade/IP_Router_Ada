@@ -1,3 +1,4 @@
+with Ada.Strings;               use Ada.Strings;	-- pour Both utilisé par Trim
 with Ada.Command_Line;          use Ada.Command_Line;
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with Ada.Exceptions;            use Ada.Exceptions;
@@ -70,7 +71,7 @@ begin
     begin
         loop
             -- Lecture de la ligne courante
-            Ligne := Get_Line (Fichier_Paquet);
+            Ligne := To_Unbounded_String(Get_Line (Fichier_Paquet));
             Trim (Ligne, Both);
             -- Gestion du de la ligne
             if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '2' then     -- la ligne est un paquet
@@ -79,7 +80,7 @@ begin
             elsif Ligne = "Table" then      -- la ligne commande l'affichage de la table
                 Numero_Ligne := Integer (Line (Fichier_Paquet));
                 Put_Line ("Table (ligne"& Integer'Image (Numero_Ligne));
-                Afficher (Table);
+                Afficher_Table (Table);
             elsif Ligne = "Fin" then      -- la ligne commande l'affichage de Fin
                 Numero_Ligne := Integer (Line (Fichier_Paquet));
                 Put_Line ("Fin (ligne"& Integer'Image (Numero_Ligne));
@@ -92,6 +93,6 @@ begin
     end;
     Close (Fichier_Paquet);
     Close (Fichier_Resultat);
-    Vider (Table);
+    Vider_Table (Table);
 
 end Routeur_Simple;

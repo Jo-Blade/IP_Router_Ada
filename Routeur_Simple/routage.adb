@@ -5,7 +5,7 @@ package body Routage is
   procedure Afficher_Table(Table_Routage: in T_Table) is
     procedure Afficher (Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String) is
     begin
-      Put_Line(To_String(IP_Vers_Texte(Adresse) & IP_Vers_Texte(Masque) & Interface_Nom));
+      Put_Line(To_String(IP_Vers_Texte(Adresse) & " " & IP_Vers_Texte(Masque) & " " & Interface_Nom));
     end Afficher;
 
     procedure Afficher_Table_Bis is new Pour_Chaque_3 (Traiter => Afficher);
@@ -139,17 +139,17 @@ package body Routage is
       Taille_Masque : Integer;    -- Taille du masque courant
     begin
       Taille_Masque := Longueur_IP(Masque);
-      if Egalite_IP(IP, Adresse, Masque) and then (Taille_Masque > Longueur_Max) then
+      if Egalite_IP(IP, Adresse, Masque) and then (Taille_Masque >= Longueur_Max) then
         Longueur_Max := Taille_Masque;
         Interface_Trouve := Interface_Nom;
       else
         Null;
       end if;
-      if Longueur_Max = 0 then
-        raise Interface_Par_Defaut;
-      else
-        Null;
-      end if;
+      --if Longueur_Max = 0 then
+      --  raise Interface_Par_Defaut;
+      --else
+      --  Null;
+      --end if;
     end Trouver;
 
     procedure Pour_Chaque_Interface is new Pour_Chaque_3 (Traiter => Trouver);
@@ -172,7 +172,7 @@ package body Routage is
     -- "Le masque <adresse_du_masque> n’est pas un masque valide, l’interface <nom_interface> sera ignorée"
     -- et ignorer cette ligne de la table
     Longueur_Max := 0;
-    Interface_Trouve := To_Unbounded_String("eth0");
+    Interface_Trouve := To_Unbounded_String("");
     Pour_Chaque_Interface (Table_Routage);
     return Interface_Trouve;
   end Trouver_Interface;
