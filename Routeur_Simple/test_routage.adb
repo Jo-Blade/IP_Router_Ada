@@ -1,13 +1,49 @@
 with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with Routage; use Routage;
 with IP; use IP;
 
 procedure test_routage is
---	Table : T_LC;
+	Table : T_Table;
+	Table2 : T_Table;
+    Fichier_Table : File_Type;          -- Fichier où est stockée la table de routage
 --	F : File_Type;
 begin
   Put_Line("début des tests");
+  Put_Line("print1");
+  Afficher_Table(Table);
 
+  Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
+  Texte_Vers_IP(To_Unbounded_String("255.255.255.0")), To_Unbounded_String("eth0"));
+  Put_Line("print2");
+  Afficher_Table(Table);
+
+  Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
+  Texte_Vers_IP(To_Unbounded_String("255.255.0.0")), To_Unbounded_String("eth0"));
+  Put_Line("print3");
+  Afficher_Table(Table);
+--
+
+  Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
+  Texte_Vers_IP(To_Unbounded_String("255.255.255.0")), To_Unbounded_String("eth1"));
+  Put_Line("print4");
+  Afficher_Table(Table);
+
+  Vider_Table(Table);
+
+  Open (Fichier_Table, In_File, "input.txt");
+  Initialiser_Table(Table2, Fichier_Table);
+  Put_Line("print5");
+  Afficher_Table(Table2);
+
+  Put_Line("print6");
+  Put_Line(To_String(Trouver_Interface(Table2, Texte_Vers_IP(To_Unbounded_String("192.169.2.20")))));
+
+  Put_Line("print6");
+  Put_Line(To_String(Trouver_Interface(Table2, Texte_Vers_IP(To_Unbounded_String("12.169.10.20")))));
+
+  Vider_Table(Table2);
+--
 --
 --    --Tests de trouver interface
 --
