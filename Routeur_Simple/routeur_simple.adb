@@ -84,7 +84,7 @@ begin
             if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '2' then     -- la ligne est un paquet
                 i := i + 1;
                 Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
-                Put (Fichier_Resultat, To_String(Interface_Nom));
+                Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
             elsif Ligne = "Table" then      -- la ligne commande l'affichage de la table
                 Numero_Ligne := Integer (Line (Fichier_Paquet));
                 Put_Line ("Table (ligne"& Integer'Image (Numero_Ligne)& ")");
