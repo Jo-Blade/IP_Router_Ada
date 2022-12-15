@@ -87,14 +87,14 @@ package body Routage is
     Masque : in T_IP; Interface_Nom : in Unbounded_String) is
 
     function Selection (Cellule : in T_Cellule) return Boolean is
-      test : Boolean;
+      Test : Boolean;
     begin
       if (Cellule.Adresse = Adresse) and (Cellule.Masque = Masque) then
-        test := True;
+        Test := True;
       else
-        test := False;
+        Test := False;
       end if;
-      return test;
+      return Test;
     end Selection;
 
     procedure Ajouter_Element_Bis is new Enregistrer(Selection => Selection);
@@ -112,7 +112,7 @@ package body Routage is
 
     Tableau : T_TAB;    --tableau pour la fonction Texte_Vers_IP
     Ligne : Unbounded_String;
-    Element : T_Cellule;    
+    Element : T_Cellule;
   begin
     loop
       Ligne := To_Unbounded_String(Get_Line(Fichier));    -- recupération de la ligne courante
@@ -120,7 +120,7 @@ package body Routage is
       Element.Adresse := Texte_Vers_IP(Tableau(1));       -- transformation en IP et affectation à élément
       Element.Masque := Texte_Vers_IP(Tableau(2));        -- Idem pour le masque
       Element.Interface_Nom := Tableau(3);                -- affectation de l'interface dans la dernière case d'élement
-      Table_LC.Ajouter_Debut (T_LC(Table_Routage), Element);
+      Table_LC.Ajouter_Debut(T_LC(Table_Routage), Element);
       exit when End_Of_File(Fichier);
     end loop;
   end Initialiser_Table; 

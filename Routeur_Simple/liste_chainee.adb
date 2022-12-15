@@ -1,6 +1,7 @@
 with Ada.Text_IO;            use Ada.Text_IO;
 with Ada.Unchecked_Deallocation;
 
+
 package body Liste_Chainee is
 	procedure Free is
 		new Ada.Unchecked_Deallocation (Object => T_Cellule, Name => T_LC);
@@ -128,7 +129,7 @@ package body Liste_Chainee is
 
   -- La fonction "Enregistrer" est la seule que nous avons écrite dans ce module.
   -- Toutes les autres sont directement copiées depuis le cours de PIM
-  -- si elles sont moins jolies, c’est pas de ma faute :)
+  -- si elles sont moins jolies, c’est pas de ma faute
   --
   procedure Enregistrer (Liste : in out T_LC; Element : in T_ELement) is
   begin
