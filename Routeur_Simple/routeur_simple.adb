@@ -1,7 +1,6 @@
 with Ada.Strings;               use Ada.Strings;	-- pour Both utilisé par Trim
 with Ada.Command_Line;          use Ada.Command_Line;
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
-with Ada.Exceptions;            use Ada.Exceptions;
 with Ada.Text_IO;               use Ada.Text_IO;
 with Routage;                   use Routage;
 with IP;                        use IP;
@@ -30,69 +29,81 @@ procedure Routeur_Simple is
 
 begin
     -- Lecture les paramètres en entrée
-    begin
         i := 1;
         while i <= Argument_Count loop
-            -- Lecture du i-ème paramètre
-            Cle := To_Unbounded_String (Argument(i));
-            -- Traitement du i-ième paramètre
-            i := i + 1;
-            if Cle = "-p" then
-                Nom_Fichier_Paquet := To_Unbounded_String(Argument(i));
-            elsif Cle = "-S" then
-                Afficher_Stats := False;
-                i := i - 1;
-            elsif Cle = "-s" then
-                Afficher_Stats := True;
-                i := i - 1;
-            elsif Cle = "-t" then
-                Nom_Fichier_Table := To_Unbounded_String(Argument(i));
-            elsif Cle = "-p" then
-                Nom_Fichier_Resultat := To_Unbounded_String(Argument(i));
-            else
-                raise Parametre_Inconnu;
-            end if;
-            i := i + 1;
+            begin
+                -- Lecture du i-ème paramètre
+                Cle := To_Unbounded_String (Argument(i));
+                -- Traitement du i-ième paramètre
+                i := i + 1;
+                if Cle = "-p" then
+                    Nom_Fichier_Paquet := To_Unbounded_String(Argument(i));
+                elsif Cle = "-S" then
+                    Afficher_Stats := False;
+                    i := i - 1;
+                elsif Cle = "-s" then
+                    Afficher_Stats := True;
+                    i := i - 1;
+                elsif Cle = "-t" then
+                    Nom_Fichier_Table := To_Unbounded_String(Argument(i));
+                elsif Cle = "-p" then
+                    Nom_Fichier_Resultat := To_Unbounded_String(Argument(i));
+                else
+                    raise Parametre_Inconnu;
+                end if;
+                i := i + 1;
+            exception
+                when Parametre_Inconnu => Put_Line ("Le "& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
+            end;
         end loop;
-    exception
-        when Parametre_Inconnu => Put_Line ("Paramètre entré inconnu");
-    end;
 
     -- Initialisaton de la table de routage
     Open (Fichier_Table, In_File, To_String(Nom_Fichier_Table));
-    begin
-        Initialiser_Table (Table, Fichier_Table);
-    end;
+    Initialiser_Table (Table, Fichier_Table);
     Close (Fichier_Table);
 
     -- Gestion des paquets et écriture des résultats
     Open (Fichier_Paquet, In_File, To_String(Nom_Fichier_Paquet));
     Create (Fichier_Resultat, Out_File, To_String(Nom_Fichier_Resultat));
-    begin
-        loop
+    i := 0;
+    loop
+        begin
             -- Lecture de la ligne courante
             Ligne := To_Unbounded_String(Get_Line (Fichier_Paquet));
             Trim (Ligne, Both);
             -- Gestion du de la ligne
             if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '2' then     -- la ligne est un paquet
+                i := i + 1;
                 Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
                 Put (Fichier_Resultat, To_String(Interface_Nom));
             elsif Ligne = "Table" then      -- la ligne commande l'affichage de la table
                 Numero_Ligne := Integer (Line (Fichier_Paquet));
-                Put_Line ("Table (ligne"& Integer'Image (Numero_Ligne));
+                Put_Line ("Table (ligne"& Integer'Image (Numero_Ligne)& ")");
                 Afficher_Table (Table);
             elsif Ligne = "Fin" then      -- la ligne commande l'affichage de Fin
                 Numero_Ligne := Integer (Line (Fichier_Paquet));
-                Put_Line ("Fin (ligne"& Integer'Image (Numero_Ligne));
+                Put_Line ("Fin (ligne"& Integer'Image (Numero_Ligne)& ")");
+                if Afficher_Stats then
+                    if i > 1 then
+                        Put_Line ("Au cours du programme, "& Integer'Image (i)& " demandes de route ont été effectuées.");
+                    elsif i = 1 then
+                        Put_Line ("Au cours du programme, 1 demande de route a été effectuée.");
+                    else
+                        Put_Line ("Au cours du programme, aucune demande de route n'a été effectuée.");
+                    end if;
+                else
+                    Null;
+                end if;
             else
                 raise Commande_Inconnue;
             end if;
-        exit when End_Of_File (Fichier_Paquet);
-        end loop;
-    exception when Commande_Inconnue => Put_Line ("Commande inconnue détectée");
-    end;
+        exception when Commande_Inconnue => Put_Line ("Commande inconnue détectée, la ligne sera ignorée.");
+        end;
+    exit when End_Of_File (Fichier_Paquet);
+    end loop;
     Close (Fichier_Paquet);
     Close (Fichier_Resultat);
     Vider_Table (Table);
 
+exception when Route_De_Base_Inconnue => Put_Line ("La route de base 0.0.0.0 255.255.255.255 n'existe pas, cette erreur est fatale.");
 end Routeur_Simple;
