@@ -131,7 +131,7 @@ package body Routage is
             end;
         exit when End_Of_File(Fichier);
         end loop;
-        if Contient(Table_Routage, Texte_Vers_IP(To_Unbounded_String("0.0.0.0")), Texte_Vers_IP(To_Unbounded_String("255.255.255.255"))) then
+        if Contient(Table_Routage, Texte_Vers_IP(To_Unbounded_String("0.0.0.0")), Texte_Vers_IP(To_Unbounded_String("0.0.0.0"))) then
             Null;
         else
             Vider_Table (Table_Routage);

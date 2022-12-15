@@ -115,5 +115,5 @@ begin
     Vider_Table (Table);
 
 exception 
-    when Route_De_Base_Inconnue => Put_Line ("La route de base 0.0.0.0 255.255.255.255 n'existe pas, cette erreur est fatale.");
+    when Route_De_Base_Inconnue => Put_Line ("La route de base 0.0.0.0 0.0.0.0 n'existe pas, cette erreur est fatale.");
 end Routeur_Simple;
