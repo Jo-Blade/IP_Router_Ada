@@ -74,7 +74,7 @@ begin
     Put_Line ("### Gestion ####");
     Open (Fichier_Paquet, In_File, To_String(Nom_Fichier_Paquet));
     Create (Fichier_Resultat, Out_File, To_String(Nom_Fichier_Resultat));
-    i := 0;
+    i := 0;     -- Compte le nombre de demandes de routage
     loop
         begin
             -- Lecture de la ligne courante
@@ -85,24 +85,23 @@ begin
                 i := i + 1;
                 Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
                 Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
-            elsif Ligne = "Table" then      -- la ligne commande l'affichage de la table
+            elsif Ligne = "table" then      -- la ligne commande l'affichage de la table
                 Numero_Ligne := Integer (Line (Fichier_Paquet));
-                Put_Line ("Table (ligne"& Integer'Image (Numero_Ligne)& ")");
+                Put_Line ("table (ligne"& Integer'Image (Numero_Ligne)& ")");
                 Afficher_Table (Table);
-            elsif Ligne = "Fin" then      -- la ligne commande l'affichage de Fin
+            elsif Ligne = "stats" then      -- la ligne commande l'affichage de Fin
                 Numero_Ligne := Integer (Line (Fichier_Paquet));
-                Put_Line ("Fin (ligne"& Integer'Image (Numero_Ligne)& ")");
-                if Afficher_Stats then
-                    if i > 1 then
-                        Put_Line ("Au cours du programme, "& Integer'Image (i)& " demandes de route ont été effectuées.");
-                    elsif i = 1 then
-                        Put_Line ("Au cours du programme, 1 demande de route a été effectuée.");
-                    else
-                        Put_Line ("Au cours du programme, aucune demande de route n'a été effectuée.");
-                    end if;
+                Put_Line ("fin (ligne"& Integer'Image (Numero_Ligne)& ")");
+                if i > 1 then
+                    Put_Line ("Au cours du programme, "& Integer'Image (i)& " demandes de route ont été effectuées.");
+                elsif i = 1 then
+                    Put_Line ("Au cours du programme, 1 demande de route a été effectuée.");
                 else
-                    Null;
+                    Put_Line ("Au cours du programme, aucune demande de route n'a été effectuée.");
                 end if;
+            elsif Ligne = "fin" then      -- la ligne commande l'affichage de Fin
+                Numero_Ligne := Integer (Line (Fichier_Paquet));
+                Put_Line ("fin (ligne"& Integer'Image (Numero_Ligne)& ")");
             else
                 raise Commande_Inconnue;
             end if;
@@ -110,6 +109,18 @@ begin
         end;
     exit when End_Of_File (Fichier_Paquet);
     end loop;
+    -- Affichage des statistiques
+    if Afficher_Stats then
+        if i > 1 then
+            Put_Line ("Au cours du programme, "& Integer'Image (i)& " demandes de route ont été effectuées.");
+        elsif i = 1 then
+            Put_Line ("Au cours du programme, 1 demande de route a été effectuée.");
+        else
+            Put_Line ("Au cours du programme, aucune demande de route n'a été effectuée.");
+        end if;
+    else
+        Null;
+    end if;
     Close (Fichier_Paquet);
     Close (Fichier_Resultat);
     Vider_Table (Table);
