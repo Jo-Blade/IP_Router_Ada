@@ -127,7 +127,8 @@ package body Routage is
             Table_LC.Ajouter_Debut(T_LC(Table_Routage), Element);
             exception
                 -- On ignore la ligne du fichier et on reprend l'analyse
-                when Erreur_Masque_Invalide => Put_Line("Le masque de la ligne: "& To_String(Ligne)& " est invalide, elle sera ignorée.");
+                when others =>
+                  Put_Line("La ligne : '"& To_String(Ligne)& "' est invalide, elle sera ignorée.");
             end;
         exit when End_Of_File(Fichier);
         end loop;
