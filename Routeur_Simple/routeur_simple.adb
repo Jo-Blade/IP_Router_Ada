@@ -24,7 +24,6 @@ procedure Routeur_Simple is
     Parametre_Inconnu : Exception;      -- Exception lorsque un paramètre inconnu est mis en ligne de commande
     Ouverture_Impossible : Exception;   -- Exception lorsque le fichier contenant la table ou le spaquets n'existe pas
     Commande_Inconnue : Exception;      -- Exception lorsque une commande inconnue est lue dans Fichier_Paquet
-    Commande_Fin : Exception;           -- Exception lorsque une la commande fin est lue dans Fichier_Paquet
     Erreur_Dernier_Argument : Exception;-- Exception lorsque le dernier argument rentré en requiert un suivant inexistant
     Fichier_Paquet : File_Type;         -- Fichier où sont les paquets à router
     Fichier_Resultat : File_Type;       -- Fichier où les résultats seront écrits
@@ -114,17 +113,13 @@ begin
             elsif Ligne = "fin" then      -- la ligne commande l'affichage de Fin
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("fin (ligne"& Integer'Image (Numero_Ligne)& ")");
-                Close (Fichier_Paquet);
-                Close (Fichier_Resultat);
-                Vider_Table (Table);
-                raise Commande_Fin;
             else
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 raise Commande_Inconnue;
             end if;
         exception when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
         end;
-    exit when End_Of_File (Fichier_Paquet);
+    exit when (Ligne = "fin") or End_Of_File (Fichier_Paquet);
     end loop;
     -- Affichage des statistiques
     if Afficher_Stats then
@@ -144,7 +139,6 @@ begin
 
 exception 
     when Route_De_Base_Inconnue => Put_Line ("La route de base '0.0.0.0 0.0.0.0' n'existe pas, cette erreur est fatale.");
-    when Commande_Fin => Null;
     when Ouverture_Impossible => Null;
     when others => Put_Line ("Erreur inconnue, arrêt immédiat du routeur.");
 end Routeur_Simple;
