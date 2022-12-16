@@ -98,12 +98,12 @@ begin
                 Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
                 Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
             elsif Ligne = "table" then      -- la ligne commande l'affichage de la table
-                Numero_Ligne := Integer (Line (Fichier_Paquet));
+                Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("table (ligne"& Integer'Image (Numero_Ligne)& ")");
                 Afficher_Table (Table);
             elsif Ligne = "stats" then      -- la ligne commande l'affichage de Fin
-                Numero_Ligne := Integer (Line (Fichier_Paquet));
-                Put_Line ("fin (ligne"& Integer'Image (Numero_Ligne)& ")");
+                Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
+                Put_Line ("stats (ligne"& Integer'Image (Numero_Ligne)& ")");
                 if i > 1 then
                     Put_Line ("Au cours du programme,"& Integer'Image (i)& " demandes de route ont été effectuées.");
                 elsif i = 1 then
@@ -112,17 +112,17 @@ begin
                     Put_Line ("Au cours du programme, aucune demande de route n'a été effectuée.");
                 end if;
             elsif Ligne = "fin" then      -- la ligne commande l'affichage de Fin
-                Numero_Ligne := Integer (Line (Fichier_Paquet));
+                Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("fin (ligne"& Integer'Image (Numero_Ligne)& ")");
                 Close (Fichier_Paquet);
                 Close (Fichier_Resultat);
                 Vider_Table (Table);
                 raise Commande_Fin;
             else
-                Numero_Ligne := Integer (Line (Fichier_Paquet));
+                Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 raise Commande_Inconnue;
             end if;
-        exception when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne - 1)&" sera ignorée.");
+        exception when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
         end;
     exit when End_Of_File (Fichier_Paquet);
     end loop;
