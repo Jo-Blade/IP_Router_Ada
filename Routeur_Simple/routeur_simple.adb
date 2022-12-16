@@ -70,7 +70,7 @@ begin
     begin
         Open (Fichier_Table, In_File, To_String(Nom_Fichier_Table));
     exception
-        when Name_Error => Put_Line ("Le fichier "& To_String(Nom_Fichier_Table)& " n'existe pas. Cette erreur est fatale."); raise Ouverture_Impossible;
+        when Name_Error => Put_Line ("Le fichier '"& To_String(Nom_Fichier_Table)& "' n'existe pas. Cette erreur est fatale."); raise Ouverture_Impossible;
     end;
     Initialiser_Table (Table, Fichier_Table);
     Close (Fichier_Table);
@@ -79,7 +79,7 @@ begin
     begin
         Open (Fichier_Paquet, In_File, To_String(Nom_Fichier_Paquet));
     exception
-        when Name_Error => Put_Line ("Le fichier "& To_String(Nom_Fichier_Paquet)& " n'existe pas. Cette erreur est fatale."); raise Ouverture_Impossible;
+        when Name_Error => Put_Line ("Le fichier '"& To_String(Nom_Fichier_Paquet)& "' existe pas. Cette erreur est fatale."); raise Ouverture_Impossible;
     end;
     Create (Fichier_Resultat, Out_File, To_String(Nom_Fichier_Resultat));
     i := 0;     -- Compte le nombre de demandes de routage
@@ -139,7 +139,7 @@ begin
     Vider_Table (Table);
 
 exception 
-    when Route_De_Base_Inconnue => Put_Line ("La route de base 0.0.0.0 0.0.0.0 n'existe pas, cette erreur est fatale.");
+    when Route_De_Base_Inconnue => Put_Line ("La route de base '0.0.0.0 0.0.0.0' n'existe pas, cette erreur est fatale.");
     when Commande_Fin => Null;
     when Ouverture_Impossible => Null;
 end Routeur_Simple;
