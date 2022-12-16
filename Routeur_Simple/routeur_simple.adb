@@ -60,7 +60,7 @@ begin
                     i := i + 1;
                 end if;
             exception
-                when Parametre_Inconnu => Put_Line ("Le "& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
+                when Parametre_Inconnu => Put_Line ("Le"& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
                 when Erreur_Dernier_Argument => Put_Line ("Le dernier argument est incorrect, il sera ignoré.");
             end;
         end loop;
