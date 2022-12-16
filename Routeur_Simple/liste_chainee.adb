@@ -6,22 +6,26 @@ package body Liste_Chainee is
 	procedure Free is
 		new Ada.Unchecked_Deallocation (Object => T_Cellule, Name => T_LC);
 
+    --Initialiser la liste chainée
 	procedure Initialiser(Liste: out T_LC) is
 	begin
         Liste := null;
     end Initialiser;
 
-
+    --Vérifier que la liste chainée est vide
 	function Est_Vide (Liste : T_LC) return Boolean is
 	begin
 		return Liste = null;
 	end;
 
+    --Ajouter un élément au début de la liste chainée
     procedure Ajouter_Debut (Liste: in out T_LC; Element: T_Element) is
     begin
         Liste := new T_Cellule'(Element, Liste);
     end Ajouter_Debut;
     
+    --Retourner le premier élément de la liste chainée
+    --On lève une exception si la liste est vide : Element_Absent_Error
     function Premier (Liste: in T_LC) return T_Element is
     begin
         if Liste = null then
@@ -30,6 +34,7 @@ package body Liste_Chainee is
         return Liste.all.Element;
     end Premier;
         
+    --Retourner la taille de la liste chainée
     function Taille(Liste: in T_LC) return Integer is
     begin
         if Liste = null then
@@ -39,8 +44,7 @@ package body Liste_Chainee is
         end if;
     end Taille;
 
-
-
+    --Retourne le booléen true si l'élémnet souhaité est présent dans la liste chainée
     function Est_Present(Liste: in T_LC; Element: in T_Element) return Boolean is
     begin
         if Liste = Null then
@@ -52,7 +56,8 @@ package body Liste_Chainee is
         end if;
     end Est_Present;
 
-
+    --Supprimer un élement de la liste chainée la premier fois qu'il apparait
+    --On lève une exception si la liste est vide : Element_Absent_Error
     procedure Supprimer(Liste: in out T_LC; Element: in T_Element) is
         A_Detruire: T_LC;
     begin
@@ -67,6 +72,8 @@ package body Liste_Chainee is
         end if;
     end Supprimer;
     
+    --Obtenir la première apparition dans la liste chainée de l'élément souhaité
+    --On lève une exception si la liste est vide : Element_Absent_Error
     function Cellule_Contenant(Element: T_Element; Liste: in T_LC) return T_LC is
     begin
         if Liste = null then
@@ -78,14 +85,17 @@ package body Liste_Chainee is
         end if;
     end Cellule_Contenant;
 
+    --Inserer un élément dans la liste chainée après l'élément souhaité
     procedure Inserer_Apres (Liste: in out T_LC ; Nouveau, Element: in T_Element) is
         Reference: T_LC;
     begin
         Reference := Cellule_Contenant (Element, Liste);
-        --! peut lever Element_Absent_Error que l'on laisse se propager.
+        -- peut lever Element_Absent_Error que l'on laisse se propager.
         Reference.all.Suivante := new T_Cellule'(Nouveau, Reference.all.Suivante);
     end Inserer_Apres;
 
+    --Retourner l'entier à l'indice souhaité dans la liste chainée
+    --On lève une exception si l'indice : Indice_Error
     function Ieme(Liste: in T_LC; Indice: in Integer) return T_Element is
     begin
         if Liste = null or Indice < 0 then
@@ -97,6 +107,7 @@ package body Liste_Chainee is
         end if;
     end Ieme;
 
+    --Vider la liste chainée dans son intégralité
     procedure Vider (Liste : in out T_LC) is
         L : T_LC;
         Suiv : T_LC;
@@ -109,7 +120,8 @@ package body Liste_Chainee is
         end loop;
 	end Vider;
 
-
+    --Fonction générique que implemeter d'autres fonctions qui s'appliquent à
+    --chaque élément de la liste chainée
     procedure Pour_Chaque (Liste : in T_LC) is
         L : T_LC;
 	begin
@@ -127,10 +139,8 @@ package body Liste_Chainee is
 	end Pour_Chaque;
 
 
-  -- La fonction "Enregistrer" est la seule que nous avons écrite dans ce module.
-  -- Toutes les autres sont directement copiées depuis le cours de PIM
-  -- si elles sont moins jolies, c’est pas de ma faute
-  --
+    --Rajouter un élément dans une liste chainée et si l'élément est déjà présent 
+    --le remplacer
   procedure Enregistrer (Liste : in out T_LC; Element : in T_ELement) is
   begin
     if Est_Vide(Liste) then
