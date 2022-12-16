@@ -3,7 +3,6 @@ with Ada.Text_IO;              use Ada.Text_IO;
 with Str_Split;
 
 with My_Strings;                  use My_Strings;
-with Ada.Integer_Text_IO;      use Ada.Integer_Text_IO;
 
 procedure split_exemple is
   exemple_chaine : constant String := "ceci    est un test";
