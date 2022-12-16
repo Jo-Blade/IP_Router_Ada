@@ -20,18 +20,18 @@ package IP is
   function Texte_Vers_IP (chaine : in Unbounded_String) return T_IP;
 
   -- convertit une ip en une chaine du type 192.168.0.1
-  function IP_Vers_Texte (ip : in T_IP) return Unbounded_String;
+  function IP_Vers_Texte (IP : in T_IP) return Unbounded_String;
 
   -- renvoie la valeur du i-ème bit (en partant de la gauche)
-  function Lire_Bit (ip : in T_IP; i : in Integer) return Integer
+  function Lire_Bit (IP : in T_IP; i : in Integer) return Integer
     with Pre => (i >= 1) and (i <= 32);
 
   -- teste l’égalité entre 2 ip pour un masque donné
-  function Egalite_IP (ip1 : in T_IP; ip2: in T_IP; masque : in T_IP)
+  function Egalite_IP (IP1 : in T_IP; IP2: in T_IP; Masque : in T_IP)
     return Boolean;
 
   -- renvoie la longueur max de 1 dans ip en partant de la gauche
-  function Longueur_IP(ip : in T_IP) return Integer 
+  function Longueur_IP(IP : in T_IP) return Integer 
     with Post => (Longueur_IP'Result >= 0) and (Longueur_IP'Result <= 32);   
 
                        
