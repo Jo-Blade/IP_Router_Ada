@@ -5,8 +5,10 @@ with IP; use IP;
 
 procedure test_routage is
 	Table : T_Table;
-	Table2 : T_Table;
+    Table2 : T_Table;
+    Table3 : T_Table;
     Fichier_Table : File_Type;          -- Fichier où est stockée la table de routage
+    Fichier_Table_Bis : File_Type;      --Fichier où est sotocké la table sans route pas défaut
     IP1 : T_IP;                         --utilisé pour le teste de Troiver_Interface
     IP2 : T_IP;
     Interface_1 : Unbounded_String;
@@ -35,17 +37,29 @@ begin
 
   Vider_Table(Table);
 
-  Open (Fichier_Table, In_File, "input.txt");
+
+    --Tests de Initialiser_Table
+
+  Open (Fichier_Table, In_File, "table.txt");
   Initialiser_Table(Table2, Fichier_Table);
   Put_Line("print5");
   Afficher_Table(Table2);
 
-  Put_Line("print6");
-  Put_Line(To_String(Trouver_Interface(Table2, Texte_Vers_IP(To_Unbounded_String("192.169.2.20")))));
+    Open(Fichier_Table_Bis, In_File, "table_sans_route_defaut.txt");
+    Put_Line("Une ligne de la table doit être ignorée pour cause de masque invalide"); --test d'une exception
 
-  Put_Line("print6");
-  Put_Line(To_String(Trouver_Interface(Table2, Texte_Vers_IP(To_Unbounded_String("12.169.10.20")))));
+    Put_Line("L'erreur Route_De_Base_Inconnue devra être raise");
+    Initialiser_Table(Table3, Fichier_Table_Bis);
+    pragma Assert(Est_Vide(Table3));           --verification que la table est bien vidé après la détection de l'erreur
 
+
+
+
+--  Put_Line("print6");
+--  Put_Line(To_String(Trouver_Interface(Table2, Texte_Vers_IP(To_Unbounded_String("192.169.2.20")))));
+
+--  Put_Line("print6");
+--  Put_Line(To_String(Trouver_Interface(Table2, Texte_Vers_IP(To_Unbounded_String("12.169.10.20")))));
   Vider_Table(Table2);
 --
 --
