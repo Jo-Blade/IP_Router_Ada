@@ -22,6 +22,7 @@ procedure Routeur_Simple is
     Ligne : Unbounded_String;           -- Ligne courante du fichier des paquets
     Interface_Nom : Unbounded_String;   -- Nom de l'interface du paquet routé
     Parametre_Inconnu : Exception;      -- Exception lorsque un paramètre inconnu est mis en ligne de commande
+    Ouverture_Impossible : Exception;   -- Exception lorsque le fichier contenant la table ou le spaquets n'existe pas
     Commande_Inconnue : Exception;      -- Exception lorsque une commande inconnue est lue dans Fichier_Paquet
     Commande_Fin : Exception;           -- Exception lorsque une la commande fin est lue dans Fichier_Paquet
     Erreur_Dernier_Argument : Exception;-- Exception lorsque le dernier argument rentré en requiert un suivant inexistant
@@ -66,14 +67,20 @@ begin
 
     -- Initialisaton de la table de routage
     New_Line;
-    Put_Line ("### Init ####");
-    Open (Fichier_Table, In_File, To_String(Nom_Fichier_Table));
+    begin
+        Open (Fichier_Table, In_File, To_String(Nom_Fichier_Table));
+    exception
+        when Name_Error => Put_Line ("Le fichier "& To_String(Nom_Fichier_Table)& " n'existe pas. Cette erreur est fatale."); raise Ouverture_Impossible;
+    end;
     Initialiser_Table (Table, Fichier_Table);
     Close (Fichier_Table);
 
     -- Gestion des paquets et écriture des résultats
-    Put_Line ("### Gestion ####");
-    Open (Fichier_Paquet, In_File, To_String(Nom_Fichier_Paquet));
+    begin
+        Open (Fichier_Paquet, In_File, To_String(Nom_Fichier_Paquet));
+    exception
+        when Name_Error => Put_Line ("Le fichier "& To_String(Nom_Fichier_Paquet)& " n'existe pas. Cette erreur est fatale."); raise Ouverture_Impossible;
+    end;
     Create (Fichier_Resultat, Out_File, To_String(Nom_Fichier_Resultat));
     i := 0;     -- Compte le nombre de demandes de routage
     loop
@@ -134,4 +141,5 @@ begin
 exception 
     when Route_De_Base_Inconnue => Put_Line ("La route de base 0.0.0.0 0.0.0.0 n'existe pas, cette erreur est fatale.");
     when Commande_Fin => Null;
+    when Ouverture_Impossible => Null;
 end Routeur_Simple;
