@@ -103,9 +103,10 @@ begin
                 Numero_Ligne := Integer (Line (Fichier_Paquet));
                 Put_Line ("fin (ligne"& Integer'Image (Numero_Ligne)& ")");
             else
+                Numero_Ligne := Integer (Line (Fichier_Paquet));
                 raise Commande_Inconnue;
             end if;
-        exception when Commande_Inconnue => Put_Line ("Commande inconnue détectée, la ligne sera ignorée.");
+        exception when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne "& Integer'Image (Numero_Ligne)&" sera ignorée.");
         end;
     exit when End_Of_File (Fichier_Paquet);
     end loop;
