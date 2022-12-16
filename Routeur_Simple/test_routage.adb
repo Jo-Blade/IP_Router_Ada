@@ -4,11 +4,14 @@ with Routage; use Routage;
 with IP; use IP;
 
 procedure test_routage is
+    Erreur_Exception_Non_Levee : Exception;
+
 	Table : T_Table;
     Table2 : T_Table;
     Table3 : T_Table;
     Fichier_Table : File_Type;          -- Fichier où est stockée la table de routage
     Fichier_Table_Bis : File_Type;      --Fichier où est sotocké la table sans route pas défaut
+    Fichier_Table_Test : File_Type;     -- Fichier où est stockée la table de test correcte
     IP1 : T_IP;                         --utilisé pour le teste de Troiver_Interface
     IP2 : T_IP;
     Interface_1 : Unbounded_String;
@@ -49,8 +52,14 @@ begin
     Put_Line("Une ligne de la table doit être ignorée pour cause de masque invalide"); --test d'une exception
 
     Put_Line("L'erreur Route_De_Base_Inconnue devra être raise");
-    Initialiser_Table(Table3, Fichier_Table_Bis);
-    pragma Assert(Est_Vide(Table3));           --verification que la table est bien vidé après la détection de l'erreur
+
+    begin
+      Initialiser_Table(Table3, Fichier_Table_Bis);
+      raise Erreur_Exception_Non_Levee;
+    exception
+        when Route_De_Base_Inconnue =>
+          Put_Line("L’exception a bien été soulevée");
+    end;
 
 
 
@@ -59,8 +68,8 @@ begin
 
 --    --Tests de trouver interface
 
-    Open(Fichier_Table, In_File, "table.txt");
-    Initialiser_Table(Table2, Fichier_Table);
+    Open (Fichier_Table_Test, In_File, "table_de_test.txt");
+    Initialiser_Table(Table2, Fichier_Table_Test);
     IP1 := Texte_Vers_IP(To_Unbounded_String("192.169.0.1"));
     Interface_1 := Trouver_Interface(Table2, IP1);
     pragma Assert(Interface_1 = To_Unbounded_String("eth0"));
@@ -73,6 +82,11 @@ begin
     New_Line;
 
 
-
+    Put_Line("");
+    Put_Line("");
+    Put_Line("##################################################");
+    Put_Line("#################### ALL OK ! ####################");
+    Put_Line("##################################################");
+    Put_Line("");
 
 end test_routage;
