@@ -7,6 +7,10 @@ procedure test_routage is
 	Table : T_Table;
 	Table2 : T_Table;
     Fichier_Table : File_Type;          -- Fichier où est stockée la table de routage
+    IP1 : T_IP;                         --utilisé pour le teste de Troiver_Interface
+    IP2 : T_IP;
+    Interface_1 : Unbounded_String;
+    Interface_2 : Unbounded_String;
 --	F : File_Type;
 begin
   Put_Line("début des tests");
@@ -46,9 +50,23 @@ begin
 --
 --
 --    --Tests de trouver interface
---
---
---
+
+    Open(Fichier_Table, In_File, "table.txt");
+    Initialiser_Table(Table2, Fichier_Table);
+    IP1 := Texte_Vers_IP(To_Unbounded_String("192.169.0.1"));
+    Interface_1 := Trouver_Interface(Table2, IP1);
+    pragma Assert(Interface_1 = To_Unbounded_String("eth0"));
+
+    IP2 := Texte_Vers_IP(To_Unbounded_String("192.3.0.3"));
+    Interface_2 := Trouver_Interface(Table2, IP2);
+    pragma Assert(Interface_2 = To_Unbounded_String("eth2"));
+
+    put("La fonction Trouver_Interface fonctionne bien !");
+    New_Line;
+
+
+
+
 --    --Tests de l'initilsiation de la table
 --	Create(F, Out_File, "test_initialiser_table", "");
 --	Put(F, "147.127.127 255.255.255.0 eth0");

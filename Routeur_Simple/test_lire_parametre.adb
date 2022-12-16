@@ -4,3 +4,4 @@ with Lire_Parametre; use Lire_Parmetre;
 procedure test is
 begin
     Lire_Parametre() = "table";
+end test;
