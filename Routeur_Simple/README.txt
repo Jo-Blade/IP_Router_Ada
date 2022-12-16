@@ -42,7 +42,7 @@ Taper les instructions suivantes dans la ligne de commande:
 
 - Test du paramètre inconnu:
 ./routeur_simple -j -- le test ne passe pas et lève l'erreur Parametre_Inconnu
-		   --le message suivant apparaît: "Le (numero_paramètre) ème paramètre en entrée est
+		   --le message suivant apparaît: "Le 1 ème paramètre en entrée est
 		     inconnu il sera ignoré."
 
 - Test du nom de fichier inexistant:
@@ -57,17 +57,14 @@ Taper les instructions suivantes dans la ligne de commande:
 - Test avec plusieurs paramètres
 ./routeur_simple -p -r exemple.txt -- le fichier de contenant les paquets sera -r
 				 -- le test lève l'erreur Parametre_Inconnu
-				 -- le message suivant apparaît: "Le (numero_paramètre) ème 		
+				 -- le message suivant apparaît: "Le 3 ème 		
 					paramètre en entrée est inconnu il sera ignoré."
 
 ./routeur_simple -s -S -t -r exemple.txt -- les statistiques ne seront pas affichées car c'est le 	
 					dernier élément de la ligne de commande qui est gardée
 				       -- le fichier contenant la table sera -r
-				       -- le message suivant apparaît: "Le (numero_paramètre) ème 		
+				       -- le message suivant apparaît: "Le 5 ème 		
 					paramètre en entrée est inconnu il sera ignoré."
-					
-				       -- -- le message suivant apparaît: "Le (numero_paramètre) 
-					ème paramètre en entrée est inconnu il sera ignoré."
 
 ./routeur_simple -t table.txt -r resultats.txt -p paquets.txt -- par défaut les statistiques vont 
 								s'afficher
