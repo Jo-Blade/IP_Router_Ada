@@ -14,30 +14,38 @@ package Routage is
 
 
     -- Initialiser avec la table de routage vide
-    procedure Initialiser_Table_Vide (Table_Routage : out T_Table) with
-        Post => Est_Vide(Table_Routage);
+    procedure Initialiser_Table_Vide (Table_Routage : out T_Table) 
+        with Post => Est_Vide(Table_Routage);
+
 
     -- Vider la table de routage
-    procedure Vider_Table (Table_Routage : in out T_Table) with
-        Post => Est_Vide (Table_Routage);
+    procedure Vider_Table (Table_Routage : in out T_Table) 
+        with Post => Est_Vide (Table_Routage);
+
 
     -- Ajouter une interface dans la table de routage
     -- Modifie l’interface existante si elle existe déjà
-    procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP;
-        Masque : in T_IP; Interface_Nom : in Unbounded_String) with
-        Post => Contient (Table_Routage, Adresse, Masque);
+    procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String) 
+        with Post => Contient (Table_Routage, Adresse, Masque);
+
 
     -- Initialiser la table de routage avec le fichier dédié
-    procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) with
-        Pre => Is_Open(Fichier),
+    procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) 
+        with Pre => Is_Open(Fichier),
         Post => not Est_Vide (Table_Routage);
 
+
+    -- Trouve l'interface correspondant à une IP dans la table de routage
     function Trouver_Interface(Table_Routage : in T_Table ; IP : in T_IP) return Unbounded_String;
 
-    --Afficher tous les élément de la table de routage
+
+    -- Afficher tous les élément de la table de routage
     procedure Afficher_Table(Table_Routage: in T_Table);
 
+
+    -- Renvoie si la table est vide ou non
     function Est_Vide (Table_Routage : in T_Table) return Boolean;
+
 
     -- Appliquer un traitement (Traiter) pour chaque élement d'une Liste.
     -- On a 3 fonctions identiques pour éviter les warnings si un paramètre est inutilisé
@@ -60,8 +68,7 @@ package Routage is
 
     function Contient (Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP) return Boolean;
 
-    function Contient (Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP;
-        Interface_Nom : in Unbounded_String ) return Boolean;
+    function Contient (Table_Routage : in T_Table; Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String ) return Boolean;
 
     private
 

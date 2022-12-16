@@ -7,13 +7,13 @@ with IP;                        use IP;
 
 procedure Routeur_Simple is
     -- Paramètres de commande
-    Afficher_Stats : Boolean := True;       -- Affichage des statistiques, vrai de base
+    Afficher_Stats : Boolean := True;   -- Affichage des statistiques, vrai de base
     Nom_Fichier_Table : Unbounded_String := To_Unbounded_String("table.txt");        -- Nom du fichier de la table de routage, table.txt de base
     Nom_Fichier_Paquet : Unbounded_String := To_Unbounded_String("paquets.txt");     -- Nom du fichier des paquets à router, paquets.txt de base
     Nom_Fichier_Resultat : Unbounded_String := To_Unbounded_String("resultats.txt"); -- Nom du fichier où écrire les résultats, resultats.txt de base
 
     -- Liste chainées
-    Table : T_Table;    -- La table de routage
+    Table : T_Table;                    -- La table de routage
 
     -- Variables locales
     i : Integer;                        -- Compteur
@@ -70,7 +70,9 @@ begin
     begin
         Open (Fichier_Table, In_File, To_String(Nom_Fichier_Table));
     exception
-        when Name_Error => Put_Line ("Le fichier '"& To_String(Nom_Fichier_Table)& "' n'existe pas. Cette erreur est fatale."); raise Ouverture_Impossible;
+        when Name_Error => 
+            Put_Line ("Le fichier '"& To_String(Nom_Fichier_Table)& "' n'existe pas. Cette erreur est fatale."); 
+            raise Ouverture_Impossible;
     end;
     Initialiser_Table (Table, Fichier_Table);
     Close (Fichier_Table);
@@ -79,7 +81,9 @@ begin
     begin
         Open (Fichier_Paquet, In_File, To_String(Nom_Fichier_Paquet));
     exception
-        when Name_Error => Put_Line ("Le fichier '"& To_String(Nom_Fichier_Paquet)& "' existe pas. Cette erreur est fatale."); raise Ouverture_Impossible;
+        when Name_Error => 
+            Put_Line ("Le fichier '"& To_String(Nom_Fichier_Paquet)& "' existe pas. Cette erreur est fatale."); 
+            raise Ouverture_Impossible;
     end;
     Create (Fichier_Resultat, Out_File, To_String(Nom_Fichier_Resultat));
     i := 0;     -- Compte le nombre de demandes de routage
@@ -142,4 +146,5 @@ exception
     when Route_De_Base_Inconnue => Put_Line ("La route de base '0.0.0.0 0.0.0.0' n'existe pas, cette erreur est fatale.");
     when Commande_Fin => Null;
     when Ouverture_Impossible => Null;
+    when others => Put_Line ("Erreur inconnue, arrêt immédiat du routeur.");
 end Routeur_Simple;

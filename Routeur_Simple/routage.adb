@@ -117,20 +117,20 @@ package body Routage is
     begin
         loop
             begin
-            Ligne := To_Unbounded_String(Get_Line(Fichier));    -- recupération de la ligne courante
-            Split(Tableau, Ligne, ' ');                         -- séparation des éléments
-            Element.Adresse := Texte_Vers_IP(Tableau(1));       -- transformation en IP et affectation à élément
-            Element.Masque := Texte_Vers_IP(Tableau(2));        -- Idem pour le masque
-            Masque_Valide := Longueur_IP(Element.Masque);       -- Si le masque n'est pas valide, une exception sera levée dans Longueur_IP
-            Masque_Valide := Masque_Valide - Masque_Valide;     -- Permet d'enlever le warning de non-utilisation
-            Element.Interface_Nom := Tableau(3);                -- affectation de l'interface dans la dernière case d'élement
-            Table_LC.Ajouter_Debut(T_LC(Table_Routage), Element);
+                Ligne := To_Unbounded_String(Get_Line(Fichier));    -- recupération de la ligne courante
+                Split(Tableau, Ligne, ' ');                         -- séparation des éléments
+                Element.Adresse := Texte_Vers_IP(Tableau(1));       -- transformation en IP et affectation à élément
+                Element.Masque := Texte_Vers_IP(Tableau(2));        -- Idem pour le masque
+                Masque_Valide := Longueur_IP(Element.Masque);       -- Si le masque n'est pas valide, une exception sera levée dans Longueur_IP
+                Masque_Valide := Masque_Valide - Masque_Valide;     -- Permet d'enlever le warning de non-utilisation
+                Element.Interface_Nom := Tableau(3);                -- affectation de l'interface dans la dernière case d'élement
+                Table_LC.Ajouter_Debut(T_LC(Table_Routage), Element);
             exception
-                -- On ignore la ligne du fichier et on reprend l'analyse
+                    -- On ignore la ligne du fichier et on reprend l'analyse
                 when others =>
-                  Put_Line("La ligne : '"& To_String(Ligne)& "' est invalide, elle sera ignorée.");
+                    Put_Line("La ligne : '"& To_String(Ligne)& "' est invalide, elle sera ignorée.");
             end;
-        exit when End_Of_File(Fichier);
+            exit when End_Of_File(Fichier);
         end loop;
         if Contient(Table_Routage, Texte_Vers_IP(To_Unbounded_String("0.0.0.0")), Texte_Vers_IP(To_Unbounded_String("0.0.0.0"))) then
             Null;
@@ -143,12 +143,12 @@ package body Routage is
 
     function Trouver_Interface (Table_Routage : in T_Table; IP : in T_IP) return Unbounded_String is
         -- Variables locales
-        Longueur_Max : Integer;              -- Plus grande longueur de masque
+        Longueur_Max : Integer;                 -- Plus grande longueur de masque
         Interface_Trouve : Unbounded_String;    -- Nom de l'interface vers laquelle sera routé le paquet, "eth0" de base
 
         -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
         procedure Trouver (Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String) is
-            Taille_Masque : Integer;    -- Taille du masque courant
+            Taille_Masque : Integer;            -- Taille du masque courant
         begin
             Taille_Masque := Longueur_IP(Masque);
             if Egalite_IP(IP, Adresse, Masque) and then (Taille_Masque >= Longueur_Max) then
