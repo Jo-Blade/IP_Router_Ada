@@ -54,15 +54,9 @@ begin
 
 
 
-
---  Put_Line("print6");
---  Put_Line(To_String(Trouver_Interface(Table2, Texte_Vers_IP(To_Unbounded_String("192.169.2.20")))));
-
---  Put_Line("print6");
---  Put_Line(To_String(Trouver_Interface(Table2, Texte_Vers_IP(To_Unbounded_String("12.169.10.20")))));
   Vider_Table(Table2);
---
---
+
+
 --    --Tests de trouver interface
 
     Open(Fichier_Table, In_File, "table.txt");
@@ -81,33 +75,4 @@ begin
 
 
 
---    --Tests de l'initilsiation de la table
---	Create(F, Out_File, "test_initialiser_table", "");
---	Put(F, "147.127.127 255.255.255.0 eth0");
---	Put(F,"147.128.0.0 255.255.0.0 eth1");
---	Put(F,"0.0.0.0 0.0.0.0 eth2");
---	Table:= Initialiser_Table(F);
---	Pragma Assert(Table.all.Element.Destination=Test_Vers_IP(To_Unbounded_String("147.127.127")));
---	Pragma Assert(Table.all.Element.Masque=Test_Vers_IP(To_Unbounded_String("255.255.255.0")));
---	Pragma Assert(Table.all.Element.Interface_Nom=Test_Vers_IP(To_Unbounded_String("eth0")));
---	Table:= Table.all.Suivant;
---	Pragma Assert(Table.all.Element.Destination=Test_Vers_IP(To_Unbounded_String("147.128.0.0")));
---	Pragma Assert(Table.all.Element.Masque=Test_Vers_IP(To_Unbounded_String("255.255.0.0")));
---	Pragma Assert(Table.all.Element.Interface_Nom=Test_Vers_IP(To_Unbounded_String("eth1")));
---	Table:= Table.all.Suivant;
---	Pragma Assert(Table.all.Element.Destination=Test_Vers_IP(To_Unbounded_String("0.0.0.0")));
---	Pragma Assert(Table.all.Element.Masque=Test_Vers_IP(To_Unbounded_String("0.0.0.0")));
---	Pragma Assert(Table.all.Element.Interface_Nom=Test_Vers_IP(To_Unbounded_String("eth2")));
---    Close(F);
---
---    --Tests de l'Affichage de la table
---    --Visualisation de table et vérification de son contenu
---	Create(F, Out_File, "test_initialiser_table", "");
---	Put(F, "147.127.127 255.255.255.0 eth0");
---	Put(F,"147.128.0.0 255.255.0.0 eth1");
---    Put(F,"0.0.0.0 0.0.0.0 eth2");
---    Table:= Initialiser_Table(F);
---    Afficher_Table(Table);
---    Close(F);
---
 end test_routage;
