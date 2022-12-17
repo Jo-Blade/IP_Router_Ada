@@ -1,4 +1,4 @@
-with Ada.Strings;               use Ada.Strings;	-- pour Both utilisé par Trim
+with Ada.Strings;               use Ada.Strings;	
 with Ada.Command_Line;          use Ada.Command_Line;
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with Ada.Text_IO;               use Ada.Text_IO;
@@ -31,38 +31,38 @@ procedure Routeur_Simple is
 
 begin
     -- Lecture les paramètres en entrée
-        i := 1;
-        while i <= Argument_Count loop
-            begin
-                -- Lecture du i-ème paramètre
-                Cle := To_Unbounded_String (Argument(i));
-                -- Traitement du i-ième paramètre
-                i := i + 1;
-                if (i > Argument_Count) and (Cle = "-p" or Cle = "-t" or Cle = "-r") then
-                    raise Erreur_Dernier_Argument;
+    i := 1;
+    while i <= Argument_Count loop
+        begin
+            -- Lecture du i-ème paramètre
+            Cle := To_Unbounded_String (Argument(i));
+            -- Traitement du i-ième paramètre
+            i := i + 1;
+            if (i > Argument_Count) and (Cle = "-p" or Cle = "-t" or Cle = "-r") then
+                raise Erreur_Dernier_Argument;
+            else
+                if Cle = "-p" then
+                    Nom_Fichier_Paquet := To_Unbounded_String(Argument(i));
+                elsif Cle = "-S" then
+                    Afficher_Stats := False;
+                    i := i - 1;
+                elsif Cle = "-s" then
+                    Afficher_Stats := True;
+                    i := i - 1;
+                elsif Cle = "-t" then
+                    Nom_Fichier_Table := To_Unbounded_String(Argument(i));
+                elsif Cle = "-r" then
+                    Nom_Fichier_Resultat := To_Unbounded_String(Argument(i));
                 else
-                    if Cle = "-p" then
-                        Nom_Fichier_Paquet := To_Unbounded_String(Argument(i));
-                    elsif Cle = "-S" then
-                        Afficher_Stats := False;
-                        i := i - 1;
-                    elsif Cle = "-s" then
-                        Afficher_Stats := True;
-                        i := i - 1;
-                    elsif Cle = "-t" then
-                        Nom_Fichier_Table := To_Unbounded_String(Argument(i));
-                    elsif Cle = "-r" then
-                        Nom_Fichier_Resultat := To_Unbounded_String(Argument(i));
-                    else
-                        raise Parametre_Inconnu;
-                    end if;
-                    i := i + 1;
+                    raise Parametre_Inconnu;
                 end if;
-            exception
-                when Parametre_Inconnu => Put_Line ("Le"& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
-                when Erreur_Dernier_Argument => Put_Line ("Le dernier argument est incorrect, il sera ignoré.");
-            end;
-        end loop;
+                i := i + 1;
+            end if;
+        exception
+            when Parametre_Inconnu => Put_Line ("Le"& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
+            when Erreur_Dernier_Argument => Put_Line ("Le dernier argument est incorrect, il sera ignoré.");
+        end;
+    end loop;
 
     -- Initialisaton de la table de routage
     New_Line;
@@ -119,7 +119,7 @@ begin
             end if;
         exception when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
         end;
-    exit when (Ligne = "fin") or End_Of_File (Fichier_Paquet);
+        exit when (Ligne = "fin") or End_Of_File (Fichier_Paquet);
     end loop;
     -- Affichage des statistiques
     if Afficher_Stats then

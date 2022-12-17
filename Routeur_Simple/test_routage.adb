@@ -6,7 +6,7 @@ with IP; use IP;
 procedure test_routage is
     Erreur_Exception_Non_Levee : Exception;
 
-	Table : T_Table;
+    Table : T_Table;
     Table2 : T_Table;
     Table3 : T_Table;
     Fichier_Table : File_Type;          -- Fichier où est stockée la table de routage
@@ -16,37 +16,37 @@ procedure test_routage is
     IP2 : T_IP;
     Interface_1 : Unbounded_String;
     Interface_2 : Unbounded_String;
---	F : File_Type;
+    --	F : File_Type;
 begin
-  Put_Line("début des tests");
-  Put_Line("print1");
-  Afficher_Table(Table);
+    Put_Line("début des tests");
+    Put_Line("print1");
+    Afficher_Table(Table);
 
-  Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
-  Texte_Vers_IP(To_Unbounded_String("255.255.255.0")), To_Unbounded_String("eth0"));
-  Put_Line("print2");
-  Afficher_Table(Table);
+    Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
+    Texte_Vers_IP(To_Unbounded_String("255.255.255.0")), To_Unbounded_String("eth0"));
+    Put_Line("print2");
+    Afficher_Table(Table);
 
-  Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
-  Texte_Vers_IP(To_Unbounded_String("255.255.0.0")), To_Unbounded_String("eth0"));
-  Put_Line("print3");
-  Afficher_Table(Table);
---
+    Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
+    Texte_Vers_IP(To_Unbounded_String("255.255.0.0")), To_Unbounded_String("eth0"));
+    Put_Line("print3");
+    Afficher_Table(Table);
+    --
 
-  Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
-  Texte_Vers_IP(To_Unbounded_String("255.255.255.0")), To_Unbounded_String("eth1"));
-  Put_Line("print4");
-  Afficher_Table(Table);
+    Ajouter_Element(Table, Texte_Vers_IP(To_Unbounded_String("192.168.1.200")),
+    Texte_Vers_IP(To_Unbounded_String("255.255.255.0")), To_Unbounded_String("eth1"));
+    Put_Line("print4");
+    Afficher_Table(Table);
 
-  Vider_Table(Table);
+    Vider_Table(Table);
 
 
     --Tests de Initialiser_Table
 
-  Open (Fichier_Table, In_File, "table.txt");
-  Initialiser_Table(Table2, Fichier_Table);
-  Put_Line("print5");
-  Afficher_Table(Table2);
+    Open (Fichier_Table, In_File, "table.txt");
+    Initialiser_Table(Table2, Fichier_Table);
+    Put_Line("print5");
+    Afficher_Table(Table2);
 
     Open(Fichier_Table_Bis, In_File, "table_sans_route_defaut.txt");
     Put_Line("Une ligne de la table doit être ignorée pour cause de masque invalide"); --test d'une exception
@@ -54,19 +54,19 @@ begin
     Put_Line("L'erreur Route_De_Base_Inconnue devra être raise");
 
     begin
-      Initialiser_Table(Table3, Fichier_Table_Bis);
-      raise Erreur_Exception_Non_Levee;
+        Initialiser_Table(Table3, Fichier_Table_Bis);
+        raise Erreur_Exception_Non_Levee;
     exception
         when Route_De_Base_Inconnue =>
-          Put_Line("L’exception a bien été soulevée");
+            Put_Line("L’exception a bien été soulevée");
     end;
 
 
 
-  Vider_Table(Table2);
+    Vider_Table(Table2);
 
 
---    --Tests de trouver interface
+    --    --Tests de trouver interface
 
     Open (Fichier_Table_Test, In_File, "table_de_test.txt");
     Initialiser_Table(Table2, Fichier_Table_Test);
