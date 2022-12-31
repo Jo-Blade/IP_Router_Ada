@@ -75,7 +75,64 @@ package body Arbre_Prefixe is
     Arbre.All.Element := Donnee;
   end Ecrire_Donnee_Tete;
 
-  --procedure Supprimer (Arbre : in out T_Trie);
+  function Lire_Ieme_Enfant (Arbre : in T_Trie; i : Natural) return T_Trie is
+  begin
+    return Arbre.All.Enfants(i);
+  end Lire_Ieme_Enfant;
+
+  -- Supprime les noeuds qui ne sont plus nécessaire après suppression
+  -- d’autres Noeuds par la fonction supprimer
+  procedure Supprimer_Noeud_Inutile (Arbre : in out T_Trie) is
+    Arbre_Temporaire : T_Trie;
+    Nombre_Fils_Feuilles : Natural;
+    Existe_Fils_Intermediare : Boolean;
+    i : Natural;
+  begin
+    i := 1;
+    Arbre_Temporaire := Null;
+    Nombre_Fils_Feuilles := 0;
+    Existe_Fils_Intermediare := False;
+    loop
+      if Est_Feuille(Arbre.All.Enfants(i)) then
+        Arbre_Temporaire := Arbre.All.Enfants(i);
+        Nombre_Fils_Feuilles := Nombre_Fils_Feuilles + 1;
+      elsif Arbre.All.Enfants(i) /= Null then
+        Existe_Fils_Intermediare := True;
+      else
+        Null;
+      end if;
+      i := i + 1;
+      exit when Existe_Fils_Intermediare or i > Nombre_Prefixes or Nombre_Fils_Feuilles >= 2;
+    end loop;
+
+    if not Existe_Fils_Intermediare and Nombre_Fils_Feuilles = 1 then
+      Free(Arbre);
+      Arbre := Arbre_Temporaire;
+    else
+      Null;
+    end if;
+  end Supprimer_Noeud_Inutile;
+
+  procedure Supprimer_Selection (Arbre : in out T_Trie) is
+    Est_Selectionne : Boolean;
+  begin
+    if Arbre = Null then 
+      Null;
+    else
+      Est_Selectionne := Selection(Arbre);
+      if not Est_Selectionne then
+        Null;
+      elsif Est_Feuille(Arbre) then
+        Free(Arbre); -- le free en ada met = à null
+      else
+        for i in 1..Nombre_Prefixes loop
+          Supprimer_Selection(Arbre.All.Enfants(i));
+        end loop;
+        Supprimer_Noeud_Inutile(Arbre);
+        Post_Traitement(Arbre);
+      end if;
+    end if;
+  end Supprimer_Selection;
 
   --procedure Trouver (Element : out T_Element; Arbre : in T_Trie; Cle : in T_Cle);
 
@@ -90,5 +147,21 @@ package body Arbre_Prefixe is
       Traiter(Arbre.All.Cle, Arbre.All.Element);
     end if;
   end Parcours_Profondeur_Post;
+
+  function Trouver (Arbre : in T_Trie; Cle : in T_Cle) return T_Element is
+
+    function Trouver_Profondeur (Arbre : in T_Trie; Profondeur : in Natural) return T_Element is
+    begin
+      if Arbre = Null then
+        raise Cle_Absente;
+      elsif Est_Feuille(Arbre) and Arbre.All.Cle = Cle then
+        return Arbre.All.Element;
+      else
+        return Trouver_Profondeur (Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Profondeur + 1);
+      end if;
+    end Trouver_Profondeur;
+  begin
+    return Trouver_Profondeur(Arbre, 0);
+  end Trouver;
 
 end Arbre_Prefixe;

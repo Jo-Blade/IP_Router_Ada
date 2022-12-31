@@ -26,33 +26,61 @@ procedure Test is
 
   procedure Afficher is new Parcours_Profondeur_Post (Traiter => Afficher_Cle);
 
+  -- retourne -1 si les 2 sont null
+  function Min_Temps_2 (Arbre1 : in T_Trie; Arbre2 : in T_Trie) return Integer is
+  begin
+    if Est_Vide(Arbre1) and Est_Vide(Arbre2) then
+      return -1;
+    elsif Est_Vide(Arbre1) then
+      return Lire_Donnee_Racine(Arbre2);
+    elsif Est_Vide(Arbre2) then
+      return Lire_Donnee_Racine(Arbre1);
+    elsif Lire_Donnee_Racine(Arbre1) < Lire_Donnee_Racine(Arbre2) then
+      return Lire_Donnee_Racine(Arbre1);
+    else
+      return Lire_Donnee_Racine(Arbre2);
+    end if;
+  end Min_Temps_2;
+
   procedure Ajouter (Arbre : in out T_Trie; Cle : in T_Cle; Temps : in Integer) is
-    Min_Temps : Integer;
 
     procedure Mettre_A_Jour (Arbre : in out T_Trie) is
-      Ancien_Temps : Integer;
     begin
       if Est_Vide(Arbre) or Est_Feuille(Arbre) then
         Null;
       else
-        Ancien_Temps := Lire_Donnee_Racine(Arbre);
-
-        if Min_Temps = -1 or Ancien_Temps < Min_Temps then
-          Min_Temps := Ancien_Temps;
-        else
-          Null;
-        end if;
-
-        Ecrire_Donnee_Tete(Arbre, Min_Temps);
+        Ecrire_Donnee_Tete(Arbre, Min_Temps_2(Lire_Ieme_Enfant(Arbre, 1), Lire_Ieme_Enfant(Arbre, 2)));
       end if;
       end Mettre_A_Jour;
 
       procedure Ajouter_Arbre is new Triebin5b.Ajouter (Post_Traitement => Mettre_A_Jour);
       begin
         -- les temps sont des entiers positifs
-        Min_Temps := -1;
         Ajouter_Arbre(Arbre, Cle, Temps);
       end Ajouter;
+
+
+      procedure Supprimer_Plus_Ancien (Arbre : in out T_Trie) is
+        Min : constant Integer := Lire_Donnee_Racine(Arbre);
+
+        function Selection (Arbre : in T_Trie) return Boolean is
+        begin
+          return Lire_Donnee_Racine(Arbre) = Min;
+        end Selection;
+
+        procedure Post_Traitement(Arbre : in out T_Trie) is
+        begin
+          if Lire_Donnee_Racine(Arbre) = Min then
+            Ecrire_Donnee_Tete(Arbre, Min_Temps_2(Lire_Ieme_Enfant(Arbre, 1), Lire_Ieme_Enfant(Arbre, 2)));
+          else
+            Null;
+          end if;
+        end Post_Traitement;
+
+        procedure Supprimer_bis is new Supprimer_Selection(Selection => Selection, Post_Traitement => Post_Traitement);
+      begin
+        Supprimer_bis(Arbre);
+      end Supprimer_Plus_Ancien;
 
       begin
         Initialiser(Arbre);
@@ -65,10 +93,33 @@ procedure Test is
           Put("test1");
           New_Line;
         end if;
-        Ajouter(Arbre, 7, 2);
+        Ajouter(Arbre, 20, 2);
         Ajouter(Arbre, 29, 3);
-        Ajouter(Arbre, 21, 4);
-        Ajouter(Arbre, 20, 5);
+        Ajouter(Arbre, 7, 4);
+        Ajouter(Arbre, 21, 5);
+        Afficher(Arbre);
+
+        New_Line;
+        New_Line;
+        Put_Line(Integer'Image(Trouver(Arbre, 7)));
+        Put_Line(Integer'Image(Trouver(Arbre, 20)));
+        New_Line;
+
+        Supprimer_Plus_Ancien(Arbre);
+        Put_Line(Integer'Image(Trouver(Arbre, 20)));
+        Supprimer_Plus_Ancien(Arbre);
+        begin
+          Put_Line(Integer'Image(Trouver(Arbre, 20)));
+          Pragma Assert(1 = 2);
+        exception
+          when Cle_Absente =>
+            Put_Line("L’exception est bien levée");
+        end;
+        Put_Line(Integer'Image(Trouver(Arbre, 29)));
+        Supprimer_Plus_Ancien(Arbre);
+        Put_Line(Integer'Image(Trouver(Arbre, 7)));
+        Supprimer_Plus_Ancien(Arbre);
+        New_Line;
         Afficher(Arbre);
 
         Vider(Arbre);

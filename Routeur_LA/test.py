@@ -124,15 +124,35 @@ def printLA(a):
     while L:
         print(L.pop())
 
+def printPost(a):
+    if len(a) != 0:
+        if estFeuille(a):
+            print(a[0])
+        else:
+            printPost(a[1])
+            printPost(a[2])
+            print(a[0])
+
+
 A =[]
 
 A = ajoute(A,2,0,1)
-A = ajoute(A,7,0,2)
+A = ajoute(A,21,0,2)
 A = ajoute(A,29,0,3)
-A = ajoute(A,21,0,4)
+A = ajoute(A,7,0,4)
 A = ajoute(A,20,0,5)
 
-printLA(A);
+printPost(A)
+#printLA(A);
+
+A = supprimer(A, A[0][1])
+A = supprimer(A, A[0][1])
+A = supprimer(A, A[0][1])
+A = supprimer(A, A[0][1])
+
+print("***********************")
+printPost(A)
+#printLA(A);
 # print(A)
 # print("--------")
 # print(trouverLRU(A, A[0][1]))
