@@ -43,8 +43,9 @@ package Routage is
 private
     
     function Lire_Prefixe (Cle : in T_Cle; Indice : in Natural) return Natural with
-            post => Lire_Prefixe'Result = 1 or Lire_Prefixe'Result = 2,
-            pre => Indice < 32;
+            pre => Indice < 32,
+            post => Lire_Prefixe'Result = 1 or Lire_Prefixe'Result = 2;
+            
 
 
     -- Type des cellules enregistrées dans la liste chainée représentant la table
