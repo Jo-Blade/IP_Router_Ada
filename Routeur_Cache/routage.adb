@@ -94,6 +94,8 @@ package body Routage is
             exit when End_Of_File(Fichier);
         end loop;
         -- A MODIFIER IMPERATIVEMENT !!!!!!
+        -- On peut régler les problèmes d'exceptions en ajoutant un argument en entrée pour différencier le cas table ou cache
+        -- une string ou autre par exemple
         if Route_Base_Existe then
             Null;
         else
@@ -137,6 +139,9 @@ package body Routage is
         Longueur_Max := 0;
         Interface_Trouve := To_Unbounded_String("");
         Pour_Chaque_Interface (T_LC(Table_Routage));
+        -- A MODIFIER IMPERATIVEMENT !!!!!!
+        -- On peut régler les problèmes d'exceptions en ajoutant un argument en entrée pour différencier le cas table ou cache
+        -- une string ou autre par exemple
         if Interface_Trouve = To_Unbounded_String("") then
             raise Interface_Par_Defaut;
         else
