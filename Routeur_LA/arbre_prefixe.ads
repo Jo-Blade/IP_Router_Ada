@@ -26,7 +26,7 @@ package Arbre_Prefixe is
   -- IMPORTANT IL MANQUE DES EXCEPTIONS (ex: si le préfixe n’existe pas)
   -- la post condition est exécutée sur tous les arbres VISITÉS APRÈS QUE L’ÉLÉMENT AIE ÉTÉ AJOUTÉ
   -- DANS L’ORDRE DÉCROISSANT DES PROFONDEURS (utile pour mettre à jour un minimum par exemple)
--- va falloir que je change noeud par arbre je pense
+  -- va falloir que je change noeud par arbre je pense
   generic
     with procedure Post_Traitement (Arbre: in out T_Trie);
   procedure Ajouter (Arbre : in out T_Trie; Cle : in T_Cle; Element : in T_Element);
