@@ -1,7 +1,7 @@
 with Ada.Text_IO;               use Ada.Text_IO;
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with IP;                        use IP;
-with Liste_Chainee;
+with Arbre_Prefixe;
 
 
 package Routage is
@@ -28,11 +28,6 @@ package Routage is
     procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String);
 
 
-    -- Initialiser la table de routage avec le fichier dédié
-    procedure Initialiser_Table (Table_Routage : out T_Table; Fichier : in File_Type) 
-        with Pre => Is_Open(Fichier),
-        Post => not Est_Vide (Table_Routage);
-
 
     -- Trouve l'interface correspondant à une IP dans la table de routage
     function Trouver_Interface(Table_Routage : in T_Table ; IP : in T_IP) return Unbounded_String;
@@ -45,20 +40,29 @@ package Routage is
     -- Renvoie si la table est vide ou non
     function Est_Vide (Table_Routage : in T_Table) return Boolean;
 
-    private
+private
+    
+    function Lire_Prefixe (Cle : in T_Cle; Indice : in Natural) return Natural with
+            post => Lire_Prefixe'Result = 1 or Lire_Prefixe'Result = 2,
+            pre => Indice < 32;
+
 
     -- Type des cellules enregistrées dans la liste chainée représentant la table
     type T_Cellule is
         record
-            Adresse : T_IP;
             Masque : T_IP;
             Interface_Nom : Unbounded_String;
+            Id : Natural;   --L'Id le plus petit représente l'élément le moins récement utilisé
         end record;
+    
+    --Instanciation de arbre_prefixe
+    --Clé : contient l'adresse de l'interface
+    --Element : contient masque, interface_nom, age.
+    package Trie_LA is new Arbre_Prefixe(T_Element => T_Cellule, T_Cle => T_IP, Nombre_Prefixes => 2,
+  Lire_Prefixe => Lire_Prefixe);
+  use Trie_LA;
 
-    package Table_LC is new Liste_Chainee(T_Element => T_Cellule);
-    use Table_LC;
-
-    type T_Table is new T_LC;
+    type T_Table is new T_Trie;
 
 
 end Routage;
