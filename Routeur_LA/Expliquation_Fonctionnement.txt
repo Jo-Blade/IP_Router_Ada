@@ -1,0 +1,6 @@
+Expliquation du fonctionnement et des instanciations pour l'utilisation du module:
+
+	>arbre_prefixe est un module générique d'arbre préfixe (possibilité d'avoir plus de 2 fils) qui peut être utilisé dans d'autre schéma.
+
+
+	>test.adb contient toute les instanciations et fonctions dont on a besoin pour notre utilisation.
