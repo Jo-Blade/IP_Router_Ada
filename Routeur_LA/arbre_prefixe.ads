@@ -69,7 +69,8 @@ package Arbre_Prefixe is
   with procedure Traiter (Cle : in T_Cle; Element : in T_Element);
   procedure Parcours_Profondeur_Post (Arbre : in T_Trie);
 
-  function Trouver (Arbre : in T_Trie; Cle : in T_Cle) return T_Element;
+    function Trouver (Arbre : in T_Trie; Cle : in T_Cle) return T_Element with
+            pre => not Est_Vide(Arbre);
 
   private
 
