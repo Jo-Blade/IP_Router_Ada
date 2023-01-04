@@ -5,7 +5,7 @@ with Ada.Text_IO;               use Ada.Text_IO;
 with Routage;                   use Routage;
 with IP;                        use IP;
 
-procedure Routeur_Simple is
+procedure Routeur_Cache is
     -- Paramètres de commande
     Afficher_Stats : Boolean := True;   -- Affichage des statistiques, vrai de base
     Nom_Fichier_Table : Unbounded_String := To_Unbounded_String("table.txt");        -- Nom du fichier de la table de routage, table.txt de base
@@ -141,4 +141,4 @@ exception
     when Route_De_Base_Inconnue => Put_Line ("La route de base '0.0.0.0 0.0.0.0' n'existe pas, cette erreur est fatale.");
     when Ouverture_Impossible => Null;
     when others => Put_Line ("Erreur inconnue, arrêt immédiat du routeur.");
-end Routeur_Simple;
+end Routeur_Cache;
