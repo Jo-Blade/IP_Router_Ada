@@ -134,8 +134,6 @@ package body Arbre_Prefixe is
     end if;
   end Supprimer_Selection;
 
-  --procedure Trouver (Element : out T_Element; Arbre : in T_Trie; Cle : in T_Cle);
-
   procedure Parcours_Profondeur_Post (Arbre : in T_Trie) is
   begin
     if Arbre = Null then
@@ -163,5 +161,25 @@ package body Arbre_Prefixe is
   begin
     return Trouver_Profondeur(Arbre, 0);
   end Trouver;
+
+
+  procedure Trouver_Post (Element_Trouve : out T_Element; Arbre : in out T_Trie; Cle : in T_Cle) is
+
+    procedure Trouver_Post_Profondeur (Arbre : in out T_Trie; Profondeur : in Natural) is
+    begin
+      if Arbre = Null then
+        raise Cle_Absente;
+      elsif Est_Feuille(Arbre) and Arbre.All.Cle = Cle then
+        Element_Trouve := Arbre.All.Element;
+        Post_Traitement(Arbre);
+      else
+        Trouver_Post_Profondeur (Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Profondeur + 1);
+        Post_Traitement(Arbre);
+      end if;
+    end Trouver_Post_Profondeur;
+  begin
+    Trouver_Post_Profondeur(Arbre, 0);
+  end Trouver_Post;
+
 
 end Arbre_Prefixe;

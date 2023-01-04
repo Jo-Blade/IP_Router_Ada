@@ -144,6 +144,9 @@ A = ajoute(A,20,0,5)
 
 printPost(A)
 #printLA(A);
+print("***********************")
+printLA(A);
+print("***********************")
 
 A = supprimer(A, A[0][1])
 A = supprimer(A, A[0][1])
@@ -152,7 +155,6 @@ A = supprimer(A, A[0][1])
 
 print("***********************")
 printPost(A)
-#printLA(A);
 # print(A)
 # print("--------")
 # print(trouverLRU(A, A[0][1]))

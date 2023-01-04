@@ -82,6 +82,23 @@ procedure Test is
         Supprimer_bis(Arbre);
       end Supprimer_Plus_Ancien;
 
+      procedure Trouver_Et_Actualiser (Donnee : out Integer; Arbre : in out T_Trie; Cle : in T_Cle; T : in Integer) is
+
+        procedure Post_Traitement(Arbre : in out T_Trie) is
+        begin
+          if Est_Feuille(Arbre) then
+            Ecrire_Donnee_Tete (Arbre, T);
+          else
+            Ecrire_Donnee_Tete(Arbre, Min_Temps_2(Lire_Ieme_Enfant(Arbre, 1), Lire_Ieme_Enfant(Arbre, 2)));
+          end if;
+        end Post_Traitement;
+
+        procedure Trouver_Et_Actualiser_Bis is new Trouver_Post (Post_Traitement => Post_Traitement);
+      begin
+        Trouver_Et_Actualiser_Bis (Donnee, Arbre, Cle);
+      end Trouver_Et_Actualiser;
+
+      A : Integer;
       begin
         Initialiser(Arbre);
         if not Est_Feuille(Arbre) then
@@ -93,10 +110,10 @@ procedure Test is
           Put("test1");
           New_Line;
         end if;
-        Ajouter(Arbre, 20, 2);
+        Ajouter(Arbre, 21, 2);
         Ajouter(Arbre, 29, 3);
         Ajouter(Arbre, 7, 4);
-        Ajouter(Arbre, 21, 5);
+        Ajouter(Arbre, 20, 5);
         Afficher(Arbre);
 
         New_Line;
@@ -104,6 +121,15 @@ procedure Test is
         Put_Line(Integer'Image(Trouver(Arbre, 7)));
         Put_Line(Integer'Image(Trouver(Arbre, 20)));
         New_Line;
+
+        
+        Put_Line("trouver et actualiser");
+        Afficher(Arbre);
+        Put_Line(Integer'Image(Trouver(Arbre, 2)));
+        Trouver_Et_Actualiser(A, Arbre, 2, 6);
+        Put_Line(Integer'Image(A));
+        Put_Line(Integer'Image(Trouver(Arbre, 2)));
+        Afficher(Arbre);
 
         Supprimer_Plus_Ancien(Arbre);
         Put_Line(Integer'Image(Trouver(Arbre, 20)));

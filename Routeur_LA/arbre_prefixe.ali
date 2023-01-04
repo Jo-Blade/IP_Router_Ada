@@ -1,0 +1,128 @@
+V "GNAT Lib v12"
+A -gnata
+A -gnatwa
+P ZX
+
+RN
+RV NO_ALLOCATORS
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTIONS
+RV NO_LOCAL_ALLOCATORS
+RV NO_RECURSION
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_UNCHECKED_DEALLOCATION
+RV NO_DEFAULT_INITIALIZATION
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+
+U arbre_prefixe%b	arbre_prefixe.adb	6da5d0ec NE OO PK GE
+W ada%s			ada.ads			ada.ali
+W ada.unchecked_deallocation%s
+
+U arbre_prefixe%s	arbre_prefixe.ads	56fc45a7 BN EE NE OO PK GE
+
+D ada.ads		20221121095525 76789da1 ada%s
+D a-uncdea.ads		20221121095525 c3a8ac65 ada.unchecked_deallocation%s
+D arbre_prefixe.ads	20230104160229 56fc45a7 arbre_prefixe%s
+D arbre_prefixe.adb	20230104160738 f8f1392e arbre_prefixe%b
+D system.ads		20221121095525 a2da961d system%s
+G a e
+G c Z s b [arbre_prefixe standard 9 9 none]
+X 1 ada.ads
+16K9*Ada 20e8 4|1r6 5r9
+X 2 a-uncdea.ads
+17+9 Object 4|5r37
+18P9 Name(17+9) 4|5r56
+20u15*Unchecked_Deallocation 4|1w10 5r13
+X 3 arbre_prefixe.ads
+2+6 T_Element 34r74 38r60 42r70 69r56 72r65 77r48 89r17 4|46r74 47r87 68r58
+. 73r68 149r63 151r85 166r48
+3+6 T_Cle 7r38 34r54 69r36 72r51 77r91 88r13 4|46r54 47r67 149r49 166r91
+5i1 Nombre_Prefixes{natural} 84r30 4|17r19 40r35 105r49 128r21 142r19
+7V15 Lire_Prefixe{natural} 7>29 7>45 4|55s46 59s46 158s54 176s52
+7*29 Cle{3+6}
+7i45 Indice{natural}
+9k9*Arbre_Prefixe 2z6 3z6 5z1 7z15 82E8 93l5 93e18 4|3b14 185l5 185t18
+11P8*T_Trie 18r40 21r37 24r35 26r36 33r51 34r37 38r45 42r50 47r43 47r71 56r41
+. 57r51 58r49 70r50 72r34 76r51 77r74 82c8 84r50 4|5r64 7r38 12r35 24r33
+. 29r36 46r37 47r50 68r43 73r48 78r41 78r69 85r53 86r24 116r49 137r50 149r32
+. 151r45 166r74 168r55
+12R8*T_Noeud 82r25 86c8 91e15 4|5r47 50r22
+14X3*Cle_Absente 4|154r15 171r15
+18U15*Initialiser 18<28 4|7b13 10l7 10t18
+18p28 Arbre{11P8} 19r30 4|7b26 9m5
+21U15*Vider 21=22 4|12b13 18s9 22l7 22t12
+21p22 Arbre{11P8} 22r30 4|12b20 14r8 18r16 20m12
+24V14*Est_Vide{boolean} 19s21 22s21 24>24 39s24 43s24 73s24 78s24 4|24b12
+. 27l7 27t15
+24p24 Arbre{11P8} 4|24b22 26r12
+26V12*Est_Feuille{boolean} 26>25 48s24 4|29b12 44l7 44t18 54s13 96s10 125s13
+. 155s13 172s13
+26p25 Arbre{11P8} 4|29b25 33r8 38r17
+33U20 Post_Traitement 33=37 4|53s9 57s9 60s9
+33p37 Arbre{11P8}
+34u13*Ajouter 34=22 34>45 34>61 4|46b13 66l7 66t14
+34p22 Arbre{11P8} 4|46b22 65m25
+34*45 Cle{3+6} 4|46b45 65r32
+34*61 Element{2+6} 4|46b61 65r37
+38V14*Lire_Donnee_Racine{2+6} 38>34 4|68b12 71l7 71t25
+38p34 Arbre{11P8} 39r33 4|68b32 70r12
+42U15*Ecrire_Donnee_Tete 42=35 42>58 4|73b13 76l7 76t25
+42p35 Arbre{11P8} 43r33 4|73b33 75r5
+42*58 Donnee{2+6} 4|73b56 75r26
+47V14*Lire_Ieme_Enfant{11P8} 47>32 47>51 4|78b12 81l7 81t23
+47p32 Arbre{11P8} 48r36 4|78b30 80r12
+47i51 i{natural} 4|78b49 80r30
+56V19 Selection{boolean} 56>30 4|122s26
+56p30 Arbre{11P8}
+57U20 Post_Traitement 57=37 4|132s9
+57p37 Arbre{11P8}
+58u13*Supprimer_Selection 58=34 4|116b13 129s11 135l7 135t26
+58p34 Arbre{11P8} 4|116b34 119r8 122r36 125r25 126m14 129r31 131m33 132m25
+69U18 Traiter 69>27 69>43 4|145s7
+69*27 Cle{3+6}
+69*43 Element{2+6}
+70u13*Parcours_Profondeur_Post 70>39 4|137b13 143s9 147l7 147t31
+70p39 Arbre{11P8} 4|137b39 139r8 143r34 145r15 145r30
+72V14*Trouver{2+6} 72>23 72>42 4|149b12 163l7 163t14
+72p23 Arbre{11P8} 73r33 4|149b21 162r31
+72*42 Cle{3+6} 4|149b40 155r52 158r67
+76U20 Post_Traitement 76=37 4|174s9 177s9
+76p37 Arbre{11P8}
+77u13*Trouver_Post 77<27 77=59 77>82 4|166b13 182l7 182t19
+77*27 Element_Trouve{2+6} 4|166b27 173m9
+77p59 Arbre{11P8} 78r33 4|166b59 181m29
+77*82 Cle{3+6} 4|166b82 172r52 176r65
+84A8 T_Enfants(11P8)<integer> 90r17
+88*7 Cle{3+6} 4|51m19 56r45 145r25 155r46 172r46
+89*7 Element{2+6} 4|52m19 56r60 70r22 75m15 145r40 156r26 173r37
+90a7 Enfants{84A8} 4|18m26 38r27 55m38 59m38 80r22 96r32 97r39 99r23 129m41
+. 143r44 158r46 176m44
+X 4 arbre_prefixe.adb
+4U13 Free[2|20] 20s7 109s7 126s9
+17i11 i{integer} 18r34
+30b5 Test{boolean} 38m9 40r23 42r14
+31i5 i{natural} 36m7 38r35 39m9 39r14 40r31
+47U15 Ajouter_Profondeur 47b15 47=35 47>58 47>74 47>98 55s9 56s9 59s9 62l9
+. 62t27 65s5
+47p35 Arbre{3|11P8} 49r10 50m9 51r9 52r9 53m25 54r25 55r28 56m28 56r35 56r50
+. 57m25 59r28 60m25
+47*58 Cle{3|3+6} 51r26 55r59 55r78 59r59 59r78
+47*74 Element{3|2+6} 52r30 55r83 59r83
+47i98 Profondeur{natural} 55r64 55r92 56r69 59r64 59r92
+85U13 Supprimer_Noeud_Inutile 85b13 85=38 114l7 114t30 131s9
+85p38 Arbre{3|11P8} 96r22 97r29 99r13 109m12 110m7
+86p5 Arbre_Temporaire{3|11P8} 92m5 97m9 110r16
+87i5 Nombre_Fils_Feuilles{natural} 93m5 98m9 98r33 105r68 108r41
+88b5 Existe_Fils_Intermediare{boolean} 94m5 100m9 105r17 108r12
+89i5 i{natural} 91m5 96r40 97r47 99r31 104m7 104r12 105r45
+117b5 Est_Selectionne{boolean} 122m7 123r14
+128i13 i{integer} 129r49
+142i11 i{integer} 143r52
+151V14 Trouver_Profondeur{3|2+6} 151b14 151>34 151>53 158s16 160l9 160t27
+. 162s12
+151p34 Arbre{3|11P8} 153r10 155r25 155r36 156r16 158r36
+151i53 Profondeur{natural} 158r72 158r86
+168U15 Trouver_Post_Profondeur 168b15 168=40 168>63 176s9 179l9 179t32 181s5
+168p40 Arbre{3|11P8} 170r10 172r25 172r36 173r27 174m25 176r34 177m25
+168i63 Profondeur{natural} 176r70 176r84
+

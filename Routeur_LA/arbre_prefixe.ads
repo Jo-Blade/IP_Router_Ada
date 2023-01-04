@@ -16,10 +16,10 @@ package Arbre_Prefixe is
   --RAJOUTER LES POST ET PRECONDITIONS DANS CE MODULE
 
     procedure Initialiser (Arbre : out T_Trie) with
-            post => Arbre = Null;
+            post => Est_Vide(Arbre);
 
     procedure Vider (Arbre : in out T_Trie) with
-            post => Null;
+            post => Est_Vide(Arbre);
 
     function Est_Vide (Arbre : in T_Trie) return Boolean;
 
@@ -70,6 +70,11 @@ package Arbre_Prefixe is
   procedure Parcours_Profondeur_Post (Arbre : in T_Trie);
 
     function Trouver (Arbre : in T_Trie; Cle : in T_Cle) return T_Element with
+            pre => not Est_Vide(Arbre);
+
+  generic
+    with procedure Post_Traitement (Arbre: in out T_Trie);
+  procedure Trouver_Post (Element_Trouve : out T_Element; Arbre : in out T_Trie; Cle : in T_Cle) with
             pre => not Est_Vide(Arbre);
 
   private
