@@ -15,11 +15,13 @@ package Arbre_Prefixe is
 
   --RAJOUTER LES POST ET PRECONDITIONS DANS CE MODULE
 
-  procedure Initialiser (Arbre : out T_Trie);
+    procedure Initialiser (Arbre : out T_Trie) with
+            post => Arbre = Null;
 
-  procedure Vider (Arbre : in out T_Trie);
+    procedure Vider (Arbre : in out T_Trie) with
+            post => Null;
 
-  function Est_Vide (Arbre : in T_Trie) return Boolean;
+    function Est_Vide (Arbre : in T_Trie) return Boolean;
 
   function Est_Feuille (Arbre : in T_Trie) return Boolean;
 
@@ -33,14 +35,17 @@ package Arbre_Prefixe is
 
   -- NE PAS OUBLIER DE RAJOUTER LES EXCEPTIONS TRIE_VIDE OU UNE PRÉCONDITION
   -- lire la donnee en tête de l’arbre (rajouter la meme pour la clé)
-  function Lire_Donnee_Racine (Arbre : in T_Trie) return T_Element;
+    function Lire_Donnee_Racine (Arbre : in T_Trie) return T_Element with
+            pre => not Est_Vide(Arbre);
 
   -- affecter la donnée en tête de l’arbre (ne pas rajouter la même pour la clé, sinon ça va faire des trucs bizarres)
-  procedure Ecrire_Donnee_Tete (Arbre : in out T_Trie; Donnee : in T_Element);
+    procedure Ecrire_Donnee_Tete (Arbre : in out T_Trie; Donnee : in T_Element) with
+            pre => not Est_Vide(Arbre);
 
   -- renvoie une copie du ieme enfant de l’arbre
   -- NE PAS OUBLIER DE RAJOUTER LES PRE ET POST
-  function Lire_Ieme_Enfant (Arbre : in T_Trie; i : Natural) return T_Trie;
+    function Lire_Ieme_Enfant (Arbre : in T_Trie; i : Natural) return T_Trie with
+            pre => not Est_Feuille(Arbre);
 
   -- Selection est une fonction qui recevra l’arbre courant
   -- si c’est une feuille => true = à supprimer, false = ne rien faire
