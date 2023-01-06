@@ -4,16 +4,25 @@ with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with Ada.Text_IO;               use Ada.Text_IO;
 with Routage;                   use Routage;
 with IP;                        use IP;
+with My_Strings;                use My_Strings;
 
 procedure Routeur_Cache is
     -- Paramètres de commande
     Afficher_Stats : Boolean := True;   -- Affichage des statistiques, vrai de base
+    Capacite_Cache : Integer := 0;      -- Capacité du cache, fixé à 0 initialement
+    Politique_Cache : Unbounded_String := To_Unbounded_String("FIFO");               -- Politique du cache, FIFO initialement
     Nom_Fichier_Table : Unbounded_String := To_Unbounded_String("table.txt");        -- Nom du fichier de la table de routage, table.txt de base
     Nom_Fichier_Paquet : Unbounded_String := To_Unbounded_String("paquets.txt");     -- Nom du fichier des paquets à router, paquets.txt de base
     Nom_Fichier_Resultat : Unbounded_String := To_Unbounded_String("resultats.txt"); -- Nom du fichier où écrire les résultats, resultats.txt de base
 
     -- Liste chainées
     Table : T_Table;                    -- La table de routage
+                --
+                --
+                --
+                --
+                --
+    Cache : T_Cache;                    -- Le cache associé à la table de routage
 
     -- Variables locales
     i : Integer;                        -- Compteur
@@ -25,6 +34,7 @@ procedure Routeur_Cache is
     Ouverture_Impossible : Exception;   -- Exception lorsque le fichier contenant la table ou le spaquets n'existe pas
     Commande_Inconnue : Exception;      -- Exception lorsque une commande inconnue est lue dans Fichier_Paquet
     Erreur_Dernier_Argument : Exception;-- Exception lorsque le dernier argument rentré en requiert un suivant inexistant
+    Erreur_Politique_Incorrecte : Exception;    -- Exception lorsque la politique lue est inconnue
     Fichier_Paquet : File_Type;         -- Fichier où sont les paquets à router
     Fichier_Resultat : File_Type;       -- Fichier où les résultats seront écrits
     Fichier_Table : File_Type;          -- Fichier où est stockée la table de routage
@@ -43,6 +53,15 @@ begin
             else
                 if Cle = "-p" then
                     Nom_Fichier_Paquet := To_Unbounded_String(Argument(i));
+                elsif Cle = "-c" then
+                    Capacite_Cache := Texte_Vers_Entier(Argument(i));
+                elsif Cle = "-P" then
+                    Politique_Cache  := To_Unbounded_String(Argument(i));
+                    if (Politique_Cache /= To_Unbounded_String("FIFO")) and (Politique_Cache /= To_Unbounded_String("LRU")) and (Politique_Cache /= To_Unbounded_String("LFU")) then
+                        raise Erreur_Politique_Incorrecte;
+                    else
+                        null;
+                    end if;
                 elsif Cle = "-S" then
                     Afficher_Stats := False;
                     i := i - 1;
@@ -61,8 +80,18 @@ begin
         exception
             when Parametre_Inconnu => Put_Line ("Le"& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
             when Erreur_Dernier_Argument => Put_Line ("Le dernier argument est incorrect, il sera ignoré.");
+            when Erreur_Pas_Un_Entier => Put_Line ("Le"& Integer'Image (i)& "ème paramètre en entrée, la taille du cache, n'est pas un entier. Cette commande sera ignorée.");
+            when Erreur_Politique_Incorrecte => Put_Line ("Le"& Integer'Image (i)& "ème paramètre en entrée, la politique du cache, n'est pas connue. Cette commande sera ignorée.");
         end;
     end loop;
+
+    -- Initialisation du cache
+                --
+                --
+                --
+                --
+                --
+    Initialiser_Cache (Cache, Capacite_Cache);
 
     -- Initialisaton de la table de routage
     New_Line;
@@ -96,6 +125,15 @@ begin
                 i := i + 1;
                 Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
                 Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
+            elsif Ligne = "cache" then      -- la ligne commande l'affichage du cache
+                Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
+                Put_Line ("cache (ligne"& Integer'Image (Numero_Ligne)& ")");
+                --
+                --
+                --
+                --
+                --
+                Afficher_Cache (Cache);
             elsif Ligne = "table" then      -- la ligne commande l'affichage de la table
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("table (ligne"& Integer'Image (Numero_Ligne)& ")");
