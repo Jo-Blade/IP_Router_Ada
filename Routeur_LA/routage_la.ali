@@ -1,0 +1,307 @@
+V "GNAT Lib v12"
+A -gnata
+A -gnatwa
+P SS ZX
+
+RN
+RV NO_ALLOCATORS
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTION_PROPAGATION
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_LOCAL_ALLOCATORS
+RV NO_NESTED_FINALIZATION
+RV NO_RECURSION
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_ELABORATION_CODE
+
+U routage_la%b		routage_la.adb		71703713 NE OO PK
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+Z arbre_prefixe%s	arbre_prefixe.adb	arbre_prefixe.ali  ED
+Z system%s		system.ads		system.ali
+Z system.assertions%s	s-assert.adb		s-assert.ali
+Z system.concat_7%s	s-conca7.adb		s-conca7.ali
+Z system.img_int%s	s-imgint.ads		s-imgint.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+Z system.storage_elements%s  s-stoele.adb	s-stoele.ali
+Z system.storage_pools%s  s-stopoo.adb		s-stopoo.ali
+Z system.storage_pools.subpools%s  s-stposu.adb	s-stposu.ali
+
+U routage_la%s		routage_la.ads		1d0fbc4e EE OO PK
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.strings%s		a-string.ads		a-string.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+Z ada.unchecked_deallocation%s
+W arbre_prefixe%s	arbre_prefixe.adb	arbre_prefixe.ali
+W ip%s			ip.adb			ip.ali
+Z system%s		system.ads		system.ali
+Z system.assertions%s	s-assert.adb		s-assert.ali
+Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.finalization_masters%s  s-finmas.adb	s-finmas.ali
+Z system.pool_global%s	s-pooglo.adb		s-pooglo.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+Z system.storage_elements%s  s-stoele.adb	s-stoele.ali
+Z system.storage_pools%s  s-stopoo.adb		s-stopoo.ali
+Z system.storage_pools.subpools%s  s-stposu.adb	s-stposu.ali
+
+D ada.ads		20221121095525 76789da1 ada%s
+D a-assert.ads		20221121095525 ba465f5c ada.assertions%s
+D a-charac.ads		20221121095525 2d3ec45b ada.characters%s
+D a-chlat1.ads		20221121095525 e0d72e76 ada.characters.latin_1%s
+D a-except.ads		20221121095525 2a7d8d70 ada.exceptions%s
+D a-finali.ads		20221121095525 bf4f806b ada.finalization%s
+D a-ioexce.ads		20221121095525 40018c65 ada.io_exceptions%s
+D a-stream.ads		20221121095525 119b8fb3 ada.streams%s
+D a-string.ads		20221121095525 90ac6797 ada.strings%s
+D a-strmap.ads		20221121095525 233229cd ada.strings.maps%s
+D a-sttebu.ads		20221121095525 18209c64 ada.strings.text_buffers%s
+D a-strunb.ads		20221121095525 5837d881 ada.strings.unbounded%s
+D a-stuten.ads		20221121095525 33c54060 ada.strings.utf_encoding%s
+D a-tags.ads		20221121095525 9eaa38c6 ada.tags%s
+D a-textio.ads		20221121095525 deada98a ada.text_io%s
+D a-unccon.ads		20221121095525 0e9b276f ada.unchecked_conversion%s
+D a-uncdea.ads		20221121095525 c3a8ac65 ada.unchecked_deallocation%s
+D arbre_prefixe.ads	20230106142537 f4ab40ad arbre_prefixe%s
+D arbre_prefixe.adb	20230106142546 53de986e arbre_prefixe%b
+D interfac.ads		20221121095525 edec285f interfaces%s
+D i-cstrea.ads		20221121095525 e53d8b8e interfaces.c_streams%s
+D ip.ads		20230105085310 dae4de46 ip%s
+D routage_la.ads	20230106144439 6b77fa24 routage_la%s
+D routage_la.adb	20230106144320 c4aa64bd routage_la%b
+D system.ads		20221121095525 a2da961d system%s
+D s-assert.ads		20221121095525 9c4520c7 system.assertions%s
+D s-atocou.ads		20221121095525 dc18efc3 system.atomic_counters%s
+D s-conca7.ads		20221121095525 776c8ba6 system.concat_7%s
+D s-crtl.ads		20221121095525 8a0692f8 system.crtl%s
+D s-exctab.ads		20221121095525 91bef6ef system.exception_table%s
+D s-ficobl.ads		20221121095525 dc5161d4 system.file_control_block%s
+D s-finmas.ads		20221121095525 bd688734 system.finalization_masters%s
+D s-finroo.ads		20221121095525 4ff27390 system.finalization_root%s
+D s-imagei.ads		20221121095525 0d3f86a7 system.image_i%s
+D s-imgint.ads		20221121095525 bdb6f5ec system.img_int%s
+D s-memory.ads		20221121095525 5b8432d0 system.memory%s
+D s-parame.ads		20221121095525 d494a4a6 system.parameters%s
+D s-pooglo.ads		20221121095525 91708d21 system.pool_global%s
+D s-putima.ads		20221121095525 4e095881 system.put_images%s
+D s-secsta.ads		20221121095525 62cd9202 system.secondary_stack%s
+D s-soflin.ads		20221121095525 df77073e system.soft_links%s
+D s-stache.ads		20221121095525 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20221121095525 1c9580f6 system.standard_library%s
+D s-stalib.adb		20221121095525 eb464a47 system.standard_library%b
+D s-stoele.ads		20221121095525 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20221121095525 8f5a9db6 system.storage_elements%b
+D s-stopoo.ads		20221121095525 e9fa2dd8 system.storage_pools%s
+D s-stposu.ads		20221121095525 e251976f system.storage_pools.subpools%s
+D s-stratt.ads		20221121095525 f7dfd786 system.stream_attributes%s
+D s-traent.ads		20221121095525 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20221121095525 fa2a7f59 system.unsigned_types%s
+D s-wchcon.ads		20221121095525 d9032363 system.wch_con%s
+D unchconv.ads		20221121095525 ca2f9e18 unchecked_conversion%s
+G a e
+G c s s s [s routage_la 6 1 none]
+G c Z s b [initialiser_table_vide routage_la 16 13 none]
+G c Z s b [vider_table routage_la 21 15 none]
+G c Z s b [ajouter_element routage_la 27 17 none]
+G c Z s b [trouver_interface_table routage_la 34 17 none]
+G c Z s b [trouver_interface_cache routage_la 40 17 none]
+G c Z s b [afficher_table routage_la 44 17 none]
+G c Z s b [supprimer_plus_ancien routage_la 46 17 none]
+G c Z s b [est_vide routage_la 50 18 none]
+G c Z s b [lire_prefixe routage_la 54 18 none]
+G c Z s s [t_celluleDI routage_la 61 16 none]
+G c Z s s [t_celluleDA routage_la 61 16 none]
+G c Z s s [t_celluleDF routage_la 61 16 none]
+G c Z s s [t_celluleIP routage_la 61 16 none]
+G c Z s s [initialiser routage_la__trie_la 18 13 71_11]
+G c Z s s [vider routage_la__trie_la 21 15 71_11]
+G c Z s s [est_vide routage_la__trie_la 24 16 71_11]
+G c Z s s [est_feuille routage_la__trie_la 26 16 71_11]
+G c Z s s [lire_donnee_racine routage_la__trie_la 38 16 71_11]
+G c Z s s [lire_cle_racine routage_la__trie_la 41 16 71_11]
+G c Z s s [ecrire_donnee_tete routage_la__trie_la 45 19 71_11]
+G c Z s s [lire_ieme_enfant routage_la__trie_la 50 20 71_11]
+G c Z s s [trouver routage_la__trie_la 75 22 71_11]
+G c Z s s [Tt_enfantsBIP routage_la__trie_la 105 13 71_11]
+G c Z s s [t_noeudDI routage_la__trie_la 107 18 71_11]
+G c Z s s [t_noeudDA routage_la__trie_la 107 18 71_11]
+G c Z s s [t_noeudDF routage_la__trie_la 107 18 71_11]
+G c Z s s [t_noeudIP routage_la__trie_la 107 18 71_11]
+G c Z s s [free routage_la__trie_la 4 13 71_11]
+G c Z s s [supprimer_noeud_inutile routage_la__trie_la 92 13 71_11]
+G c Z b b [min_temps_2 routage_la 48 12 none]
+G r i none [s routage_la 6 1 none] [arbre_prefixe standard 9 9 none]
+G r c none [ajouter_element routage_la 27 17 none] [lire_bit ip 26 14 none]
+G r c none [trouver_interface_table routage_la 34 17 none] [egalite_ip ip 30 14 none]
+G r c none [trouver_interface_table routage_la 34 17 none] [longueur_ip ip 34 14 none]
+G r c none [trouver_interface_cache routage_la 40 17 none] [egalite_ip ip 30 14 none]
+G r c none [trouver_interface_cache routage_la 40 17 none] [lire_bit ip 26 14 none]
+G r c none [afficher_table routage_la 44 17 none] [ip_vers_texte ip 23 14 none]
+G r c none [lire_prefixe routage_la 54 18 none] [lire_bit ip 26 14 none]
+G r c none [trouver routage_la__trie_la 75 22 71_11] [lire_bit ip 26 14 none]
+X 1 ada.ads
+16K9*Ada 20e8 23|1r6 1r37 24|1r6 1r23
+X 9 a-string.ads
+16K13*Strings 35e16 23|1r10 1r41
+X 12 a-strunb.ads
+85K21*Unbounded 765e26 23|1w18 1r49
+90R9*Unbounded_String<6|43R9> 744e15 23|27r122 34r61 40r61 64r31 24|13r26
+. 14r26 65r42 89r57 155r57
+120V13*To_String{string} 24|16s11 16s41 16s70
+X 15 a-textio.ads
+58K13*Text_IO 727e16 24|1w10 1r27
+263U14*New_Line 24|25s5
+464U14*Put 24|16s7 85s5
+507U14*Put_Line 24|23s5
+X 18 arbre_prefixe.ads
+2+6 T_Element 23|71r48
+3+6 T_Cle 23|71r72
+5i1 Nombre_Prefixes{natural} 23|71r87
+7V15 Lire_Prefixe{natural} 23|72r11
+9k9*Arbre_Prefixe 114e18 23|3w6 71r34
+11P8*T_Trie 23|75r31[71] 24|24r25[23|71] 31r29[23|71] 37r11[23|71] 48r37[23|71]
+. 48r57[23|71] 67r45[23|71] 83r19[23|71] 91r46[23|71] 119r45[23|71] 127r36[23|71]
+. 132r46[23|71] 146r19[23|71] 157r46[23|71] 172r36[23|71] 196r45[23|71]
+18U13*Initialiser 24|43s5[23|71]
+21U15*Vider 24|37s5[23|71]
+24V16*Est_Vide{boolean} 24|31s20[23|71] 50s8[23|71] 50s29[23|71] 52s11[23|71]
+. 54s11[23|71] 70s10[23|71]
+26V16*Est_Feuille{boolean} 24|70s29[23|71] 94s10[23|71] 160s10[23|71] 176s14[23|71]
+33U22 Post_Traitement 24|79r45[23|71]
+34u17*Ajouter 24|79r36[23|71]
+38V16*Lire_Donnee_Racine{23|61R16} 24|53s14[23|71] 55s14[23|71] 56s11[23|71]
+. 56s43[23|71] 57s14[23|71] 59s14[23|71] 73s31[23|71] 95s31[23|71] 100s31[23|71]
+. 125s31[23|71] 129s14[23|71] 135s10[23|71] 136s31[23|71] 161s31[23|71] 166s31[23|71]
+. 173s50[23|71]
+41V16*Lire_Cle_Racine{22|7M10} 24|174s45[23|71]
+45U19*Ecrire_Donnee_Tete 24|75s9[23|71] 97s9[23|71] 102s9[23|71] 138s9[23|71]
+. 163s9[23|71] 168s9[23|71]
+50V20*Lire_Ieme_Enfant{11P8[23|71]} 24|74s46[23|71] 74s74[23|71] 101s46[23|71]
+. 101s74[23|71] 137s46[23|71] 137s74[23|71] 167s46[23|71] 167s74[23|71]
+59V27 Selection{boolean} 24|144r56[23|71]
+60U28 Post_Traitement 24|144r80[23|71]
+61u23*Supprimer_Selection 24|144r36[23|71]
+72U28 Traiter 24|21r67[23|71]
+73u23*Parcours_Profondeur_Post 24|21r41[23|71]
+87V27 Verifier{boolean} 24|115r71[23|71]
+88U28 Post_Traitement 24|115r93[23|71]
+89u23*Chercher_Et_Verifier_Post 24|115r44[23|71]
+96V27 Selection{boolean} 24|192r67[23|71]
+97V27 Choisir{23|61R16} 24|192r127[23|71]
+98U28 Post_Traitement 24|192r91[23|71]
+99u23*Trouver_Selection_Post 24|192r44[23|71]
+X 22 ip.ads
+5K9*IP 41e7 23|2w6 2r37
+7M10*T_IP 23|27r79 27r97 34r119 40r119 54r41 63r24 71r81 24|6r35 12r37 64r75
+. 65r17 89r115 106r48 155r115 174r37
+23V14*IP_Vers_Texte{12|90R9} 24|13s46 14s46
+26V14*Lire_Bit{integer} 24|8s12
+30V14*Egalite_IP{boolean} 24|108s10 176s36
+34V14*Longueur_IP{integer} 24|185s10 185s41
+X 23 routage_la.ads
+6K9*Routage_LA 54E18 78l5 78e15 24|3b14 202l5 202t15
+8P8*T_Table<18|11P8[71]> 16r57 21r51 27r57 34r102 40r102 44r50 46r55 50r47
+. 75c16 24|11r46 29r41 35r49 41r56 64r53 89r98 124r51 155r98
+11X3*Route_De_Base_Inconnue
+12X3*Interface_Par_Defaut
+16U13*Initialiser_Table_Vide 16<37 24|41b13 44l7 44t29
+16p37 Table_Routage{8P8} 17r27 24|41b36 43m17
+21U15*Vider_Table 21=28 24|35b13 38l7 38t18
+21p28 Table_Routage{8P8} 22r30 24|35b26 37m18 37r18
+27U17*Ajouter_Element 27=34 27>66 27>85 27>103 24|64b13 86l7 86t22
+27p34 Table_Routage{8P8} 24|64b30 83m26 83r26
+27m66 Adresse{22|7M10} 24|64b62 83r42
+27m85 Masque{22|7M10} 24|65b5 83r62
+27r103 Interface_Nom{12|90R9} 24|65b23 83r70
+34U17*Trouver_Interface_Table 34<42 34=79 34>111 24|155b13 198l7 198t30
+34r42 Interface_Nom{12|90R9} 24|155b38 197m5
+34p79 Table_Routage{8P8} 24|155b75 196m52 196r52
+34m111 IP{22|7M10} 24|155b107 176r47
+40U17*Trouver_Interface_Cache 40<42 40=79 40>111 24|89b13 121l7 121t30
+40r42 Interface_Nom{12|90R9} 24|89b38 120m5
+40p79 Table_Routage{8P8} 24|89b75 119m52 119r52
+40m111 IP{22|7M10} 24|89b107 108r21 119r68
+44U17*Afficher_Table 44>32 24|11b13 26l7 26t21
+44p32 Table_Routage{8P8} 24|11b28 24r32
+46U17*Supprimer_Plus_Ancien 46=40 24|124b13 147l7 147t28
+46p40 Arbre{8P8} 47r29 24|124b36 125r50 146m26 146r26
+50V18*Est_Vide{boolean}<18|24p16> 17s18 22s20 47s20 50>28 24|29b12 32l7 32t15
+50p28 Table_Routage{8P8} 24|29b22 31r36
+54V18 Lire_Prefixe{natural} 54>32 54>47 56r19 56r46 72r27 24|6b12 9l7 9t19
+54m32 Cle{22|7M10} 24|6b26 8r21
+54i47 Indice{natural} 55r18 24|6b41 8r26
+61R16 T_Cellule 66e23 71r61 24|12r53 68r28 83r51 92r28 106r78 117r23 133r28
+. 158r28 173r37 183r37 183r62 183r80 194r23
+63m15*Masque{22|7M10} 24|14r68 108r64 176r90 185r31 185r62
+64r15*Interface_Nom{12|90R9} 24|16r88 120r38 197r38
+65i15*Id{natural} 24|17r31 53r41 55r41 56r38 56r70 57r41 59r41 74m28 96m28
+. 101m28 125r57 129r40 135r36 137m28 162m28 167m28
+71K19 Trie_LA[18|9] 73r15 24|31r12
+X 24 routage_la.adb
+4i3 Id_Global{natural} 83r85 84m5 84r18 85r23 96r34 98m9 98r22 162r34 164m9
+. 164r22
+12U15 Afficher_Noeud 12b15 12>31 12>43 18l9 18t23 21r78
+12m31 Cle{22|7M10} 13r60
+12r43 Cellule{23|61R16} 14r60 16r80 17r23
+13r7 Adresse{12|90R9} 16r21
+14r7 Masque{12|90R9} 16r51
+21U15 Afficher_Table_Bis[18|73] 24s5
+48V12 Min_Temps_2{integer} 48b12 48>25 48>45 61l7 61t18 74s34 101s34 137s34
+. 167s34
+48p25 Arbre1{18|11P8[23|71]} 50r17 52r20 55r33 56r30 57r33
+48p45 Arbre2{18|11P8[23|71]} 50r38 53r33 54r20 56r62 59r33
+67U15 Mettre_A_Jour 67b15 67=30 77l9 77t22 79r64
+67p30 Arbre{18|11P8[23|71]} 70r19 70r41 73r50 74r63 74r91 75m28
+68r7 Cellule_A_Modifier{23|61R16} 73m9 73r9 74m9 75r35
+79U15 Ajouter_Arbre[18|34] 83s5
+91U15 Post_Traitement 91b15 91=31 104l9 104t24 115r112
+91p31 Arbre{18|11P8[23|71]} 94r22 95r50 97m29 100r50 101r63 101r91 102m28
+92r7 Cellule_A_Modifier{23|61R16} 95m9 95r9 96m9 97r36 100m9 100r9 101m9
+. 102r35
+106V14 Verifier{boolean} 106b14 106>24 106>54 113l9 113t17 115r83
+106m24 Adresse_A_Verifier{22|7M10} 108r25
+106r54 Cellule_A_Verifier{23|61R16} 108r45
+115U15 Trouver_Et_Actualiser[18|89] 119s5
+117r5 Cellule_Trouvee{23|61R16} 119m28 120r22
+125i5 Min{natural} 129r45 135r41
+127V14 Selection{boolean} 127b14 127>25 130l9 130t18 144r69
+127p25 Arbre{18|11P8[23|71]} 129r33
+132U15 Post_Traitement 132b15 132=31 142l9 142t24 144r99
+132p31 Arbre{18|11P8[23|71]} 135r29 136r50 137r63 137r91 138m28
+133r7 Cellule_A_Modifier{23|61R16} 136m9 136r9 137m9 138r35
+144U15 Supprimer_bis[18|61] 146s5
+157U15 Post_Traitement 157b15 157=31 170l9 170t24 192r110
+157p31 Arbre{18|11P8[23|71]} 160r22 161r50 163m29 166r50 167r63 167r91 168m28
+158r7 Cellule_A_Modifier{23|61R16} 161m9 161r9 162m9 163r36 166m9 166r9 167m9
+. 168r35
+172V14 Selection{boolean} 172b14 172>25 181l9 181t18 192r80
+172p25 Arbre{18|11P8[23|71]} 173r69 174r61 176r26
+173r7 Cellule_A_Verifier{23|61R16} 176r71
+174m7 Adresse_A_Verifier{22|7M10} 176r51
+183V14 Choisir{23|61R16} 183b14 183>23 183>48 190l9 190t16 192r138
+183r23 Element1{23|61R16} 185r22 186r16
+183r48 Element2{23|61R16} 185r53 188r16
+192U15 Trouver_Et_Actualiser[18|99] 196s5
+194r5 Cellule_Trouvee{23|61R16} 196m28 197r22
+X 25 system.ads
+67M9*Address
+X 36 s-memory.ads
+51V13*Alloc{25|67M9} 101i<c,__gnat_malloc>22
+66U14*Free 102i<c,__gnat_free>22
+74V13*Realloc{25|67M9} 103i<c,__gnat_realloc>22
+X 44 s-stalib.adb
+87U14 Break_Start 88i<c,__gnat_break_start>22
+

@@ -93,7 +93,16 @@ procedure Test is
           end if;
         end Post_Traitement;
 
-        procedure Trouver_Et_Actualiser_Bis is new Trouver_Post (Post_Traitement => Post_Traitement);
+        function Verifier (A_Cle : in T_Cle; A_Donnee : in Integer) return Boolean is
+        begin
+          if A_Cle = Cle and A_Donnee >= 0 then
+            return True;
+          else
+            return False;
+          end if;
+        end Verifier;
+
+        procedure Trouver_Et_Actualiser_Bis is new Chercher_Et_Verifier_Post (Verifier => Verifier, Post_Traitement => Post_Traitement);
       begin
         Trouver_Et_Actualiser_Bis (Donnee, Arbre, Cle);
       end Trouver_Et_Actualiser;
@@ -138,7 +147,7 @@ procedure Test is
           Put_Line(Integer'Image(Trouver(Arbre, 20)));
           Pragma Assert(1 = 2);
         exception
-          when Cle_Absente =>
+          when Element_Absent_Error =>
             Put_Line("L’exception est bien levée");
         end;
         Put_Line(Integer'Image(Trouver(Arbre, 29)));

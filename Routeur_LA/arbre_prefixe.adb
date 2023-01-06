@@ -70,6 +70,13 @@ package body Arbre_Prefixe is
     return Arbre.All.Element;
   end Lire_Donnee_Racine;
 
+
+  function Lire_Cle_Racine (Arbre : in T_Trie) return T_Cle is
+  begin
+    return Arbre.All.Cle;
+  end Lire_Cle_Racine;
+
+
   procedure Ecrire_Donnee_Tete (Arbre : in out T_Trie; Donnee : in T_Element) is
   begin
     Arbre.All.Element := Donnee;
@@ -151,9 +158,13 @@ package body Arbre_Prefixe is
     function Trouver_Profondeur (Arbre : in T_Trie; Profondeur : in Natural) return T_Element is
     begin
       if Arbre = Null then
-        raise Cle_Absente;
-      elsif Est_Feuille(Arbre) and Arbre.All.Cle = Cle then
-        return Arbre.All.Element;
+        raise Element_Absent_Error;
+      elsif Est_Feuille(Arbre) then
+        if Arbre.All.Cle = Cle then
+          return Arbre.All.Element;
+        else
+          raise Element_Absent_Error;
+        end if;
       else
         return Trouver_Profondeur (Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Profondeur + 1);
       end if;
@@ -163,23 +174,61 @@ package body Arbre_Prefixe is
   end Trouver;
 
 
-  procedure Trouver_Post (Element_Trouve : out T_Element; Arbre : in out T_Trie; Cle : in T_Cle) is
+  procedure Chercher_Et_Verifier_Post (Element_Trouve : out T_Element; Arbre : in out T_Trie; Cle : in T_Cle) is
 
-    procedure Trouver_Post_Profondeur (Arbre : in out T_Trie; Profondeur : in Natural) is
+    procedure Chercher_Profondeur (Arbre : in out T_Trie; Profondeur : in Natural) is
     begin
       if Arbre = Null then
-        raise Cle_Absente;
-      elsif Est_Feuille(Arbre) and Arbre.All.Cle = Cle then
-        Element_Trouve := Arbre.All.Element;
-        Post_Traitement(Arbre);
+        raise Element_Absent_Error;
+      elsif Est_Feuille(Arbre) then
+        if Verifier(Arbre.All.Cle, Arbre.All.Element) then
+          Element_Trouve := Arbre.All.Element;
+          Post_Traitement(Arbre);
+        else
+          raise Element_Absent_Error;
+        end if;
       else
-        Trouver_Post_Profondeur (Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Profondeur + 1);
+        Chercher_Profondeur(Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Profondeur + 1);
         Post_Traitement(Arbre);
       end if;
-    end Trouver_Post_Profondeur;
+    end Chercher_Profondeur;
   begin
-    Trouver_Post_Profondeur(Arbre, 0);
-  end Trouver_Post;
+    Chercher_Profondeur(Arbre, 0);
+  end Chercher_Et_Verifier_Post;
+
+  procedure Trouver_Selection_Post (Element_Trouve : out T_Element; Arbre : in out T_Trie) is
+    Est_Trouve : Boolean;
+
+    procedure Trouver_Selection_Bis (Arbre : in out T_Trie) is
+    begin
+      if Arbre /= Null and then Selection(Arbre) then
+        if Est_Feuille(Arbre) then
+          if Est_Trouve then
+            Element_Trouve := Choisir(Element_Trouve, Arbre.All.Element);
+          else
+            Element_Trouve := Arbre.All.Element;
+            Est_Trouve := True;
+          end if;
+          Post_Traitement(Arbre);
+        else
+          for i in 1..Nombre_Prefixes loop
+            Trouver_Selection_Bis(Arbre.All.Enfants(i));
+          end loop;
+          Post_Traitement(Arbre);
+        end if;
+      else
+        Null;
+      end if;
+    end Trouver_Selection_Bis;
+  begin
+    Est_Trouve := False;
+    Trouver_Selection_Bis (Arbre);
+    if Est_Trouve then
+      Null;
+    else
+      raise Element_Absent_Error;
+    end if;
+  end Trouver_Selection_Post;
 
 
 end Arbre_Prefixe;
