@@ -25,7 +25,7 @@ package Routage is
 
     -- Ajouter une interface dans la table de routage
     -- Modifie l’interface existante si elle existe déjà
-    procedure Ajouter_Element (Table_Routage : out T_Table; Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String);
+    procedure Ajouter_Element (Table_Routage : in out T_Table; Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String);
 
 
     -- Initialiser la table de routage avec le fichier dédié
