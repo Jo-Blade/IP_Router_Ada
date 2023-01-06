@@ -7,6 +7,7 @@ with Liste_Chainee;
 package Routage is
 
     type T_Table is limited private;
+    type T_Cache is limited private;
 
     -- Exceptions
     Route_De_Base_Inconnue : Exception;
@@ -18,9 +19,19 @@ package Routage is
         with Post => Est_Vide(Table_Routage);
 
 
+    -- Initialiser avec le cache vide
+    procedure Initialiser_Cache_Vide (Cache : out T_Cache) 
+        with Post => Est_Vide_Cache(Cache);
+
+
     -- Vider la table de routage
     procedure Vider_Table (Table_Routage : in out T_Table) 
         with Post => Est_Vide (Table_Routage);
+
+
+    -- Vider le cache
+    procedure Vider_Cache (Cache : in out T_Cache) 
+        with Post => Est_Vide_Cache (Cache);
 
 
     -- Ajouter une interface dans la table de routage
@@ -42,10 +53,21 @@ package Routage is
     procedure Afficher_Table(Table_Routage: in T_Table);
 
 
+    -- Renvoie si le cache est vide ou non
+    function Est_Vide_Cache (Cache : in T_Cache) return Boolean;
+    
+
     -- Renvoie si la table est vide ou non
     function Est_Vide (Table_Routage : in T_Table) return Boolean;
 
-    private
+    
+    -- Met à jour le cache en accord avec la politique et la cohérence du cache
+    procedure Mise_A_Jour_Cache(Cache : in out T_Cache; IP_A_Router : in T_IP; Capacite_Cache : in Integer;
+        Politique_Cache : in Unbounded_String; Taille_Cache_Actuelle : in Integer;
+        Interface_Nom : in Unbounded_String; Table : in T_Table);
+
+
+private
 
     -- Type des cellules enregistrées dans la liste chainée représentant la table
     type T_Cellule is
@@ -55,10 +77,23 @@ package Routage is
             Interface_Nom : Unbounded_String;
         end record;
 
+    type T_Cellule_Cache is
+        record
+            Adresse : T_IP;
+            Masque : T_IP;
+            Interface_Nom : Unbounded_String;
+            Frequence : Integer;
+        end record;
+
     package Table_LC is new Liste_Chainee(T_Element => T_Cellule);
     use Table_LC;
 
-    type T_Table is new T_LC;
+    type T_Table is new Table_LC.T_LC;
 
+
+    package Cache_LC is new Liste_Chainee(T_Element => T_Cellule_Cache);
+    use Cache_LC;
+
+    type T_Cache is new Cache_LC.T_LC;
 
 end Routage;

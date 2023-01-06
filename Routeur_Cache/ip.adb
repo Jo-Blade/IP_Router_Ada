@@ -95,4 +95,18 @@ package body IP is
         return Compteur_1 - 1;
     end Longueur_IP;
 
+
+    function Discriminant(IP1 : in T_IP; IP2 : in T_IP) return T_IP is
+        i : Integer;    -- un compteur
+        Masque : T_IP;  -- le masque Discriminant
+    begin
+        Masque := Entier_Vers_IP(0);
+        i := 1;
+        while Lire_Bit(IP1, i) = Lire_Bit(IP2, i) loop
+            i := i + 1;
+            Masque := Masque or 2**(32-i);
+        end loop;
+        return Masque;
+    end Discriminant;
+
 end IP;

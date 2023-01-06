@@ -17,11 +17,6 @@ procedure Routeur_Cache is
 
     -- Liste chainées
     Table : T_Table;                    -- La table de routage
-                --
-                --
-                --
-                --
-                --
     Cache : T_Cache;                    -- Le cache associé à la table de routage
 
     -- Variables locales
@@ -38,6 +33,24 @@ procedure Routeur_Cache is
     Fichier_Paquet : File_Type;         -- Fichier où sont les paquets à router
     Fichier_Resultat : File_Type;       -- Fichier où les résultats seront écrits
     Fichier_Table : File_Type;          -- Fichier où est stockée la table de routage
+    Taille_Cache_Actuelle : Integer := 0;   -- Taille actuelle du cache, fixé à 0 initialement
+
+    -- Routage_Par_Table s'execute lorsque le cache ne contient pas la route nécessaire
+    -- On recherche d'abord dans la table, puis on met à jour le cache
+    procedure Routage_Par_Table(Table : in T_Table; IP_A_Router : in T_IP) is
+    begin
+        -- Recherche de la route dans la table
+        Interface_Nom := Trouver_Interface(Table, IP_A_Router);
+        -- Mise à jour du cache
+        Mise_A_Jour_Cache(Cache, IP_A_Router, Capacite_Cache, Politique_Cache, Taille_Cache_Actuelle, Interface_Nom, Table);
+        if Taille_Cache_Actuelle < Capacite_Cache then
+            Taille_Cache_Actuelle := Taille_Cache_Actuelle + 1;
+        else
+            null;
+        end if;
+        -- Ecriture de la route dans le fichier
+        Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
+    end Routage_Par_Table;
 
 begin
     -- Lecture les paramètres en entrée
@@ -86,12 +99,7 @@ begin
     end loop;
 
     -- Initialisation du cache
-                --
-                --
-                --
-                --
-                --
-    Initialiser_Cache (Cache, Capacite_Cache);
+    Initialiser_Cache_Vide (Cache);
 
     -- Initialisaton de la table de routage
     New_Line;
@@ -122,8 +130,17 @@ begin
             Trim (Ligne, Both);
             -- Gestion du de la ligne
             if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '2' then     -- la ligne est un paquet
+                -- Je cherche dans le cache si une route correspond, si c'est le cas la route est ajoutée
+                -- Le cas échéant, une exception Route_Pas_Dans_Cache est levée.
+                -- Il s'agit alors de mettre le cache à jour, tout en routant avec la table de routage.
                 i := i + 1;
-                Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
+                --
+                --
+                --
+                --
+                --
+                --
+                Interface_Nom := Trouver_Interface_Cache(Cache, Texte_Vers_IP(Ligne), Politique_Cache);
                 Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
             elsif Ligne = "cache" then      -- la ligne commande l'affichage du cache
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
@@ -155,7 +172,14 @@ begin
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 raise Commande_Inconnue;
             end if;
-        exception when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
+        exception 
+            when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
+            --
+            --
+            --
+            --
+            -- Exception à définir
+            when Route_Pas_Dans_Cache => Routage_Par_Table(Table, Texte_Vers_IP(Ligne));
         end;
         exit when (Ligne = "fin") or End_Of_File (Fichier_Paquet);
     end loop;

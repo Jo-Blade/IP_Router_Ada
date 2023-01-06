@@ -1,7 +1,7 @@
 -- Ce module définit un type Liste_Chainee et les opérations associés
 
 generic
-type T_Element is private;
+    type T_Element is private;
 
 package Liste_Chainee is
     Element_Absent_Error : Exception;
