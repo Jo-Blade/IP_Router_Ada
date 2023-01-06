@@ -12,6 +12,7 @@ package Routage is
     -- Exceptions
     Route_De_Base_Inconnue : Exception;
     Interface_Par_Defaut : Exception;
+    Route_Pas_Dans_Cache : Exception;
 
 
     -- Initialiser avec la table de routage vide
@@ -49,8 +50,16 @@ package Routage is
     function Trouver_Interface(Table_Routage : in T_Table ; IP : in T_IP) return Unbounded_String;
 
 
+    -- Trouve l'interface correspondant à une IP dans la table de routage
+    function Trouver_Interface_Cache (Cache : in out T_Cache; IP : in T_IP; Politique_Cache : in Unbounded_String) return Unbounded_String;
+
+
     -- Afficher tous les élément de la table de routage
     procedure Afficher_Table(Table_Routage: in T_Table);
+
+
+    -- Afficher tous les élément du cache
+    procedure Afficher_Cache(Cache: in T_Cache; Politique_Cache : in Unbounded_String);
 
 
     -- Renvoie si le cache est vide ou non

@@ -130,27 +130,16 @@ begin
             Trim (Ligne, Both);
             -- Gestion du de la ligne
             if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '2' then     -- la ligne est un paquet
-                -- Je cherche dans le cache si une route correspond, si c'est le cas la route est ajoutée
+                -- On cherche dans le cache si une route correspond, si c'est le cas la route est ajoutée
                 -- Le cas échéant, une exception Route_Pas_Dans_Cache est levée.
                 -- Il s'agit alors de mettre le cache à jour, tout en routant avec la table de routage.
                 i := i + 1;
-                --
-                --
-                --
-                --
-                --
-                --
                 Interface_Nom := Trouver_Interface_Cache(Cache, Texte_Vers_IP(Ligne), Politique_Cache);
                 Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
             elsif Ligne = "cache" then      -- la ligne commande l'affichage du cache
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("cache (ligne"& Integer'Image (Numero_Ligne)& ")");
-                --
-                --
-                --
-                --
-                --
-                Afficher_Cache (Cache);
+                Afficher_Cache (Cache, Politique_Cache);
             elsif Ligne = "table" then      -- la ligne commande l'affichage de la table
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("table (ligne"& Integer'Image (Numero_Ligne)& ")");
@@ -174,11 +163,6 @@ begin
             end if;
         exception 
             when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
-            --
-            --
-            --
-            --
-            -- Exception à définir
             when Route_Pas_Dans_Cache => Routage_Par_Table(Table, Texte_Vers_IP(Ligne));
         end;
         exit when (Ligne = "fin") or End_Of_File (Fichier_Paquet);

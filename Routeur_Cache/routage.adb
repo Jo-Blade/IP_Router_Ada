@@ -8,11 +8,26 @@ package body Routage is
           Put_Line(To_String(IP_Vers_Texte(Cellule.Adresse) & " " & IP_Vers_Texte(Cellule.Masque) & " " & Cellule.Interface_Nom));
         end Afficher;
 
-    procedure Afficher_Table_Bis is new Table_LC.Pour_Chaque (Traiter => Afficher);
+        procedure Afficher_Table_Bis is new Table_LC.Pour_Chaque (Traiter => Afficher);
     begin
         Afficher_Table_Bis (Table_LC.T_LC(Table_Routage));
     end Afficher_Table;
 
+
+    procedure Afficher_Cache(Cache: in T_Cache; Politique_Cache : in Unbounded_String) is
+        procedure Afficher (Cellule : T_Cellule_Cache) is
+        begin
+            if Politique_Cache = To_Unbounded_String("LFU") then
+                Put_Line(To_String(IP_Vers_Texte(Cellule.Adresse) & " " & IP_Vers_Texte(Cellule.Masque) & " " & Cellule.Interface_Nom & " " & Integer'Image(Cellule.Frequence)));
+            else
+                Put_Line(To_String(IP_Vers_Texte(Cellule.Adresse) & " " & IP_Vers_Texte(Cellule.Masque) & " " & Cellule.Interface_Nom));
+            end if;
+        end Afficher;
+
+        procedure Afficher_Table_Bis is new Cache_LC.Pour_Chaque (Traiter => Afficher);
+    begin
+        Afficher_Table_Bis (Cache_LC.T_LC(Cache));
+    end Afficher_Cache;
 
     function Est_Vide_Cache (Cache : in T_Cache) return Boolean is
     begin
@@ -54,8 +69,9 @@ package body Routage is
         Politique_Cache : in Unbounded_String; Taille_Cache_Actuelle : in Integer;
         Interface_Nom : in Unbounded_String; Table : in T_Table) is
         Nouvelle_Cellule : T_Cellule_Cache;    -- Cellule à enregistrer
-        Masque_Max : T_IP;
-
+        Masque_Max : T_IP;                     -- Masque à ajouter au Cache
+        
+        -- Cherche le masque minimal discriminant 2 IP
         function Plus_Petit(A : in T_Cellule_Cache; B : in T_Cellule_Cache) return Boolean is
         begin
             return (A.Frequence < B.Frequence);
@@ -63,6 +79,7 @@ package body Routage is
 
         procedure Inserer_Element is new Cache_LC.Inserer(Plus_Petit => Plus_Petit);
 
+        -- Determine le masque le plus long des masques minimaux discriminants
         function Determiner_Masque(Table : in T_Table; IP_A_Router : in T_IP) return T_IP is
             Masque : T_IP;
             
@@ -164,9 +181,6 @@ package body Routage is
             end;
             exit when End_Of_File(Fichier);
         end loop;
-        -- A MODIFIER IMPERATIVEMENT !!!!!!
-        -- On peut régler les problèmes d'exceptions en ajoutant un argument en entrée pour différencier le cas table ou cache
-        -- une string ou autre par exemple
         if Route_Base_Existe then
             Null;
         else
@@ -203,16 +217,9 @@ package body Routage is
         -- On passe pour chaque élément dans traiter la condition de validité du masque et s'il passe,
         -- on stocke sa longueure et l'interface qui lui est associée
         -- Après le passage de Pour_Chaque, on renvoie l'interface
-        --
-        -- FAUDRA PAS OUBLIER DE RENVOYER UNE EXCEPTION SI ON NE TROUVE PAS D’INTERFACE (ce qui est censé être
-        -- impossible dans le cas du routeur simple car la table contient toujours 0.0.0.0 mais ça sera utile
-        -- pour le routeur avec cache)
         Longueur_Max := 0;
         Interface_Trouve := To_Unbounded_String("");
         Pour_Chaque_Interface (Table_LC.T_LC(Table_Routage));
-        -- A MODIFIER IMPERATIVEMENT !!!!!!
-        -- On peut régler les problèmes d'exceptions en ajoutant un argument en entrée pour différencier le cas table ou cache
-        -- une string ou autre par exemple
         if Interface_Trouve = To_Unbounded_String("") then
             raise Interface_Par_Defaut;
         else
@@ -220,5 +227,68 @@ package body Routage is
         end if;
         return Interface_Trouve;
     end Trouver_Interface;
+
+
+    function Trouver_Interface_Cache (Cache : in out T_Cache; IP : in T_IP; Politique_Cache : in Unbounded_String) return Unbounded_String is
+        -- Variables locales
+        Longueur_Max : Integer;                 -- Plus grande longueur de masque
+        Interface_Trouve : Unbounded_String;    -- Nom de l'interface vers laquelle sera routé le paquet
+        Est_Routable : Boolean := False;        -- Stocke si un routage est possible ou non via le cache
+        Route_Valide : T_Cellule_Cache;         -- La route choisie
+
+        -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
+        procedure Trouver (Cellule : in T_Cellule_Cache) is
+            Taille_Masque : Integer;            -- Taille du masque courant
+        begin
+            Taille_Masque := Longueur_IP(Cellule.Masque);
+            if Egalite_IP(IP, Cellule.Adresse, Cellule.Masque) and then (Taille_Masque >= Longueur_Max) then
+                Longueur_Max := Taille_Masque;
+                Interface_Trouve := Cellule.Interface_Nom;
+                Est_Routable := True;
+                Route_Valide := Cellule;
+            else
+                Null;
+            end if;
+        end Trouver;
+
+        procedure Pour_Chaque_Interface is new Cache_LC.Pour_Chaque (Traiter => Trouver);
+
+        -- Extraction de l'élément à replacer dans le cache
+        function Selection_Extraction (Element : in T_Cellule_Cache) return Boolean is
+        begin
+            return Element = Route_Valide;
+        end Selection_Extraction;
+
+        procedure Extraire_Debut_Cache is new Cache_LC.Extraire (Selection => Selection_Extraction);
+
+        -- Insère l'élément précédemment extrait à la fin du cache pour conserver la cohérence
+        function Plus_Petit (Element_A : in T_Cellule_Cache; Element_B : in T_Cellule_Cache) return Boolean is
+            Test : Boolean;         -- Résultat du test de Plus_Petit
+        begin
+            if Politique_Cache = To_Unbounded_String("LRU") then
+                Test := True;
+            elsif Politique_Cache = To_Unbounded_String("LFU") then
+                Test := (Element_A.Frequence > Element_B.Frequence);
+            else
+                Null;
+            end if;
+            return Test;
+        end Plus_Petit;
+
+        procedure Inserer_Fin_Cache is new Cache_LC.Inserer (Plus_Petit => Plus_Petit);
+
+    begin
+        Longueur_Max := 0;
+        Interface_Trouve := To_Unbounded_String("");
+        Pour_Chaque_Interface (Cache_LC.T_LC(Cache));
+        if not Est_Routable then
+            raise Route_Pas_Dans_Cache;
+        elsif (Politique_Cache = To_Unbounded_String("LRU")) or (Politique_Cache = To_Unbounded_String("LFU")) then
+            Inserer_Fin_Cache(Cache_LC.T_LC(Cache), Route_Valide);
+        else
+            Null;
+        end if;
+        return Interface_Trouve;
+    end Trouver_Interface_Cache;
 
 end Routage;
