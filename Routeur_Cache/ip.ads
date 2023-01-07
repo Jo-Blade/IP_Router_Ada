@@ -36,7 +36,8 @@ package IP is
 
     -- Renvoie le masque de longueur minimale qui discrimine IP1 et IP2
     function Discriminant(IP1 : in T_IP; IP2 : in T_IP) return T_IP
-    with Post => not Egalite_IP(IP1, IP2, Discriminant'Result); 
+    with Pre => not Egalite_IP (IP1, IP2, Texte_Vers_IP(To_Unbounded_String("255.255.255.255"))),
+         Post => not Egalite_IP(IP1, IP2, Discriminant'Result); 
 
     private
         type T_IP is mod 2 ** 32;
