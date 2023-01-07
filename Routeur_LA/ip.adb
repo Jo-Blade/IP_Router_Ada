@@ -26,7 +26,7 @@ package body IP is
         for i in 1..4 loop
             n := Texte_Vers_Entier( To_String(Buffer(i)) ); -- lecture du i-ème octet d'IP
 
-            if n >= 0 then
+            if n >= 0 and n < 256 then
                 New_IP := New_IP * UN_OCTET + Entier_Vers_IP(n);
             else
                 raise Erreur_Chaine_Non_IP;
