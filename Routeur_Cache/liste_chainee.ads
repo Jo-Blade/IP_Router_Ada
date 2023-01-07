@@ -21,6 +21,11 @@ package Liste_Chainee is
     procedure Ajouter_Debut (Liste: in out T_LC; Element: T_Element) 
         with Post => Taille (Liste) > 0 and then Ieme (Liste, 0) = Element;
 
+    -- Ajouter un élément à la fin de la liste chainée
+    procedure Ajouter_Fin (Liste: in out T_LC; Element: in T_Element)
+        with Pre => not Est_Vide(Liste),
+             Post => Taille (Liste) > 0;
+
     -- Retourner le premier élément d'une liste.
     -- Exception : Element_Absent_Error si la liste est vide
     function Premier (Liste: in T_LC) return T_Element;   

@@ -22,10 +22,23 @@ package body Liste_Chainee is
 
 
     -- Ajouter un élément au début de la liste chainée
-    procedure Ajouter_Debut (Liste: in out T_LC; Element: T_Element) is
+    procedure Ajouter_Debut (Liste: in out T_LC; Element: in T_Element) is
     begin
         Liste := new T_Cellule'(Element, Liste);
     end Ajouter_Debut;
+
+
+    -- Ajouter un élément à la fin de la liste chainée
+    procedure Ajouter_Fin (Liste: in out T_LC; Element: in T_Element) is
+        Liste_Temp : T_LC;
+    begin
+        Liste_Temp := Liste;
+        if not Est_Vide(Liste_Temp) and then not Est_Vide(Liste_Temp.all.Suivante) then
+            Ajouter_Fin (Liste_Temp.all.Suivante, Element);
+        else
+            Liste_Temp.all.Suivante := new T_Cellule'(Element, Null);
+        end if;
+    end Ajouter_Fin;
 
 
     -- Retourner le premier élément de la liste chainée

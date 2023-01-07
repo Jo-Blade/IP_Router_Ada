@@ -122,23 +122,31 @@ package body Routage is
 
             Nouvelle_Cellule := T_Cellule_Cache'(IP_A_Router, Masque_Max, Interface_Nom, 1);
             -- Ajout de la route au cache
-            if (Politique_Cache = To_Unbounded_String("FIFO")) or (Politique_Cache = To_Unbounded_String("LRU")) then
-                if Taille_Cache_Actuelle < Capacite_Cache then
-                    Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
-                else
-                    Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
-                    Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
-                end if;
+            if Est_Vide_Cache(Cache) then
+                Ajouter_Debut(Cache, Nouvelle_Cellule);
             else
-                if Est_Vide_Cache(Cache) then
-                    Ajouter_Debut(Cache, Nouvelle_Cellule);
-                else
+                if (Politique_Cache = To_Unbounded_String("FIFO")) or (Politique_Cache = To_Unbounded_String("LRU")) then
                     if Taille_Cache_Actuelle < Capacite_Cache then
-                        Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                        if Politique_Cache = To_Unbounded_String("LRU") then
+                            Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                        else
+                            Ajouter_Fin(Cache, Nouvelle_Cellule);
+                        end if;
                     else
                         Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
-                        Inserer_Element(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                        if Politique_Cache = To_Unbounded_String("LRU") then
+                            Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                        else
+                            Ajouter_Fin(Cache, Nouvelle_Cellule);
+                        end if;
                     end if;
+                else
+                        if Taille_Cache_Actuelle < Capacite_Cache then
+                            Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                        else
+                            Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
+                            Inserer_Element(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                        end if;
                 end if;
             end if;
         end if;
