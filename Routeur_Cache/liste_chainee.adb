@@ -143,10 +143,21 @@ package body Liste_Chainee is
                 Traiter(Liste_Temp.all.Element);
             exception
                 when others =>
-                    Put("Il y a une erreur.");
+                    Put("Il y a une erreur lors de Pour_Chaque dans liste_chainee.adb.");
                     New_Line;
             end;
+            if Est_Vide(Liste_Temp) then
+                Put_Line("Est_Vide");
+            else
+                Put_Line("not Est_Vide");
+            end if;
             Liste_Temp := Liste_Temp.all.Suivante;
+            if Est_Vide(Liste_Temp) then
+                Put_Line("Est_Vide");
+            else
+                Put_Line("not Est_Vide");
+            end if;
+            Put_Line("--");
         end loop;
     end Pour_Chaque;
 
@@ -173,7 +184,7 @@ package body Liste_Chainee is
       end if;
     end Inserer;
 
-    function Trouver(Liste : in out T_LC) return T_Element is
+    function Trouver(Liste : in T_LC) return T_Element is
     begin
       if Est_Vide(Liste) then
         raise Element_Absent_Error;

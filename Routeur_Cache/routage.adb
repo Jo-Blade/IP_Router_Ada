@@ -24,9 +24,9 @@ package body Routage is
             end if;
         end Afficher;
 
-        procedure Afficher_Table_Bis is new Cache_LC.Pour_Chaque (Traiter => Afficher);
+        procedure Afficher_Cache_Bis is new Cache_LC.Pour_Chaque (Traiter => Afficher);
     begin
-        Afficher_Table_Bis (Cache_LC.T_LC(Cache));
+        Afficher_Cache_Bis (Cache_LC.T_LC(Cache));
     end Afficher_Cache;
 
     function Est_Vide_Cache (Cache : in T_Cache) return Boolean is
@@ -235,6 +235,7 @@ package body Routage is
         Interface_Trouve : Unbounded_String;    -- Nom de l'interface vers laquelle sera routé le paquet
         Est_Routable : Boolean := False;        -- Stocke si un routage est possible ou non via le cache
         Route_Valide : T_Cellule_Cache;         -- La route choisie
+        Route_Temp : T_Cellule_Cache;           -- Route temporaire pour l'extraction de route valide du cache
 
         -- Définition de la procedure Trouver qui s'appliquera pour chaque élément de la table de routage
         procedure Trouver (Cellule : in T_Cellule_Cache) is
@@ -284,7 +285,8 @@ package body Routage is
         if not Est_Routable then
             raise Route_Pas_Dans_Cache;
         elsif (Politique_Cache = To_Unbounded_String("LRU")) or (Politique_Cache = To_Unbounded_String("LFU")) then
-            Inserer_Fin_Cache(Cache_LC.T_LC(Cache), Route_Valide);
+            Extraire_Debut_Cache(Route_Temp, Cache_LC.T_LC(Cache));
+            Inserer_Fin_Cache(Cache_LC.T_LC(Cache), Route_Temp);
         else
             Null;
         end if;

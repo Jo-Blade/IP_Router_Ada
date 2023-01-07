@@ -95,6 +95,7 @@ private
         end record;
 
     package Table_LC is new Liste_Chainee(T_Element => T_Cellule);
+    -- Wtf le warning use clause for package "Table_LC" has no effect
     use Table_LC;
 
     type T_Table is new Table_LC.T_LC;

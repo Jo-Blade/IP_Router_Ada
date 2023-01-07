@@ -77,7 +77,7 @@ package Liste_Chainee is
     -- et le renvoie à l’utilisateur (sans modifier la liste)
     generic
       with function Selection (Element : in T_Element) return Boolean;
-    function Trouver(Liste : in out T_LC) return T_Element;
+    function Trouver(Liste : in T_LC) return T_Element;
 
     -- Trouve le premier élément de la liste vérifiant la condition Selection
     -- puis le supprime de la liste et renvoie sa valeur
