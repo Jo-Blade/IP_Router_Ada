@@ -102,16 +102,16 @@ package body Routage is
         end Determiner_Masque;
 
     begin
-        -- On cherche le masque le plus long qui discrimine la route
-        Put_Line("Determiner_Masque");
-        Masque_Max := Determiner_Masque(Table, IP_A_Router);
-
-        Nouvelle_Cellule := T_Cellule_Cache'(IP_A_Router, Masque_Max, Interface_Nom, 1);
-        Put_Line("Ajout_Route");
-        -- Ajout de la route au cache
         if Capacite_Cache = 0 then
             Null;
         else
+            -- On cherche le masque le plus long qui discrimine la route
+            Put_Line("Determiner_Masque");
+            Masque_Max := Determiner_Masque(Table, IP_A_Router);
+
+            Nouvelle_Cellule := T_Cellule_Cache'(IP_A_Router, Masque_Max, Interface_Nom, 1);
+            Put_Line("Ajout_Route");
+            -- Ajout de la route au cache
             if (Politique_Cache = To_Unbounded_String("FIFO")) or (Politique_Cache = To_Unbounded_String("LRU")) then
                 Put_Line("Politique FIFO LRU");
                 if Taille_Cache_Actuelle < Capacite_Cache then

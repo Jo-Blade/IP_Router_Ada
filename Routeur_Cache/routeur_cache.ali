@@ -1,0 +1,218 @@
+V "GNAT Lib v12"
+M P W=b
+A -gnatwa
+A -gnata
+P SS ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_LOCAL_ALLOCATORS
+RV NO_NESTED_FINALIZATION
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+
+U routeur_cache%b	routeur_cache.adb	cc262f90 NE OO SU
+W ada%s			ada.ads			ada.ali
+W ada.command_line%s	a-comlin.adb		a-comlin.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.strings%s		a-string.ads		a-string.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W ip%s			ip.adb			ip.ali
+W my_strings%s		my_strings.adb		my_strings.ali
+W routage%s		routage.adb		routage.ali
+Z system%s		system.ads		system.ali
+Z system.atomic_operations.test_and_set%s  s-aotase.adb  s-aotase.ali
+Z system.concat_3%s	s-conca3.adb		s-conca3.ali
+Z system.concat_5%s	s-conca5.adb		s-conca5.ali
+Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.img_int%s	s-imgint.ads		s-imgint.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20221121095525 76789da1 ada%s
+D a-charac.ads		20221121095525 2d3ec45b ada.characters%s
+D a-chlat1.ads		20221121095525 e0d72e76 ada.characters.latin_1%s
+D a-comlin.ads		20221121095525 4aa66568 ada.command_line%s
+D a-except.ads		20221121095525 2a7d8d70 ada.exceptions%s
+D a-finali.ads		20221121095525 bf4f806b ada.finalization%s
+D a-ioexce.ads		20221121095525 40018c65 ada.io_exceptions%s
+D a-stream.ads		20221121095525 119b8fb3 ada.streams%s
+D a-string.ads		20221121095525 90ac6797 ada.strings%s
+D a-strmap.ads		20221121095525 233229cd ada.strings.maps%s
+D a-sttebu.ads		20221121095525 18209c64 ada.strings.text_buffers%s
+D a-strunb.ads		20221121095525 5837d881 ada.strings.unbounded%s
+D a-stuten.ads		20221121095525 33c54060 ada.strings.utf_encoding%s
+D a-tags.ads		20221121095525 9eaa38c6 ada.tags%s
+D a-textio.ads		20221121095525 deada98a ada.text_io%s
+D a-unccon.ads		20221121095525 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20221121095525 edec285f interfaces%s
+D i-c.ads		20221121095525 2284bf7c interfaces.c%s
+D i-cstrea.ads		20221121095525 e53d8b8e interfaces.c_streams%s
+D ip.ads		20230107191617 7bdfa37c ip%s
+D liste_chainee.ads	20230107175913 a43d122e liste_chainee%s
+D my_strings.ads	20230104115503 0966e67b my_strings%s
+D routage.ads		20230107175838 72b25148 routage%s
+D routeur_cache.adb	20230107183201 90bd482b routeur_cache%b
+D system.ads		20221121095525 a2da961d system%s
+D s-atocou.ads		20221121095525 dc18efc3 system.atomic_counters%s
+D s-atoope.ads		20221121095525 c7637a25 system.atomic_operations%s
+D s-aotase.ads		20221121095525 90cf94ab system.atomic_operations.test_and_set%s
+D s-aotase.adb		20221121095525 e581b407 system.atomic_operations.test_and_set%b
+D s-atopri.ads		20221121095525 1b132436 system.atomic_primitives%s
+D s-conca3.ads		20221121095525 9078e860 system.concat_3%s
+D s-conca5.ads		20221121095525 47259367 system.concat_5%s
+D s-crtl.ads		20221121095525 8a0692f8 system.crtl%s
+D s-exctab.ads		20221121095525 91bef6ef system.exception_table%s
+D s-ficobl.ads		20221121095525 dc5161d4 system.file_control_block%s
+D s-finmas.ads		20221121095525 bd688734 system.finalization_masters%s
+D s-finroo.ads		20221121095525 4ff27390 system.finalization_root%s
+D s-imagei.ads		20221121095525 0d3f86a7 system.image_i%s
+D s-imgint.ads		20221121095525 bdb6f5ec system.img_int%s
+D s-memory.ads		20221121095525 5b8432d0 system.memory%s
+D s-parame.ads		20221121095525 d494a4a6 system.parameters%s
+D s-pooglo.ads		20221121095525 91708d21 system.pool_global%s
+D s-putima.ads		20221121095525 4e095881 system.put_images%s
+D s-secsta.ads		20221121095525 62cd9202 system.secondary_stack%s
+D s-soflin.ads		20221121095525 df77073e system.soft_links%s
+D s-stache.ads		20221121095525 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20221121095525 1c9580f6 system.standard_library%s
+D s-stalib.adb		20221121095525 eb464a47 system.standard_library%b
+D s-stoele.ads		20221121095525 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20221121095525 8f5a9db6 system.storage_elements%b
+D s-stopoo.ads		20221121095525 e9fa2dd8 system.storage_pools%s
+D s-stratt.ads		20221121095525 f7dfd786 system.stream_attributes%s
+D s-traent.ads		20221121095525 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20221121095525 fa2a7f59 system.unsigned_types%s
+D s-wchcon.ads		20221121095525 d9032363 system.wch_con%s
+D unchconv.ads		20221121095525 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z b b [routeur_cache standard 9 11 none]
+G r c none [routeur_cache standard 9 11 none] [texte_vers_entier my_strings 24 14 none]
+G r c none [routeur_cache standard 9 11 none] [initialiser_cache_vide routage 24 15 none]
+G r c none [routeur_cache standard 9 11 none] [initialiser_table routage 44 15 none]
+G r c none [routeur_cache standard 9 11 none] [texte_vers_ip ip 20 14 none]
+G r c none [routeur_cache standard 9 11 none] [trouver_interface_cache routage 54 14 none]
+G r c none [routeur_cache standard 9 11 none] [ip_vers_texte ip 23 14 none]
+G r c none [routeur_cache standard 9 11 none] [afficher_cache routage 62 15 none]
+G r c none [routeur_cache standard 9 11 none] [afficher_table routage 58 15 none]
+G r c none [routeur_cache standard 9 11 none] [trouver_interface routage 50 14 none]
+G r c none [routeur_cache standard 9 11 none] [mise_a_jour_cache routage 74 15 none]
+G r c none [routeur_cache standard 9 11 none] [vider_table routage 29 15 none]
+X 1 ada.ads
+16K9*Ada 20e8 24|1r6 1r37 2r6 2r37 3r6 3r37 4r6 4r37
+X 4 a-comlin.ads
+36K13*Command_Line 144e21 24|2w10 2r41
+39V13*Argument_Count{natural} 24|62s16 68s21
+52V13*Argument{string} 24|65s41 72s63 74s57 76s61 89s62 91s65
+X 9 a-string.ads
+16K13*Strings 35e16 24|1w10 1r41 3r10 3r41
+33n37*Both{33E9} 24|134r26
+X 12 a-strunb.ads
+85K21*Unbounded 765e26 24|3w18 3r49
+90R9*Unbounded_String<6|43R9> 744e15 24|13r23 14r25 15r26 16r28 25r11 26r13
+. 27r21
+107V13*To_Unbounded_String{90R9} 24|13s43 14s45 15s46 16s48 65s20 72s43 76s41
+. 77s44 77s97 77s149 89s42 91s45 133s22
+120V13*To_String{string} 24|56s37 111s39 114s39 122s40 125s39 128s41 136s16
+. 136s47 142s45 169s72
+155V14*"&"{90R9} 24|56s89 142s97
+163V14*"&"{90R9} 24|56s83 142s91
+242V14*"="{boolean} 24|77s41 77s94 77s146
+248V14*"="{boolean} 24|68s46 68s60 68s74 71s24 73s27 75s27 82s27 85s27 88s27
+. 90s27 143s25 147s25 151s25 161s25 172s26
+615U14*Trim 24|134s13
+X 15 a-textio.ads
+58K13*Text_IO 727e16 24|4w10 4r41
+66P9*File_Type 24|33r22 34r24 35r21
+68n23*In_File{68E9} 24|111r30 122r31
+68n32*Out_File{68E9} 24|128r31
+79I9*Count<integer>
+83I12*Positive_Count{79I9}
+98U14*Create 24|128s5
+113U14*Open 24|111s9 122s9
+128U14*Close 24|118s5 186s5 187s5
+263U14*New_Line 24|109s5
+311V13*End_Of_File{boolean} 24|172s38
+361V13*Line{83I12} 24|144s42 148s42 152s42 162s42 165s42
+491V13*Get_Line{string} 24|133s42
+497U14*Put_Line 24|56s9 142s17
+507U14*Put_Line 24|45s9 46s9 47s9 48s9 98s39 99s45 100s42 101s49 114s13 125s13
+. 145s17 149s17 153s17 155s21 157s21 159s21 163s17 169s39 177s13 179s13 181s13
+. 191s36 193s20
+543X4*Name_Error 24|113r14 124r14
+X 20 ip.ads
+5K9*IP 45e7 24|6w6 6r37
+7M10*T_IP 24|40r70
+20V14*Texte_Vers_IP{7M10} 24|56s61 141s65 142s69 170s67
+23V14*IP_Vers_Texte{12|90R9} 24|56s47 142s55
+X 21 liste_chainee.ads
+10P10*T_LC
+X 22 my_strings.ads
+3K9*My_Strings 32e15 24|7w6 7r37
+5X5*Erreur_Pas_Un_Entier 24|100r18
+24V14*Texte_Vers_Entier{integer} 24|74s39
+X 23 routage.ads
+7K9*Routage 109e12 24|5w6 5r37
+9P10*T_Table<21|10P10[97]> 24|19r13 40r44
+10P10*T_Cache<21|10P10[104]> 24|20r13
+13X5*Route_De_Base_Inconnue 24|191r10
+15X5*Route_Pas_Dans_Cache 24|170r18
+24U15*Initialiser_Cache_Vide 24|106s5
+29U15*Vider_Table 24|188s5
+44U15*Initialiser_Table 24|117s5
+50V14*Trouver_Interface{12|90R9} 24|43s26
+54V14*Trouver_Interface_Cache{12|90R9} 24|141s34
+58U15*Afficher_Table 24|150s17
+62U15*Afficher_Cache 24|146s17
+74U15*Mise_A_Jour_Cache 24|49s9
+X 24 routeur_cache.adb
+9U11*Routeur_Cache 9b11 194l5 194t18
+11b5 Afficher_Stats{boolean} 83m21 86m21 175r8
+12i5 Capacite_Cache{integer} 49r47 50r36 74m21
+13r5 Politique_Cache{12|90R9} 49r63 76m21 77r25 77r78 77r130 141r87 146r40
+14r5 Nom_Fichier_Table{12|90R9} 89m21 111r49 114r49
+15r5 Nom_Fichier_Paquet{12|90R9} 72m21 122r50 125r49
+16r5 Nom_Fichier_Resultat{12|90R9} 91m21 128r51
+19p5 Table{23|9P10} 117m24 117r24 150r33 170r60 188m18 188r18
+20p5 Cache{23|10P10} 49m27 49r27 106m29 106r29 141m58 141r58 146r33
+23i5 i{integer} 61m5 62r11 65r50 67m13 67r18 68r17 72r72 74r66 76r70 84m21
+. 84r26 87m21 87r26 89r71 91r74 95m17 95r22 98r70 100r73 101r80 129m5 140m17
+. 140r22 154r20 155r72 156r23 176r12 177r64 178r15
+24i5 Numero_Ligne{integer} 144m17 145r58 148m17 149r58 152m17 153r58 162m17
+. 163r56 165m17 169r131
+25r5 Cle{12|90R9} 65m13 68r42 68r56 68r70 71r20 73r23 75r23 82r23 85r23 88r23
+. 90r23
+26r5 Ligne{12|90R9} 56r75 133m13 134m19 134r19 136r26 136r57 141r79 142r83
+. 143r19 147r19 151r19 161r19 169r82 170r81 172r20
+27r5 Interface_Nom{12|90R9} 43m9 49r103 56r91 141m17 142r99
+28X5 Parametre_Inconnu 93r27 98r18
+29X5 Ouverture_Impossible 115r19 126r19 192r10
+30X5 Commande_Inconnue 166r23 169r18
+31X5 Erreur_Dernier_Argument 69r23 99r18
+32X5 Erreur_Politique_Incorrecte 78r31 101r18
+33p5 Fichier_Paquet{15|66P9} 122m15 122r15 133r52 144r48 148r48 152r48 162r48
+. 165r48 172r51 186m12 186r12
+34p5 Fichier_Resultat{15|66P9} 56r19 128m13 128r13 142r27 187m12 187r12
+35p5 Fichier_Table{15|66P9} 111m15 111r15 117r31 118m12 118r12
+36i5 Taille_Cache_Actuelle{integer} 49r80 50r12 51m13 51r38
+40U15 Routage_Par_Table 40b15 40>33 40>53 57l9 57t26 170s42
+40p33 Table{23|9P10} 43r44 49r118
+40m53 IP_A_Router{20|7M10} 43r51 49r34
+X 25 system.ads
+67M9*Address
+X 40 s-memory.ads
+51V13*Alloc{25|67M9} 101i<c,__gnat_malloc>22
+66U14*Free 102i<c,__gnat_free>22
+74V13*Realloc{25|67M9} 103i<c,__gnat_realloc>22
+X 48 s-stalib.adb
+87U14 Break_Start 88i<c,__gnat_break_start>22
+
