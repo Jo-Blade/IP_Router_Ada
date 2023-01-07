@@ -108,6 +108,7 @@ package body IP is
             Masque := Masque or 2**(32-i);
             i := i + 1;
         end loop;
+        Masque := Masque or 2**(32-i);
         return Masque;
     end Discriminant;
 
