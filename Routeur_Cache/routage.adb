@@ -86,7 +86,8 @@ package body Routage is
             procedure Traiter(Element : in T_Cellule) is
                 Masque_Discriminant : constant T_IP := Discriminant(Element.Adresse, IP_A_Router);
             begin
-                if Longueur_IP(Masque_Discriminant) < Longueur_IP(Masque) then
+                Put_Line("Pour_Chaque_IP");
+                if Longueur_IP(Masque_Discriminant) < Longueur_IP(Element.Masque) then
                     Masque := Masque_Discriminant;
                 else
                     Null;
@@ -108,23 +109,27 @@ package body Routage is
         Nouvelle_Cellule := T_Cellule_Cache'(IP_A_Router, Masque_Max, Interface_Nom, 1);
         Put_Line("Ajout_Route");
         -- Ajout de la route au cache
-        if (Politique_Cache = To_Unbounded_String("FIFO")) or (Politique_Cache = To_Unbounded_String("LRU")) then
-            Put_Line("Politique FIFO LRU");
-            if Taille_Cache_Actuelle < Capacite_Cache then
-                Put_Line("Inserer_Cache");
-                Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+        if Capacite_Cache = 0 then
+            Null;
+        else
+            if (Politique_Cache = To_Unbounded_String("FIFO")) or (Politique_Cache = To_Unbounded_String("LRU")) then
+                Put_Line("Politique FIFO LRU");
+                if Taille_Cache_Actuelle < Capacite_Cache then
+                    Put_Line("Inserer_Cache");
+                    Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                else
+                    Put_Line("Supprimer_Cache");
+                    Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
+                    Put_Line("Inserer_Cache");
+                    Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                end if;
             else
+                Put_Line("Politique LFU");
                 Put_Line("Supprimer_Cache");
                 Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
                 Put_Line("Inserer_Cache");
-                Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                Inserer_Element(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
             end if;
-        else
-            Put_Line("Politique LFU");
-            Put_Line("Supprimer_Cache");
-            Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
-            Put_Line("Inserer_Cache");
-            Inserer_Element(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
         end if;
     end Mise_A_Jour_Cache;
 

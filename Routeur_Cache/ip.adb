@@ -1,4 +1,5 @@
 with My_Strings;         use My_Strings;
+with Ada.Text_IO;        use Ada.Text_IO;
 with Str_Split;
 
 package body IP is
@@ -88,6 +89,7 @@ package body IP is
             if Lire_Bit(IP, i) = 0 then
                 Null;
             else
+                Put_Line("Erreur_Masque_Invalide");
                 raise Erreur_Masque_Invalide;
             end if;
         end loop;
@@ -103,8 +105,8 @@ package body IP is
         Masque := Entier_Vers_IP(0);
         i := 1;
         while Lire_Bit(IP1, i) = Lire_Bit(IP2, i) loop
-            i := i + 1;
             Masque := Masque or 2**(32-i);
+            i := i + 1;
         end loop;
         return Masque;
     end Discriminant;
