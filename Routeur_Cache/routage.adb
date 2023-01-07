@@ -106,14 +106,11 @@ package body Routage is
             Null;
         else
             -- On cherche le masque le plus long qui discrimine la route
-            Put_Line("Determiner_Masque");
             Masque_Max := Determiner_Masque(Table, IP_A_Router);
 
             Nouvelle_Cellule := T_Cellule_Cache'(IP_A_Router, Masque_Max, Interface_Nom, 1);
-            Put_Line("Ajout_Route");
             -- Ajout de la route au cache
             if (Politique_Cache = To_Unbounded_String("FIFO")) or (Politique_Cache = To_Unbounded_String("LRU")) then
-                Put_Line("Politique FIFO LRU");
                 if Taille_Cache_Actuelle < Capacite_Cache then
                     Put_Line("Inserer_Cache");
                     Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
@@ -124,7 +121,6 @@ package body Routage is
                     Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
                 end if;
             else
-                Put_Line("Politique LFU");
                 Put_Line("Supprimer_Cache");
                 Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
                 Put_Line("Inserer_Cache");
@@ -297,7 +293,6 @@ package body Routage is
         Interface_Trouve := To_Unbounded_String("");
         Pour_Chaque_Interface (Cache_LC.T_LC(Cache));
         if not Est_Routable then
-            Put_Line("not Est_Routable");
             raise Route_Pas_Dans_Cache;
         elsif (Politique_Cache = To_Unbounded_String("LRU")) or (Politique_Cache = To_Unbounded_String("LFU")) then
             Extraire_Debut_Cache(Route_Temp, Cache_LC.T_LC(Cache));
