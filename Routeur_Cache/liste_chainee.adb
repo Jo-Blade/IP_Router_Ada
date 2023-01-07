@@ -138,11 +138,6 @@ package body Liste_Chainee is
         Liste_Temp : T_LC;
     begin
         Liste_Temp := Liste;
-        if Est_Vide(Liste_Temp) then
-            Put_Line("Est_Vide");
-        else
-            Put_Line("not Est_Vide");
-        end if;
         While not Est_Vide(Liste_Temp) loop
             begin
                 Traiter(Liste_Temp.all.Element);
@@ -152,16 +147,7 @@ package body Liste_Chainee is
                     New_Line;
             end;
             Liste_Temp := Liste_Temp.all.Suivante;
-            Put_Line("--");
-            if Est_Vide(Liste_Temp) then
-                Put_Line("Est_Vide");
-            else
-                Put_Line("not Est_Vide");
-            end if;
         end loop;
-        Put_Line("Fin Pour_Chaque.");
-        Put_Line("--");
-        Put_Line("--");
     end Pour_Chaque;
 
 
