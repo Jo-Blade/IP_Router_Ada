@@ -166,37 +166,37 @@ package body Liste_Chainee is
 
     procedure Inserer (Liste : in out T_LC; Element : in T_Element) is
     begin
-      if Est_Vide(Liste) or not Plus_Petit(Element, Liste.All.Element) then
-        Liste := new T_Cellule'(Element, Liste);
-      else
-        Inserer(Liste.All.Suivante, Element);
-      end if;
+        if Est_Vide(Liste) or else not Plus_Petit(Element, Liste.All.Element) then
+            Liste := new T_Cellule'(Element, Liste);
+        else
+            Inserer(Liste.All.Suivante, Element);
+        end if;
     end Inserer;
 
     function Trouver(Liste : in T_LC) return T_Element is
     begin
-      if Est_Vide(Liste) then
-        raise Element_Absent_Error;
-      elsif Selection(Liste.All.Element) then
-        return Liste.All.Element;
-      else
-        return Trouver (Liste.All.Suivante);
-      end if;
+        if Est_Vide(Liste) then
+            raise Element_Absent_Error;
+        elsif Selection(Liste.All.Element) then
+            return Liste.All.Element;
+        else
+            return Trouver (Liste.All.Suivante);
+        end if;
     end Trouver;
 
     procedure Extraire (Element_Trouve : out T_Element; Liste : in out T_LC) is
-      temp_Liste : T_LC;
+        temp_Liste : T_LC;
     begin
-      if Est_Vide(Liste) then
-        raise Element_Absent_Error;
-      elsif Selection(Liste.All.Element) then
-        Element_Trouve := Liste.All.Element;
-        temp_Liste := Liste;
-        Liste := Liste.All.Suivante;
-        Free(temp_Liste);
-      else
-        Extraire (Element_Trouve, Liste.All.Suivante);
-      end if;
+        if Est_Vide(Liste) then
+            raise Element_Absent_Error;
+        elsif Selection(Liste.All.Element) then
+            Element_Trouve := Liste.All.Element;
+            temp_Liste := Liste;
+            Liste := Liste.All.Suivante;
+            Free(temp_Liste);
+        else
+            Extraire (Element_Trouve, Liste.All.Suivante);
+        end if;
     end Extraire;
 
 end Liste_Chainee;

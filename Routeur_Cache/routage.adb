@@ -133,10 +133,12 @@ package body Routage is
                 if Est_Vide_Cache(Cache) then
                     Ajouter_Debut(Cache, Nouvelle_Cellule);
                 else
-                    Put_Line("Supprimer_Cache");
-                    Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
-                    Put_Line("Inserer_Cache");
-                    Inserer_Element(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                    if Taille_Cache_Actuelle < Capacite_Cache then
+                        Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                    else
+                        Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
+                        Inserer_Element(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+                    end if;
                 end if;
             end if;
         end if;
