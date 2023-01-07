@@ -92,7 +92,7 @@ package body Routage is
           Masque_Actuel := Element.Masque;
         else
           Masque_Discriminant := Discriminant(Element.Adresse, IP_A_Router);
-          if Longueur_IP(Masque_Discriminant) > Longueur_IP(Element.Masque) then
+          if Longueur_IP(Masque_Discriminant) < Longueur_IP(Element.Masque) then
             Masque_Actuel := Masque_Discriminant;
           else
             Masque_Actuel := Element.Masque;
