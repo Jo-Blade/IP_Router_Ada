@@ -137,7 +137,7 @@ begin
                 begin
                     Interface_Nom := Trouver_Interface_Cache(Cache, Texte_Vers_IP(Ligne), Politique_Cache);
                     Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
-                exception when Erreur_Chaine_Non_IP => Put_Line("La ligne" & Integer'Image(i) & "du fichier paquets contient un paquet incorrect. Elle sera ignorée."); 
+                exception when Erreur_Chaine_Non_IP => Put_Line("La ligne" & Integer'Image(i) & " du fichier paquets contient un paquet incorrect. Elle sera ignorée."); 
                 end;
             elsif Ligne = "cache" then      -- la ligne commande l'affichage du cache
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;

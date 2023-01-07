@@ -76,6 +76,8 @@ begin
     end;
 
     -- Test Discriminant
+    IP1 := Texte_Vers_IP(To_Unbounded_String("192.168.0.1"));
+    IP2 := Texte_Vers_IP(To_Unbounded_String("192.178.0.0"));
     Put_Line(To_String(IP_Vers_Texte(IP1)));
     Put_Line(To_String(IP_Vers_Texte(IP2)));
     Put_Line(To_String(IP_Vers_Texte(Discriminant(IP1,IP2))));
