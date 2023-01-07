@@ -81,13 +81,12 @@ package body Routage is
 
         -- Determine le masque le plus long des masques minimaux discriminants
         function Determiner_Masque(Table : in T_Table; IP_A_Router : in T_IP) return T_IP is
-            Masque : T_IP;
+            Masque : T_IP := Entier_Vers_IP(0);
             
             procedure Traiter(Element : in T_Cellule) is
                 Masque_Discriminant : constant T_IP := Discriminant(Element.Adresse, IP_A_Router);
             begin
-                Put_Line("Pour_Chaque_IP");
-                if Longueur_IP(Masque_Discriminant) < Longueur_IP(Element.Masque) then
+                if Longueur_IP(Masque_Discriminant) > Longueur_IP(Element.Masque) then
                     Masque := Masque_Discriminant;
                 else
                     Null;
