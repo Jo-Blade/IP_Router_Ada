@@ -134,8 +134,11 @@ begin
                 -- Le cas échéant, une exception Route_Pas_Dans_Cache est levée.
                 -- Il s'agit alors de mettre le cache à jour, tout en routant avec la table de routage.
                 i := i + 1;
-                Interface_Nom := Trouver_Interface_Cache(Cache, Texte_Vers_IP(Ligne), Politique_Cache);
-                Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
+                begin
+                    Interface_Nom := Trouver_Interface_Cache(Cache, Texte_Vers_IP(Ligne), Politique_Cache);
+                    Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
+                exception when Erreur_Chaine_Non_IP => Put_Line("La ligne" & Integer'Image(i) & "du fichier paquets contient un paquet incorrect. Elle sera ignorée."); 
+                end;
             elsif Ligne = "cache" then      -- la ligne commande l'affichage du cache
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("cache (ligne"& Integer'Image (Numero_Ligne)& ")");
