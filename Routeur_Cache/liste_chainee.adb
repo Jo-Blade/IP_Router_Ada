@@ -138,6 +138,11 @@ package body Liste_Chainee is
         Liste_Temp : T_LC;
     begin
         Liste_Temp := Liste;
+        if Est_Vide(Liste_Temp) then
+            Put_Line("Est_Vide");
+        else
+            Put_Line("not Est_Vide");
+        end if;
         While not Est_Vide(Liste_Temp) loop
             begin
                 Traiter(Liste_Temp.all.Element);
@@ -146,19 +151,17 @@ package body Liste_Chainee is
                     Put("Il y a une erreur lors de Pour_Chaque dans liste_chainee.adb.");
                     New_Line;
             end;
-            if Est_Vide(Liste_Temp) then
-                Put_Line("Est_Vide");
-            else
-                Put_Line("not Est_Vide");
-            end if;
             Liste_Temp := Liste_Temp.all.Suivante;
+            Put_Line("--");
             if Est_Vide(Liste_Temp) then
                 Put_Line("Est_Vide");
             else
                 Put_Line("not Est_Vide");
             end if;
-            Put_Line("--");
         end loop;
+        Put_Line("Fin Pour_Chaque.");
+        Put_Line("--");
+        Put_Line("--");
     end Pour_Chaque;
 
 
