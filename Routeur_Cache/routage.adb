@@ -319,6 +319,7 @@ package body Routage is
             raise Route_Pas_Dans_Cache;
         elsif (Politique_Cache = To_Unbounded_String("LRU")) or (Politique_Cache = To_Unbounded_String("LFU")) then
             Extraire_Debut_Cache(Route_Temp, Cache_LC.T_LC(Cache));
+            Route_Temp.Frequence := Route_Temp.Frequence + 1;
             Inserer_Fin_Cache(Cache_LC.T_LC(Cache), Route_Temp);
         else
             Null;
