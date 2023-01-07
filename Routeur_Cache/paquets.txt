@@ -1,6 +1,6 @@
 table
 212.212.212.212
-stats
+cache
 147.127.18.80
 cache
 fin

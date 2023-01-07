@@ -42,10 +42,6 @@ procedure Routeur_Cache is
         -- Recherche de la route dans la table
         Interface_Nom := Trouver_Interface(Table, IP_A_Router);
         -- Mise à jour du cache
-        Put_Line(" ");
-        Put_Line(" ");
-        Put_Line(" ");
-        Put_Line("MAJ_Cache");
         Mise_A_Jour_Cache(Cache, IP_A_Router, Capacite_Cache, Politique_Cache, Taille_Cache_Actuelle, Interface_Nom, Table);
         if Taille_Cache_Actuelle < Capacite_Cache then
             Taille_Cache_Actuelle := Taille_Cache_Actuelle + 1;
@@ -186,6 +182,7 @@ begin
     Close (Fichier_Paquet);
     Close (Fichier_Resultat);
     Vider_Table (Table);
+    Vider_Cache (Cache);
 
 exception 
     when Route_De_Base_Inconnue => Put_Line ("La route de base '0.0.0.0 0.0.0.0' n'existe pas, cette erreur est fatale.");
