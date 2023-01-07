@@ -100,7 +100,7 @@ package body Routage is
         end if;
 
         if Longueur_IP(Masque_Actuel) > Longueur_IP(Masque) then
-          Masque := Masque_Discriminant;
+          Masque := Element.Masque;
         else
           Null;
         end if;
