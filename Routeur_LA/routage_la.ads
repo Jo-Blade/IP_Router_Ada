@@ -10,6 +10,7 @@ package Routage_LA is
   -- Exceptions
   Route_De_Base_Inconnue : Exception;
   Interface_Par_Defaut : Exception;
+  Interface_Non_Trouve : Exception;
 
 
   -- Initialiser avec la table de routage vide

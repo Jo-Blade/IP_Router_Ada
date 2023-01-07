@@ -19,7 +19,9 @@ procedure Test is
 
   Arbre : T_Trie;
 
-  procedure Afficher_Cle (Cle : T_Cle; Element : Integer) is
+  procedure Afficher_Cle (Arbre : in T_Trie) is
+    Cle     : constant T_Cle   := Lire_Cle_Racine(Arbre);
+    Element : constant Integer := Lire_Donnee_Racine(Arbre);
   begin
     Put(Integer'Image(Integer(Cle)) & " -- " & Integer'Image(Element) & " | ");
   end Afficher_Cle;

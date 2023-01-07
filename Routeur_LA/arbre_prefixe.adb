@@ -149,7 +149,7 @@ package body Arbre_Prefixe is
       for i in 1..Nombre_Prefixes loop
         Parcours_Profondeur_Post(Arbre.All.Enfants(i));
       end loop;
-      Traiter(Arbre.All.Cle, Arbre.All.Element);
+      Traiter(Arbre);
     end if;
   end Parcours_Profondeur_Post;
 

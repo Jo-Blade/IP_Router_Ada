@@ -1,4 +1,5 @@
 with My_Strings;         use My_Strings;
+with Ada.Text_IO;        use Ada.Text_IO;
 with Str_Split;
 
 package body IP is
@@ -88,11 +89,27 @@ package body IP is
             if Lire_Bit(IP, i) = 0 then
                 Null;
             else
+                Put_Line("Erreur_Masque_Invalide");
                 raise Erreur_Masque_Invalide;
             end if;
         end loop;
 
         return Compteur_1 - 1;
     end Longueur_IP;
+
+
+    function Discriminant(IP1 : in T_IP; IP2 : in T_IP) return T_IP is
+        i : Integer;    -- un compteur
+        Masque : T_IP;  -- le masque Discriminant
+    begin
+        Masque := Entier_Vers_IP(0);
+        i := 1;
+        while Lire_Bit(IP1, i) = Lire_Bit(IP2, i) loop
+            Masque := Masque or 2**(32-i);
+            i := i + 1;
+        end loop;
+        Masque := Masque or 2**(32-i);
+        return Masque;
+    end Discriminant;
 
 end IP;

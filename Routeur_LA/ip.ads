@@ -34,6 +34,10 @@ package IP is
     function Longueur_IP(IP : in T_IP) return Integer 
     with Post => (Longueur_IP'Result >= 0) and (Longueur_IP'Result <= 32);   
 
+    -- Renvoie le masque de longueur minimale qui discrimine IP1 et IP2
+    function Discriminant(IP1 : in T_IP; IP2 : in T_IP) return T_IP
+    with Pre => IP1 /= IP2,
+         Post => not Egalite_IP(IP1, IP2, Discriminant'Result); 
 
     private
         type T_IP is mod 2 ** 32;

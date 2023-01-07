@@ -69,7 +69,7 @@ package Arbre_Prefixe is
             -- je vais changer traiter pour envoyer un arbre ?
             -- et créer 2 fonctions get_Cle et get_Element pour l’utilisateur
             generic
-            with procedure Traiter (Cle : in T_Cle; Element : in T_Element);
+            with procedure Traiter (Arbre : in T_Trie);
             procedure Parcours_Profondeur_Post (Arbre : in T_Trie);
 
             function Trouver (Arbre : in T_Trie; Cle : in T_Cle) return T_Element;

@@ -9,18 +9,26 @@ package body Routage_LA is
   end Lire_Prefixe;
 
   procedure Afficher_Table(Table_Routage: in T_Table) is
-    procedure Afficher_Noeud (Cle : T_IP; Cellule : T_Cellule) is
-      Adresse : constant Unbounded_String := IP_Vers_Texte(Cle);
-      Masque  : constant Unbounded_String := IP_Vers_Texte(Cellule.Masque);
+    procedure Afficher_Noeud (Arbre : in T_Trie) is
+      Adresse       : constant Unbounded_String := IP_Vers_Texte(Lire_Cle_Racine(Arbre));
+      Masque        : constant Unbounded_String := IP_Vers_Texte(Lire_Donnee_Racine(Arbre).Masque);
+      Interface_Nom : constant Unbounded_String := Lire_Donnee_Racine(Arbre).Interface_Nom;
+      Id            : constant Natural          := Lire_Donnee_Racine(Arbre).Id;
     begin
-      Put(To_String(Adresse) & " -- " & To_String(Masque) & " -- " & To_String(Cellule.Interface_Nom)
-      & Natural'Image(Cellule.Id) & " | ");
+      --Put(To_String(Adresse) & " -- " & To_String(Masque) & " -- " & To_String(Cellule.Interface_Nom)
+      --& Natural'Image(Cellule.Id) & " | ");
+
+      if Est_Feuille(Arbre) then
+        Put_Line(To_String(Adresse) & " " & To_String(Masque) & " " & To_String(Interface_Nom) & " " & Natural'Image(Id));
+      else
+        Null;
+      end if;
     end Afficher_Noeud;
 
 
     procedure Afficher_Table_Bis is new Parcours_Profondeur_Post (Traiter => Afficher_Noeud);
   begin
-    Put_Line("Représentation Post-Fixée de l’arbre :");
+    --Put_Line("Représentation Post-Fixée de l’arbre :");
     Afficher_Table_Bis (T_Trie(Table_Routage));
     New_Line;
   end Afficher_Table;
@@ -82,7 +90,6 @@ package body Routage_LA is
     -- les temps sont des entiers positifs
     Ajouter_Arbre(T_Trie(Table_Routage), Adresse, T_Cellule'(Masque, Interface_Nom, Id_Global + 1));
     Id_Global := Id_Global + 1;
-    Put(Natural'Image(Id_Global));
   end Ajouter_Element;
 
 
@@ -118,6 +125,8 @@ package body Routage_LA is
   begin
     Trouver_Et_Actualiser (Cellule_Trouvee, T_Trie(Table_Routage), IP);
     Interface_Nom := Cellule_Trouvee.Interface_Nom;
+  exception
+    when Element_Absent_Error => raise Interface_Non_Trouve;
   end Trouver_Interface_Cache;
 
 
@@ -145,8 +154,6 @@ package body Routage_LA is
   begin
     Supprimer_bis(T_Trie(Arbre));
   end Supprimer_Plus_Ancien;
-
-
 
 
 
@@ -195,8 +202,8 @@ package body Routage_LA is
   begin
     Trouver_Et_Actualiser (Cellule_Trouvee, T_Trie(Table_Routage));
     Interface_Nom := Cellule_Trouvee.Interface_Nom;
+  exception
+    when Element_Absent_Error => raise Interface_Non_Trouve;
   end Trouver_Interface_Table;
-
-
 
 end Routage_LA;
