@@ -75,6 +75,11 @@ begin
             put(" Erreur_Masque_Invalide levée");
     end;
 
+    -- Test Discriminant
+    Put_Line(To_String(IP_Vers_Texte(IP1)));
+    Put_Line(To_String(IP_Vers_Texte(IP2)));
+    Put_Line(To_String(IP_Vers_Texte(Discriminant(IP1,IP2))));
+
     Put_Line("");
     Put_Line("");
     Put_Line("##################################################");
