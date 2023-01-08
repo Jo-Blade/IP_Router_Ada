@@ -6,6 +6,7 @@ with IP; use IP;
 procedure test_routage is
     Erreur_Exception_Non_Levee : Exception;
 
+    Cache : T_Cache;
     Table : T_Table;
     Table2 : T_Table;
     Table3 : T_Table;
@@ -91,7 +92,13 @@ begin
     Put_Line("Debut des tests sur le cache");
 
 
+    Put_Line("test de Initialiser_Cache_Vide et Est_Vide_Cache");
+    Initialiser_Cache_Vide(Cache);
+    pragma Assert(Est_Vide_Cache(Cache));
+    Put_Line("Initialiser_Cache_Vide et Est_Vide_Cache fonctionnent");
 
+
+    Put_Line("test de Trouver_Interface_Cache");
 
 
 
