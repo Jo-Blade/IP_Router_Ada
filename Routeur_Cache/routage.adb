@@ -127,18 +127,10 @@ package body Routage is
             else
                 if (Politique_Cache = To_Unbounded_String("FIFO")) or (Politique_Cache = To_Unbounded_String("LRU")) then
                     if Taille_Cache_Actuelle < Capacite_Cache then
-                        if Politique_Cache = To_Unbounded_String("LRU") then
-                            Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
-                        else
-                            Ajouter_Fin(Cache, Nouvelle_Cellule);
-                        end if;
+                        Ajouter_Fin(Cache, Nouvelle_Cellule);
                     else
                         Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
-                        if Politique_Cache = To_Unbounded_String("LRU") then
-                            Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
-                        else
-                            Ajouter_Fin(Cache, Nouvelle_Cellule);
-                        end if;
+                        Ajouter_Fin(Cache, Nouvelle_Cellule);
                     end if;
                 else
                         if Taille_Cache_Actuelle < Capacite_Cache then
