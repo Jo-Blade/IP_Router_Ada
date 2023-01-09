@@ -90,7 +90,7 @@ begin
     Initialiser_Table_Vide(Cache);
 
     test_Ajouter_Element;
-    test_Trouver_Interface_Table;
+    test_Trouver_Interface_Table_Cache;
     test_Supprimer_Plus_Ancien;
     test_Vider_Table;
 
