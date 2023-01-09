@@ -58,7 +58,7 @@ procedure test_routage_LA is
 
         Put_Line("Suppression element plus ancien table");
         Supprimer_Plus_Ancien(Table);
-        Trouver_Interface_Table(Interface_Trouvee, Table, Texte_Vers_IP(To_Unbounded_String("0.0.0.0")));
+        Trouver_Interface_Table(Interface_Trouvee, Table, Texte_Vers_IP(To_Unbounded_String("147.127.127.0")));
         raise Erreur_Exception_Non_Levee;
 
     exception
