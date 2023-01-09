@@ -6,8 +6,7 @@ generic
 
     -- Lire_Prefixe permet de déterminer quel préfixe (donc enfant) choisir
     -- Renvoie un entier entre 1 et Nombre_Prefixes
-    with function Lire_Prefixe (Cle : in T_Cle; Indice : in Natural) return Natural 
-        with Post => (Lire_Prefixe'Result >= 1) and (Lire_Prefixe'Result <= Nombre_Prefixes);
+    with function Lire_Prefixe (Cle : in T_Cle; Indice : in Natural) return Natural;
 
 package Arbre_Prefixe is
 
