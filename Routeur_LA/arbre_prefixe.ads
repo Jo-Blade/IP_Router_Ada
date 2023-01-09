@@ -13,7 +13,7 @@ package Arbre_Prefixe is
 
   Element_Absent_Error : Exception;
 
-  --RAJOUTER LES POST ET PRECONDITIONS DANS CE MODULE
+
 
   procedure Initialiser (Arbre : out T_Trie) with
     post => Est_Vide(Arbre);

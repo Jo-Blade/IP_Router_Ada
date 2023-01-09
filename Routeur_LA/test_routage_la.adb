@@ -4,7 +4,7 @@ with Routage_LA; use Routage_LA;
 with IP; use IP;
 
 procedure test_routage_LA is
-    --Erreur_Exception_Non_Levee : Exception;
+    Erreur_Exception_Non_Levee : Exception;
 
     Table : T_Table;
     Cache : T_Table;
@@ -38,7 +38,7 @@ procedure test_routage_LA is
     end test_Ajouter_Element;
 
 
-    procedure test_Trouver_Interface_Table is
+    procedure test_Trouver_Interface_Table_Cache is
     begin
 
 
@@ -58,9 +58,15 @@ procedure test_routage_LA is
 
         Put_Line("Suppression element plus ancien table");
         Supprimer_Plus_Ancien(Table);
-        New_Line;
-        Afficher_Table(Table);
-        New_Line;
+        Trouver_Interface_Table(Interface_Trouvee, Table, To_Unbounded_String("0.0.0.0"));
+        raise Erreur_Exception_Non_Levee;
+
+    exception
+        when Interface_Non_Trouve =>
+            put("Exception bien levée.");
+            New_Line;
+            put("La fonction Supprimer_PLus_Ancien fonctionne bien.");
+
     end test_Supprimer_Plus_Ancien;
 
 
