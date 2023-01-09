@@ -51,21 +51,15 @@ procedure test_routage_LA is
         pragma Assert(Interface_Trouvee = To_Unbounded_String("eth2"));
         put("Trouver_Interface_Cache foncionne en entier.");
         New_Line;
-    end test_Trouver_Interface_Table;
+    end test_Trouver_Interface_Table_Cache;
 
     procedure test_Supprimer_Plus_Ancien is
     begin
 
         Put_Line("Suppression element plus ancien table");
         Supprimer_Plus_Ancien(Table);
-        Trouver_Interface_Table(Interface_Trouvee, Table, To_Unbounded_String("0.0.0.0"));
-        raise Erreur_Exception_Non_Levee;
-
-    exception
-        when Interface_Non_Trouve =>
-            put("Exception bien levée.");
-            New_Line;
-            put("La fonction Supprimer_PLus_Ancien fonctionne bien.");
+        Trouver_Interface_Table(Interface_Trouvee, Table, Texte_Vers_IP(To_Unbounded_String("147.127.127.0")));
+        pragma Assert(Interface_Trouvee = To_Unbounded_String("eth2"));
 
     end test_Supprimer_Plus_Ancien;
 
