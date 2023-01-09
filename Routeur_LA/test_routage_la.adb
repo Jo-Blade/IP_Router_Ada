@@ -51,7 +51,7 @@ procedure test_routage_LA is
         pragma Assert(Interface_Trouvee = To_Unbounded_String("eth2"));
         put("Trouver_Interface_Cache foncionne en entier.");
         New_Line;
-    end test_Trouver_Interface_Table;
+    end test_Trouver_Interface_Table_Cache;
 
     procedure test_Supprimer_Plus_Ancien is
     begin
