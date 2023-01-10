@@ -69,40 +69,30 @@ package body Routage_LA is
   end Min_Temps_2;
 
 
-  procedure Ajouter_Element (Table_Routage : in out T_Table; Adresse : in T_IP;
-    Masque : in T_IP; Interface_Nom : in Unbounded_String) is
-
-    procedure Mettre_A_Jour (Arbre : in out T_Trie) is
-      Cellule_A_Modifier : T_Cellule;
-    begin
-      if Est_Vide(Arbre) or Est_Feuille(Arbre) then
-        Null;
-      else
-        Cellule_A_Modifier := Lire_Donnee_Racine(Arbre);
-        Cellule_A_Modifier.Id := Min_Temps_2(Lire_Ieme_Enfant(Arbre, 1), Lire_Ieme_Enfant(Arbre, 2));
-        Ecrire_Donnee_Tete(Arbre, Cellule_A_Modifier);
-      end if;
-    end Mettre_A_Jour;
-
-    procedure Ajouter_Arbre is new Ajouter (Post_Traitement => Mettre_A_Jour);
-
-  begin
-    -- les temps sont des entiers positifs
-    Ajouter_Arbre(T_Trie(Table_Routage), Adresse, T_Cellule'(Masque, Interface_Nom, Id_Global + 1));
-    Id_Global := Id_Global + 1;
-  end Ajouter_Element;
-
-
-  procedure Trouver_Interface_Cache (Interface_Nom: out Unbounded_String; Table_Routage : in out T_Table; IP : in T_IP) is
+  procedure Trouver_Interface_Cache (Interface_Nom: out Unbounded_String; Table_Routage : in out T_Table; IP : in T_IP; Politique_Cache : in Unbounded_String) is
 
     procedure Post_Traitement(Arbre : in out T_Trie) is
       Cellule_A_Modifier : T_Cellule;
     begin
       if Est_Feuille(Arbre) then
-        Cellule_A_Modifier := Lire_Donnee_Racine(Arbre);
-        Cellule_A_Modifier.Id := Id_Global + 1;
-        Ecrire_Donnee_Tete (Arbre, Cellule_A_Modifier);
-        Id_Global := Id_Global + 1;
+
+        if Politique_Cache = To_Unbounded_String("LRU") then
+
+          Cellule_A_Modifier := Lire_Donnee_Racine(Arbre);
+          Cellule_A_Modifier.Id := Id_Global + 1;
+          Ecrire_Donnee_Tete (Arbre, Cellule_A_Modifier);
+          Id_Global := Id_Global + 1;
+
+        elsif Politique_Cache = To_Unbounded_String("LFU") then
+
+          Cellule_A_Modifier := Lire_Donnee_Racine(Arbre);
+          Cellule_A_Modifier.Id := Cellule_A_Modifier.Id + 1;
+          Ecrire_Donnee_Tete (Arbre, Cellule_A_Modifier);
+
+        else
+          Null;
+        end if;
+
       else
         Cellule_A_Modifier := Lire_Donnee_Racine(Arbre);
         Cellule_A_Modifier.Id := Min_Temps_2(Lire_Ieme_Enfant(Arbre, 1), Lire_Ieme_Enfant(Arbre, 2));
@@ -128,33 +118,6 @@ package body Routage_LA is
   exception
     when Element_Absent_Error => raise Interface_Non_Trouve;
   end Trouver_Interface_Cache;
-
-
-  procedure Supprimer_Plus_Ancien (Arbre : in out T_Table) is
-    Min : constant Natural := Lire_Donnee_Racine(Arbre).Id;
-
-    function Selection (Arbre : in T_Trie) return Boolean is
-    begin
-      return Lire_Donnee_Racine(Arbre).Id = Min;
-    end Selection;
-
-    procedure Post_Traitement(Arbre : in out T_Trie) is
-      Cellule_A_Modifier : T_Cellule;
-    begin
-      if Lire_Donnee_Racine(Arbre).Id = Min then
-        Cellule_A_Modifier := Lire_Donnee_Racine(Arbre);
-        Cellule_A_Modifier.Id := Min_Temps_2(Lire_Ieme_Enfant(Arbre, 1), Lire_Ieme_Enfant(Arbre, 2));
-        Ecrire_Donnee_Tete(Arbre, Cellule_A_Modifier);
-      else
-        Null;
-      end if;
-    end Post_Traitement;
-
-    procedure Supprimer_bis is new Supprimer_Selection(Selection => Selection, Post_Traitement => Post_Traitement);
-  begin
-    Supprimer_bis(T_Trie(Arbre));
-  end Supprimer_Plus_Ancien;
-
 
 
 
@@ -205,5 +168,68 @@ package body Routage_LA is
   exception
     when Element_Absent_Error => raise Interface_Non_Trouve;
   end Trouver_Interface_Table;
+
+
+
+
+  procedure Mise_A_Jour_Cache(Cache : in out T_Table; IP_A_Router : in T_IP; Capacite_Cache : in Integer;
+    Politique_Cache : in Unbounded_String; Taille_Cache_Actuelle : in Integer;
+    Interface_Nom : in Unbounded_String; Table : in Routage.T_Table) is
+
+    Masque_Max : T_IP;
+    Min_Id : Natural;
+    Premier_Trouve : Boolean;
+
+    function Selection_Premier_Min (Arbre : in T_Trie) return Boolean is
+      Test : constant Boolean := Premier_Trouve and Lire_Donnee_Racine(Arbre).Id = Min_Id;
+    begin
+      if Test and Est_Feuille(Arbre) then
+        Premier_Trouve := False;
+      else
+        Null;
+      end if;
+      return Test;
+    end Selection_Premier_Min;
+
+
+    procedure Mettre_A_Jour (Arbre : in out T_Trie) is
+      Cellule_A_Modifier : T_Cellule;
+    begin
+      if Est_Vide(Arbre) or Est_Feuille(Arbre) then
+        Null;
+      else
+        Cellule_A_Modifier := Lire_Donnee_Racine(Arbre);
+        Cellule_A_Modifier.Id := Min_Temps_2(Lire_Ieme_Enfant(Arbre, 1), Lire_Ieme_Enfant(Arbre, 2));
+        Ecrire_Donnee_Tete(Arbre, Cellule_A_Modifier);
+      end if;
+    end Mettre_A_Jour;
+
+    procedure Ajouter_Arbre is new Ajouter (Post_Traitement => Mettre_A_Jour);
+
+    procedure Supprimer_Premier_Min is new Supprimer_Selection(Selection => Selection_Premier_Min, Post_Traitement => Mettre_A_Jour);
+
+  begin
+    if Capacite_Cache = 0 then
+      Null;
+    else
+      -- On cherche le masque le plus long qui discrimine la route
+      Masque_Max := Routage.Determiner_Masque_Cache(Table, IP_A_Router);
+
+      if Taille_Cache_Actuelle < Capacite_Cache then
+        Null;
+      else
+        Premier_Trouve := True;
+        Min_Id := Lire_Donnee_Racine(Cache).Id;
+        Supprimer_Premier_Min(T_Trie(Cache));
+      end if;
+
+      if (Politique_Cache = To_Unbounded_String("FIFO")) or (Politique_Cache = To_Unbounded_String("LRU")) then
+        Ajouter_Arbre(T_Trie(Cache), IP_A_Router, T_Cellule'(Masque_Max, Interface_Nom, Id_Global + 1));
+        Id_Global := Id_Global + 1;
+      else
+        Ajouter_Arbre(T_Trie(Cache), IP_A_Router, T_Cellule'(Masque_Max, Interface_Nom, 1));
+      end if;
+    end if;
+  end Mise_A_Jour_Cache;
 
 end Routage_LA;

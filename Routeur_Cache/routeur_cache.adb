@@ -6,6 +6,8 @@ with Routage;                   use Routage;
 with IP;                        use IP;
 with My_Strings;                use My_Strings;
 
+with Routage_LL;                use Routage_LL;
+
 procedure Routeur_Cache is
     -- Paramètres de commande
     Afficher_Stats : Boolean := True;   -- Affichage des statistiques, vrai de base
@@ -16,8 +18,8 @@ procedure Routeur_Cache is
     Nom_Fichier_Resultat : Unbounded_String := To_Unbounded_String("resultats.txt"); -- Nom du fichier où écrire les résultats, resultats.txt de base
 
     -- Liste chainées
-    Table : T_Table;                    -- La table de routage
-    Cache : T_Cache;                    -- Le cache associé à la table de routage
+    Table : Routage.T_Table;            -- La table de routage
+    Cache : Routage_LL.T_Table;         -- Le cache associé à la table de routage
 
     -- Variables locales
     i : Integer;                        -- Compteur
@@ -37,7 +39,7 @@ procedure Routeur_Cache is
 
     -- Routage_Par_Table s'execute lorsque le cache ne contient pas la route nécessaire
     -- On recherche d'abord dans la table, puis on met à jour le cache
-    procedure Routage_Par_Table(Table : in T_Table; IP_A_Router : in T_IP) is
+    procedure Routage_Par_Table(Table : in Routage.T_Table; IP_A_Router : in T_IP) is
     begin
         -- Recherche de la route dans la table
         Interface_Nom := Trouver_Interface(Table, IP_A_Router);
@@ -94,12 +96,13 @@ begin
             when Parametre_Inconnu => Put_Line ("Le"& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
             when Erreur_Dernier_Argument => Put_Line ("Le dernier argument est incorrect, il sera ignoré.");
             when Erreur_Pas_Un_Entier => Put_Line ("Le"& Integer'Image (i)& "ème paramètre en entrée, la taille du cache, n'est pas un entier. Cette commande sera ignorée.");
-            when Erreur_Politique_Incorrecte => Put_Line ("Le"& Integer'Image (i)& "ème paramètre en entrée, la politique du cache, n'est pas connue. Cette commande sera ignorée.");
+            when Erreur_Politique_Incorrecte => Put_Line ("Le"& Integer'Image (i)& "ème paramètre en entrée, la politique du cache, n'est pas connue. FIFO sera selectionnée automatiquement.");
+                                                Politique_Cache := To_Unbounded_String("FIFO");
         end;
     end loop;
 
     -- Initialisation du cache
-    Initialiser_Cache_Vide (Cache);
+    Initialiser_Table_Vide (Cache);
 
     -- Initialisaton de la table de routage
     New_Line;
@@ -135,7 +138,7 @@ begin
                 -- Il s'agit alors de mettre le cache à jour, tout en routant avec la table de routage.
                 i := i + 1;
                 begin
-                    Interface_Nom := Trouver_Interface_Cache(Cache, Texte_Vers_IP(Ligne), Politique_Cache);
+                    Trouver_Interface_Cache(Interface_Nom, Cache, Texte_Vers_IP(Ligne), Politique_Cache);
                     Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
                 exception when Erreur_Chaine_Non_IP => Put_Line("La ligne" & Integer'Image(i) & " du fichier paquets contient un paquet incorrect. Elle sera ignorée."); 
                 end;
@@ -166,7 +169,7 @@ begin
             end if;
         exception 
             when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
-            when Route_Pas_Dans_Cache => Routage_Par_Table(Table, Texte_Vers_IP(Ligne));
+            when Routage_LL.Interface_Non_Trouve => Routage_Par_Table(Table, Texte_Vers_IP(Ligne));
         end;
         exit when (Ligne = "fin") or End_Of_File (Fichier_Paquet);
     end loop;
@@ -185,10 +188,10 @@ begin
     Close (Fichier_Paquet);
     Close (Fichier_Resultat);
     Vider_Table (Table);
-    Vider_Cache (Cache);
+    Vider_Table (Cache);
 
 exception 
-    when Route_De_Base_Inconnue => Put_Line ("La route de base '0.0.0.0 0.0.0.0' n'existe pas, cette erreur est fatale.");
+    when Routage.Route_De_Base_Inconnue => Put_Line ("La route de base '0.0.0.0 0.0.0.0' n'existe pas, cette erreur est fatale.");
     when Ouverture_Impossible => Null;
     when others => Put_Line ("Erreur inconnue, arrêt immédiat du routeur.");
 end Routeur_Cache;

@@ -2,6 +2,8 @@ with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with IP;                        use IP;
 with Arbre_Prefixe;
 
+with Routage;
+
 
 package Routage_LA is
 
@@ -23,12 +25,6 @@ package Routage_LA is
       with Post => Est_Vide (Table_Routage);
 
 
-      -- Ajouter une interface dans la table de routage
-      -- Modifie l’interface existante si elle existe déjà
-      procedure Ajouter_Element (Table_Routage : in out T_Table; Adresse : in T_IP; Masque : in T_IP; Interface_Nom : in Unbounded_String);
-
-
-
       -- Dans le cas d’une table de routage classique, utiliser cette fonction
       -- Trouve l'interface correspondant à une IP dans la table de routage
       -- Et met à jour l’id des éléments visités pour savoir quel est l’interface la moins récemment utilisée
@@ -38,17 +34,23 @@ package Routage_LA is
       -- Cette fonction ne fonctionne que dans le cas où la Table_Routage est en réalité un cache LA (et est alors plus rapide)
       -- Trouve l'interface correspondant à une IP dans la table de routage
       -- Et met à jour l’id des éléments visités pour savoir quel est l’interface la moins récemment utilisée
-      procedure Trouver_Interface_Cache (Interface_Nom: out Unbounded_String; Table_Routage : in out T_Table; IP : in T_IP);
+      procedure Trouver_Interface_Cache (Interface_Nom: out Unbounded_String; Table_Routage : in out T_Table; IP : in T_IP; Politique_Cache : in Unbounded_String);
 
 
       -- Afficher tous les élément de la table de routage
       procedure Afficher_Table(Table_Routage: in T_Table);
 
-      procedure Supprimer_Plus_Ancien (Arbre : in out T_Table) with
-        pre => not Est_Vide(Arbre);
 
         -- Renvoie si la table est vide ou non
         function Est_Vide (Table_Routage : in T_Table) return Boolean;
+
+
+        -- Met à jour le cache en accord avec la politique et la cohérence du cache
+        procedure Mise_A_Jour_Cache(Cache : in out T_Table; IP_A_Router : in T_IP; Capacite_Cache : in Integer;
+          Politique_Cache : in Unbounded_String; Taille_Cache_Actuelle : in Integer;
+          Interface_Nom : in Unbounded_String; Table : in Routage.T_Table);
+
+
 
         private
 
