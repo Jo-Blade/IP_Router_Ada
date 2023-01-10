@@ -83,7 +83,9 @@ begin
     test_Mise_A_Jour_Cache;
     test_Trouver_Interface_Cache;
 
-  New_Line;
+    New_Line;
+    Vider_Table(Table);
+    Vider_Table(Cache);
 
 
   Put_Line("");
