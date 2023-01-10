@@ -36,11 +36,11 @@ procedure test_routage_LL is
         Afficher_Cache(Cache, To_Unbounded_String("LFU")); New_Line; New_Line;
 
         put("Etape 2"); New_Line;
-        Mise_A_Jour_Cache(Cache, Texte_Vers_IP(To_Unbounded_String("147.128.10.10")) ,3, To_Unbounded_String("LFU"),1,  To_Unbounded_String("eth1"), Table);
+        Mise_A_Jour_Cache(Cache, Texte_Vers_IP(To_Unbounded_String("147.127.127.5")) ,3, To_Unbounded_String("LFU"),2,  To_Unbounded_String("eth3"), Table);
         Afficher_Cache(Cache, To_Unbounded_String("LFU")); New_Line; New_Line;
 
         put("Etape 3"); New_Line;
-        Mise_A_Jour_Cache(Cache, Texte_Vers_IP(To_Unbounded_String("147.127.127.5")) ,3, To_Unbounded_String("LFU"),2,  To_Unbounded_String("eth3"), Table);
+        Mise_A_Jour_Cache(Cache, Texte_Vers_IP(To_Unbounded_String("147.128.10.10")) ,3, To_Unbounded_String("LFU"),1,  To_Unbounded_String("eth1"), Table);
         Afficher_Cache(Cache, To_Unbounded_String("LFU")); New_Line; New_Line;
 
 
