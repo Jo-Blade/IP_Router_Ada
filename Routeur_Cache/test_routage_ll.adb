@@ -97,7 +97,7 @@ procedure test_routage_LL is
 
     exception
         when INTERFACE_NON_TROUVE =>
-            put("L'élément le moins utilisé du cache a bien été supprimé");
+            put("Le premier élément ajouté au cache a bien été supprimé");
     end test_Mise_A_Jour_Cache_FIFO;
 
 
