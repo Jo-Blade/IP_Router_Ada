@@ -2,10 +2,11 @@ with Ada.Strings;               use Ada.Strings;
 with Ada.Command_Line;          use Ada.Command_Line;
 with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 with Ada.Text_IO;               use Ada.Text_IO;
-with Routage_LA;
-with Routage;
+with Routage;                   use Routage;
 with IP;                        use IP;
 with My_Strings;                use My_Strings;
+
+with Routage_LA;                use Routage_LA;
 
 procedure Routeur_LA is
     -- Paramètres de commande
@@ -17,8 +18,8 @@ procedure Routeur_LA is
     Nom_Fichier_Resultat : Unbounded_String := To_Unbounded_String("resultats.txt"); -- Nom du fichier où écrire les résultats, resultats.txt de base
 
     -- Liste chainées
-    Table : Routage.T_Table;                    -- La table de routage
-    Cache : Routage_LA.T_Table;                    -- Le cache associé à la table de routage
+    Table : Routage.T_Table;            -- La table de routage
+    Cache : Routage_LA.T_Table;         -- Le cache associé à la table de routage
 
     -- Variables locales
     i : Integer;                        -- Compteur
@@ -41,16 +42,13 @@ procedure Routeur_LA is
     procedure Routage_Par_Table(Table : in Routage.T_Table; IP_A_Router : in T_IP) is
     begin
         -- Recherche de la route dans la table
-        Interface_Nom := Routage.Trouver_Interface(Table, IP_A_Router);
+        Interface_Nom := Trouver_Interface(Table, IP_A_Router);
         -- Mise à jour du cache
-        if Capacite_Cache = 0 then
-          Null;
-        elsif Taille_Cache_Actuelle < Capacite_Cache then
+        Mise_A_Jour_Cache(Cache, IP_A_Router, Capacite_Cache, Politique_Cache, Taille_Cache_Actuelle, Interface_Nom, Table);
+        if Taille_Cache_Actuelle < Capacite_Cache then
             Taille_Cache_Actuelle := Taille_Cache_Actuelle + 1;
-            Routage_LA.Ajouter_Element(Cache, IP_A_Router, Routage.Determiner_Masque_Cache(Table, IP_A_Router), Interface_Nom);
         else
-            Routage_LA.Supprimer_Plus_Ancien(Cache);
-            Routage_LA.Ajouter_Element(Cache, IP_A_Router, Routage.Determiner_Masque_Cache(Table, IP_A_Router), Interface_Nom);
+            null;
         end if;
         -- Ecriture de la route dans le fichier
         Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
@@ -98,12 +96,13 @@ begin
             when Parametre_Inconnu => Put_Line ("Le"& Integer'Image (i-1)& "ème paramètre en entrée est inconnu il sera ignoré.");
             when Erreur_Dernier_Argument => Put_Line ("Le dernier argument est incorrect, il sera ignoré.");
             when Erreur_Pas_Un_Entier => Put_Line ("Le"& Integer'Image (i)& "ème paramètre en entrée, la taille du cache, n'est pas un entier. Cette commande sera ignorée.");
-            when Erreur_Politique_Incorrecte => Put_Line ("Le"& Integer'Image (i)& "ème paramètre en entrée, la politique du cache, n'est pas connue. Cette commande sera ignorée.");
+            when Erreur_Politique_Incorrecte => Put_Line ("Le"& Integer'Image (i)& "ème paramètre en entrée, la politique du cache, n'est pas connue. FIFO sera selectionnée automatiquement.");
+                                                Politique_Cache := To_Unbounded_String("FIFO");
         end;
     end loop;
 
     -- Initialisation du cache
-    Routage_LA.Initialiser_Table_Vide (Cache);
+    Initialiser_Table_Vide (Cache);
 
     -- Initialisaton de la table de routage
     New_Line;
@@ -114,7 +113,7 @@ begin
             Put_Line ("Le fichier '"& To_String(Nom_Fichier_Table)& "' n'existe pas. Cette erreur est fatale."); 
             raise Ouverture_Impossible;
     end;
-    Routage.Initialiser_Table (Table, Fichier_Table);
+    Initialiser_Table (Table, Fichier_Table);
     Close (Fichier_Table);
 
     -- Gestion des paquets et écriture des résultats
@@ -139,18 +138,18 @@ begin
                 -- Il s'agit alors de mettre le cache à jour, tout en routant avec la table de routage.
                 i := i + 1;
                 begin
-                    Routage_LA.Trouver_Interface_Cache(Interface_Nom, Cache, Texte_Vers_IP(Ligne));
+                    Trouver_Interface_Cache(Interface_Nom, Cache, Texte_Vers_IP(Ligne), Politique_Cache);
                     Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
                 exception when Erreur_Chaine_Non_IP => Put_Line("La ligne" & Integer'Image(i) & " du fichier paquets contient un paquet incorrect. Elle sera ignorée."); 
                 end;
             elsif Ligne = "cache" then      -- la ligne commande l'affichage du cache
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("cache (ligne"& Integer'Image (Numero_Ligne)& ")");
-                Routage_LA.Afficher_Table(Cache);
+                Afficher_Table (Cache);
             elsif Ligne = "table" then      -- la ligne commande l'affichage de la table
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("table (ligne"& Integer'Image (Numero_Ligne)& ")");
-                Routage.Afficher_Table (Table);
+                Afficher_Table (Table);
             elsif Ligne = "stats" then      -- la ligne commande l'affichage de Fin
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("stats (ligne"& Integer'Image (Numero_Ligne)& ")");
@@ -188,8 +187,8 @@ begin
     end if;
     Close (Fichier_Paquet);
     Close (Fichier_Resultat);
-    Routage.Vider_Table (Table);
-    Routage_LA.Vider_Table (Cache);
+    Vider_Table (Table);
+    Vider_Table (Cache);
 
 exception 
     when Routage.Route_De_Base_Inconnue => Put_Line ("La route de base '0.0.0.0 0.0.0.0' n'existe pas, cette erreur est fatale.");

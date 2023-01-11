@@ -4,6 +4,12 @@ package body Arbre_Prefixe is
   procedure Free is
     new Ada.Unchecked_Deallocation (Object => T_Noeud, Name => T_Trie);
 
+  function Lire_Prefixe_Bis (Cle : in T_Cle; Indice : in Natural) return Natural
+    with Post => (Lire_Prefixe_Bis'Result >= 1) and (Lire_Prefixe_Bis'Result <= Nombre_Prefixes) is
+  begin
+    return Lire_Prefixe(Cle, Indice);
+  end Lire_Prefixe_Bis;
+
   procedure Initialiser (Arbre : out T_Trie) is
   begin
     Arbre := Null;
@@ -52,11 +58,11 @@ package body Arbre_Prefixe is
         Arbre.All.Element := Element;
         Post_Traitement(Arbre);
       elsif Est_Feuille(Arbre) then
-        Ajouter_Profondeur(Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Cle, Element, Profondeur + 1);
+        Ajouter_Profondeur(Arbre.All.Enfants(Lire_Prefixe_Bis(Cle, Profondeur)), Cle, Element, Profondeur + 1);
         Ajouter_Profondeur(Arbre, Arbre.All.Cle, Arbre.All.Element, Profondeur);
         Post_Traitement(Arbre);
       else
-        Ajouter_Profondeur(Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Cle, Element, Profondeur + 1);
+        Ajouter_Profondeur(Arbre.All.Enfants(Lire_Prefixe_Bis(Cle, Profondeur)), Cle, Element, Profondeur + 1);
         Post_Traitement(Arbre);
       end if;
     end Ajouter_Profondeur;
@@ -166,7 +172,7 @@ package body Arbre_Prefixe is
           raise Element_Absent_Error;
         end if;
       else
-        return Trouver_Profondeur (Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Profondeur + 1);
+        return Trouver_Profondeur (Arbre.All.Enfants(Lire_Prefixe_Bis(Cle, Profondeur)), Profondeur + 1);
       end if;
     end Trouver_Profondeur;
   begin
@@ -188,7 +194,7 @@ package body Arbre_Prefixe is
           raise Element_Absent_Error;
         end if;
       else
-        Chercher_Profondeur(Arbre.All.Enfants(Lire_Prefixe(Cle, Profondeur)), Profondeur + 1);
+        Chercher_Profondeur(Arbre.All.Enfants(Lire_Prefixe_Bis(Cle, Profondeur)), Profondeur + 1);
         Post_Traitement(Arbre);
       end if;
     end Chercher_Profondeur;
