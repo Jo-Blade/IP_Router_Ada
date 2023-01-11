@@ -2,7 +2,7 @@ project Pim_Projet is
 
    for Source_Dirs use ("src", "Routeur_LA", "Routeur_Cache");
    for Object_Dir use "obj";
-   for Main use ("pim2022.adb", "test_routage_la.adb", "test_routage_ll.adb");
+   for Main use ("pim2022.adb", "test_arbre_prefixe.adb", "test_routage_la.adb", "test_routage_ll.adb");
 
    package Compiler is
       for Switches ("ada") use ("-g", "-gnata", "-gnatwa");
