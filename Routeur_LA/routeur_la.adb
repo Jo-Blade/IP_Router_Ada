@@ -11,7 +11,7 @@ procedure Routeur_LA is
     -- Paramètres de commande
     Afficher_Stats : Boolean := True;   -- Affichage des statistiques, vrai de base
     Capacite_Cache : Integer := 0;      -- Capacité du cache, fixé à 0 initialement
-    Politique_Cache : Unbounded_String := To_Unbounded_String("FIFO");               -- Politique du cache, FIFO initialement
+    Politique_Cache : Unbounded_String := To_Unbounded_String("LRU");                -- Politique du cache, LRU initialement
     Nom_Fichier_Table : Unbounded_String := To_Unbounded_String("table.txt");        -- Nom du fichier de la table de routage, table.txt de base
     Nom_Fichier_Paquet : Unbounded_String := To_Unbounded_String("paquets.txt");     -- Nom du fichier des paquets à router, paquets.txt de base
     Nom_Fichier_Resultat : Unbounded_String := To_Unbounded_String("resultats.txt"); -- Nom du fichier où écrire les résultats, resultats.txt de base
