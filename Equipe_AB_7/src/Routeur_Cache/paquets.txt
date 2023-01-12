@@ -1,13 +1,9 @@
 table
 212.212.212.212
-cache
 147.5.5.5
-cache
 stats
 127.0.1.4
-cache
 212.212.212.210
-cache
 147.127.127.3
 cache
 fin

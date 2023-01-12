@@ -1,0 +1,92 @@
+V "GNAT Lib v9"
+A -gnatwa
+A -gnata
+A -g
+P ZX
+
+RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTIONS
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_ELABORATION_CODE
+RV SPARK_05
+
+U my_strings%b		my_strings.adb		2b7c79c4 NE OO PK
+Z ada.exceptions%s	a-except.adb		a-except.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
+Z system.assertions%s	s-assert.adb		s-assert.ali
+Z system.img_int%s	s-imgint.adb		s-imgint.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+
+U my_strings%s		my_strings.ads		89fe2f64 EE OO PK
+W ada%s			ada.ads			ada.ali
+W ada.strings%s		a-string.ads		a-string.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
+Z system%s		system.ads		system.ali
+Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20210601075304 76789da1 ada%s
+D a-charac.ads		20210601075304 2d3ec45b ada.characters%s
+D a-chlat1.ads		20210601075304 66457d31 ada.characters.latin_1%s
+D a-except.ads		20210601075304 291912d5 ada.exceptions%s
+D a-finali.ads		20210601075304 bf4f806b ada.finalization%s
+D a-stream.ads		20210601075304 119b8fb3 ada.streams%s
+D a-string.ads		20210601075304 90ac6797 ada.strings%s
+D a-strmap.ads		20210601075304 e8bb714a ada.strings.maps%s
+D a-strunb.ads		20210601075304 8098c91f ada.strings.unbounded%s
+D a-tags.ads		20210601075304 491b781d ada.tags%s
+D a-unccon.ads		20210601075304 0e9b276f ada.unchecked_conversion%s
+D my_strings.ads	20230106150515 0966e67b my_strings%s
+D my_strings.adb	20230106150515 221a9fbf my_strings%b
+D system.ads		20210601075304 4635ec04 system%s
+D s-assert.ads		20210601075304 cd8d2c94 system.assertions%s
+D s-atocou.ads		20210601075304 b45c2d8d system.atomic_counters%s
+D s-exctab.ads		20210601075304 54135002 system.exception_table%s
+D s-finmas.ads		20210601075304 7811a767 system.finalization_masters%s
+D s-finroo.ads		20210601075304 4ff27390 system.finalization_root%s
+D s-imgint.ads		20210601075304 02dbe0c2 system.img_int%s
+D s-parame.ads		20210601075304 48ec542b system.parameters%s
+D s-secsta.ads		20210601075304 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20210601075304 a7318a92 system.soft_links%s
+D s-stache.ads		20210601075304 a37c21ec system.stack_checking%s
+D s-stalib.ads		20210601075304 09bd3940 system.standard_library%s
+D s-stoele.ads		20210601075304 2dc34a04 system.storage_elements%s
+D s-stopoo.ads		20210601075304 b16154c2 system.storage_pools%s
+D s-stposu.ads		20210601075304 97a6219c system.storage_pools.subpools%s
+D s-stratt.ads		20210601075304 aedef97e system.stream_attributes%s
+D s-traent.ads		20210601075304 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20210601075304 34867c83 system.unsigned_types%s
+X 1 ada.ads
+16K9*Ada 20e8 12|1r6 1r36
+X 7 a-string.ads
+16K13*Strings 35e16 12|1r10 1r40
+X 9 a-strunb.ads
+76K21*Unbounded 491e26 12|1w18 1r48
+79R9*Unbounded_String<5|43R9> 474e14 12|9r80 13|3r80
+94V13*To_Unbounded_String{79R9} 13|10s16
+X 12 my_strings.ads
+3K9*My_Strings 32l5 32e15 13|1b14 67l5 67t15
+5X5*Erreur_Pas_Un_Entier 13|38r31 45r31 52r27
+9V14*To_Unbounded_String_N{9|79R9} 9>37 9>57 13|3b14 11l9 11t30
+9a37 chaine{string} 10r23 13|3b37 4r30 4r45 6r18 6r33 7r31
+9i57 n{integer} 10r18 13|3b57 4r60 6r48
+15V14*Caractere_Vers_Entier{integer} 15>37 17r19 18r10 13|14b14 17l9 17t30
+. 49s53
+15e37 c{character} 16r25 16r33 13|14b37 16r30
+24V14*Texte_Vers_Entier{integer} 24>33 13|20b14 58l9 58t26
+24a33 texte{string} 13|20b33 28r18 28r33 29r26 35r28 42r28
+29V14*Entier_Positif_Vers_Texte{string} 29>41 13|61b14 65l9 65t34
+29i41 n{integer} 30r18 13|61b41 62r56
+X 13 my_strings.adb
+4a9 Temp_Chaine{string} 7m13 10r36
+6i13 i{integer} 7r25 7r38
+21e9 Caractere{character} 29m13 31r18 49r75
+22i9 Signe{integer} 25m9 43m25 49r45
+23i9 Entier{integer} 26m9 49m21 49r31 56r16
+28i13 i{integer} 29r32 35r24 42r24
+62a9 Temp_Chaine{string} 64r16 64r33
+
