@@ -84,7 +84,7 @@ package Arbre_Prefixe is
     -- et quand elle arrive sur la feuille finale, vérifie si la condition
     -- Vérifier est vrai.
     -- On va donc examiner l’élément du tableau avec la clé la plus longue contenue dans Cle
-    -- et appliquer, si cette élément vérifie la condition, un post traitement à tous les noeuds visités
+    -- et appliquer, si cet élément vérifie la condition, un post traitement à tous les noeuds visités
     generic
         with function Verifier (Cle : in T_Cle; Element : in T_Element) return Boolean;
         with procedure Post_Traitement (Arbre: in out T_Trie);

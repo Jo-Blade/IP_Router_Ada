@@ -1,0 +1,41 @@
+- Système indice dans l'arbre: 
+
+- Garder une fréquence pour tout type de cache dans le cas LL
+    Lors de la création du type T_Cache, 2 slutions se sont offertes à nous. La première consistait à réutiliser T_Table pour les politiques FIFO et LFU et utiliser un type T_Cache 
+    distinct avec la fréquence en plus dans T_Element, ou bien d'ajouter la fréquence pour toute politque.
+    Le premier choix permet de sauver de la RAM lors de l'éxécution du programme, puisque hors LFU chaque cellule contient un entier de moins. Néanmoins ce gain est minime et nous avons
+    estimé que pour un routeur, de nos jours, l'écart de RAM engendré par le second choix est négligeable sur la facilité d'implémentation, lisibilité et compréhensibilité du code.
+
+- Limite théorique des indices de l'arbre assez élevée mais peut être améliorée
+    Dans la mêm lignée que le choix précédent, nous avons choisi d'affecter à chaque route enregitrée dans l'arbre un indice qui lui est propre. Celà implique que le routeur finira par
+    atteindre la limite théorique des indices, leur type étant Natural, cette limite est de 2^16. Puisque celà prendra plus d'une année à atteindre par un routeur recevant 10 requettes
+    par secondes une fois le cache plein, nous avons décidé que ce problème est négligeable. 
+    Une solution possible pour régler ce problème est de "remettre à 0" les indices à partir d'une certaine limite. C'est à dire qu'au delà d'un seuil fixé (indice > 2^15 par exemple)
+    Un parcours de l'arbre serait lancé de telle sorte que le plus petit indice soit remit à 1 et ainsi de suite en concervant l'ordre déjà établi des indices.
+
+- Cache : liste chainee ou tableau 
+
+- Choix private ou limited
+
+- Arbre prefixe plusieur fils, versatile 
+
+- Adresse ip cherchées
+difficultés : LA : trouver rapidement l'element à supprimer quand taille trop grande
+solution : explication
+
+Gestion d'un grand nombre de module au sein du même projet
+    Ce projet se constitue en un nombre important de modules liés les uns aux autres. LA création de ces modules fût une chose, mais proprement les relier et gérer les types privés et limité privé
+    en fût en autre. En effet, cela nous a demander des réfléxions préalables à l'écriture de ces modules puisque les types définis dans les uns devaient ou non pouvoir être accessibles dans les autres.
+    De même, l'instanciation des différents modules et fonctions n'a pas toujours été des plus évident.
+
+Familiarisation avec le git
+    Un point difficile à aborder lors de ce projet fût l'apprentissage de l'utilisation de git à plusieurs. Bien que le prise en main ait été finalement rapide, réussir à comprendre et gérer
+    les conflits au départ n'a pas été évident. Ainsi nous avons appris à réfléchir aux impact des commandes, à la clarté des commit et a entretenir une sauvegarde externe.
+
+bilan technique :  
+- Masque le plus optimisé.
+    Comme il était subtilement pointé dans le sujet, nous avons opté pour une implémentation de choix du masque dans le cache le plus précis. Autrement que d'aller au bout de l'idée de la cohérence
+    de cache, ce choix permet un routage "plus efficace" par le fait que le cache est entièrement discriminant. C'est à dire qu'il contient le plus de route possibles différentes. C'est ainsi
+    qu'il est efficace, permettant d'éviter le plus possible le parcours peu efficace de la table.
+
+
