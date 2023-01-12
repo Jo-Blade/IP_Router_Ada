@@ -46,7 +46,7 @@ package body Routage_LL is
     -- Cherche le masque minimal discriminant 2 IP
     function Plus_Petit(A : in T_Cellule_Cache; B : in T_Cellule_Cache) return Boolean is
     begin
-      return (A.Frequence < B.Frequence);
+      return (A.Frequence <= B.Frequence);
     end Plus_Petit;
 
     procedure Inserer_Element is new Cache_LC.Inserer(Plus_Petit => Plus_Petit);
@@ -67,15 +67,15 @@ package body Routage_LL is
           if Taille_Cache_Actuelle < Capacite_Cache then
             Ajouter_Fin(Cache, Nouvelle_Cellule);
           else
-            Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
             Ajouter_Fin(Cache, Nouvelle_Cellule);
+            Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
           end if;
         else
           if Taille_Cache_Actuelle < Capacite_Cache then
             Ajouter_Debut(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
           else
-            Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
             Inserer_Element(Cache_LC.T_LC(Cache), Nouvelle_Cellule);
+            Cache_LC.Supprimer(Cache_LC.T_LC(Cache), Premier(Cache_LC.T_LC(Cache)));
           end if;
         end if;
       end if;

@@ -63,7 +63,7 @@ begin
             Cle := To_Unbounded_String (Argument(i));
             -- Traitement du i-ième paramètre
             i := i + 1;
-            if (i > Argument_Count) and (Cle = "-p" or Cle = "-t" or Cle = "-r") then
+            if (i > Argument_Count) and (Cle = "-p" or Cle = "-t" or Cle = "-r" or Cle = "-c" or Cle = "-P") then
                 raise Erreur_Dernier_Argument;
             else
                 if Cle = "-p" then

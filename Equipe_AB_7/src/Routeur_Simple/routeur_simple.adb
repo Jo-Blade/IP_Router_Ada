@@ -94,8 +94,11 @@ begin
             -- Gestion du de la ligne
             if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '2' then     -- la ligne est un paquet
                 i := i + 1;
-                Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
-                Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
+                begin
+                    Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
+                    Put_Line (Fichier_Resultat, To_String(IP_Vers_Texte(Texte_Vers_IP(Ligne)) & " " & Interface_Nom));
+                exception when Erreur_Chaine_Non_IP => Put_Line("La ligne" & Integer'Image(i) & " du fichier paquets contient un paquet incorrect. Elle sera ignorée."); 
+                end;
             elsif Ligne = "table" then      -- la ligne commande l'affichage de la table
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 Put_Line ("table (ligne"& Integer'Image (Numero_Ligne)& ")");
@@ -117,7 +120,8 @@ begin
                 Numero_Ligne := Integer (Line (Fichier_Paquet)) - 1;
                 raise Commande_Inconnue;
             end if;
-        exception when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
+        exception 
+            when Commande_Inconnue => Put_Line ("Commande inconnue ("& To_String(Ligne)& ") détectée, la ligne"& Integer'Image (Numero_Ligne)&" sera ignorée.");
         end;
         exit when (Ligne = "fin") or End_Of_File (Fichier_Paquet);
     end loop;
