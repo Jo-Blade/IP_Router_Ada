@@ -179,7 +179,7 @@ package body Liste_Chainee is
 
     procedure Inserer (Liste : in out T_LC; Element : in T_Element) is
     begin
-        if Est_Vide(Liste) or else not Plus_Petit(Element, Liste.All.Element) then
+        if Est_Vide(Liste) or else Plus_Petit(Element, Liste.All.Element) then
             Liste := new T_Cellule'(Element, Liste);
         else
             Inserer(Liste.All.Suivante, Element);
