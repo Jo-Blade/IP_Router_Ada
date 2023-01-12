@@ -125,6 +125,48 @@ procedure Test_Liste_Chainee is
   end Tester_Inserer_Apres_Ieme;
 
 
+    procedure Tester_Inserer_Extraire_Trouver is
+        
+        function Plus_Petit(A : in Unbounded_String; B : in Unbounded_String) return Boolean is
+        begin
+            return (Length(To_String(A)) =< Length(To_String(B)));
+        end Plus_Petit;
+
+        procedure Inserer_Element is new Cache_LC.Inserer(Plus_Petit => Plus_Petit);
+        
+        function Selection(A : in Unbounded_String) return Boolean is
+        begin
+            return (A = To_Unbounded_String("22"));
+        end Selection;
+
+        procedure Trouver is new Trouver(Selection => Selection);
+        procedure Extraire is new Extraire(Selection => Selection);
+        T : T_LC;
+        elem1 : Unbounded_String;
+        elem2 : Unbounded_String;
+        elem3 : Unbounded_String;
+        elem4 : Unbounded_String;
+        elem_trouver : Unbounded_String;
+        
+    begin
+        
+        elem1 := To_Unbounded_String("1");
+        elem2 := To_Unbounded_String("22");
+        elem3 := To_Unbounded_String("333");
+        elem4 := To_Unbounded_String("4444");
+        Initialiser(T);
+        
+        Ajouter_Debut(T,elem1);
+        Ajouter_Debut(T,elem2);
+        Ajouter_Debut(T,elem3);
+        
+        Inserer_Element(T, elem4);
+        pragma Assert(Ieme(T,4) = elem4);
+        elem_trouver := Trouver(T);
+        pragma Assert(elem_trouver = elem2);
+        Extraire(elem_trouver, T);
+        pragma Assert(elem_trouver = elem2);
+    end Tester_Inserer_Extraire_Trouver;
 
 
 
@@ -135,6 +177,7 @@ begin
   Tester_Ajouter_Debut_Premier_Supprimer;
   Tester_Taille_Est_Present_Vider;
   Tester_Inserer_Apres_Ieme;
+  Tester_Inserer_Extraire_Trouver;
 
   Put_Line ("Fin des tests : OK.");
   Put_Line ("******************************************************");
