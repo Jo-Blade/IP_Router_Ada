@@ -1,5 +1,6 @@
 with Ada.Text_IO;           use Ada.Text_IO;
 with Ada.Strings.Unbounded;    use Ada.Strings.Unbounded;
+with My_Strings;    use My_Strings;
 with Liste_Chainee;
 
 
@@ -129,14 +130,14 @@ procedure Test_Liste_Chainee is
         
         function Plus_Petit(A : in Unbounded_String; B : in Unbounded_String) return Boolean is
         begin
-            return (Length(To_String(A)) =< Length(To_String(B)));
+            return (Texte_Vers_Entier(A) =< Texte_Vers_Entier(B));
         end Plus_Petit;
 
-        procedure Inserer_Element is new Cache_LC.Inserer(Plus_Petit => Plus_Petit);
+        procedure Inserer_Element is new Inserer(Plus_Petit => Plus_Petit);
         
         function Selection(A : in Unbounded_String) return Boolean is
         begin
-            return (A = To_Unbounded_String("22"));
+            return (A = To_Unbounded_String("2"));
         end Selection;
 
         procedure Trouver is new Trouver(Selection => Selection);
@@ -151,9 +152,9 @@ procedure Test_Liste_Chainee is
     begin
         
         elem1 := To_Unbounded_String("1");
-        elem2 := To_Unbounded_String("22");
-        elem3 := To_Unbounded_String("333");
-        elem4 := To_Unbounded_String("4444");
+        elem2 := To_Unbounded_String("2");
+        elem3 := To_Unbounded_String("3");
+        elem4 := To_Unbounded_String("4");
         Initialiser(T);
         
         Ajouter_Debut(T,elem1);
