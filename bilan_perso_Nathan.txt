@@ -5,7 +5,7 @@ Temps total : ~30h
     - rapport : ~2h
 
 Ce projet à pour moi été intéressant sur plusieurs points.
-Tout d'abord, le travail d'équipe nécessaire pour le mener à bien a été un redécouverte avec l'utilisation de git et les discussions techniques. En effet les choix qui le groupe a été mené à 
+Tout d'abord, le travail d'équipe nécessaire pour le mener à bien a été un redécouverte avec l'utilisation de git et les discussions techniques. En effet les choix que le groupe a été mené à 
 prendre on dû être débattu et considérés. Cette expérience m'a permis d'acquérir en confiance et esprit critique, écouter les arguments des uns et des autres pour se faire son avis. 
 Ensuite, de manière plus anecdotique, j'ai apprécié comprendre et recoder le principe de fonctionnement d'un routeur, une machine présente au quotidien.
 Enfin, compléter petit à petit le projet, assembler chaque module avec chaque module et voir le résultat compiler et fonctionner a été un vrai plaisir.
