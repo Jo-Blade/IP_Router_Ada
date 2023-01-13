@@ -1,5 +1,6 @@
 with Ada.Text_IO;           use Ada.Text_IO;
 with Ada.Strings.Unbounded;    use Ada.Strings.Unbounded;
+with My_Strings;    use My_Strings;
 with Liste_Chainee;
 
 
@@ -125,6 +126,57 @@ procedure Test_Liste_Chainee is
   end Tester_Inserer_Apres_Ieme;
 
 
+  procedure Tester_Inserer_Extraire_Trouver is
+
+    function Plus_Petit(A : in Unbounded_String; B : in Unbounded_String) return Boolean is
+    begin
+      return (Texte_Vers_Entier(To_String(A)) <= Texte_Vers_Entier(To_String(B)));
+    end Plus_Petit;
+
+    procedure Inserer_Element is new Inserer(Plus_Petit => Plus_Petit);
+
+    function Selection(A : in Unbounded_String) return Boolean is
+    begin
+      return (A = To_Unbounded_String("2"));
+    end Selection;
+
+    function Trouver is new Liste_Chainee_String.Trouver(Selection => Selection);
+    
+    procedure Extraire is new Liste_Chainee_String.Extraire(Selection => Selection);
+
+    T : T_LC;
+    elem1 : Unbounded_String;
+    elem2 : Unbounded_String;
+    elem3 : Unbounded_String;
+    elem4 : Unbounded_String;
+    elem_trouver : Unbounded_String;
+
+  begin
+
+    elem1 := To_Unbounded_String("1");
+    elem2 := To_Unbounded_String("2");
+    elem3 := To_Unbounded_String("3");
+    elem4 := To_Unbounded_String("4");
+    Initialiser(T);
+
+    -- Attention, quand on ajoute au début, ça donne la liste inversée
+    Ajouter_Debut(T,elem3);
+    Ajouter_Debut(T,elem2);
+    Ajouter_Debut(T,elem1);
+
+    Inserer_Element(T, elem4);
+    pragma Assert(Taille(T) = 4);
+    Afficher_T(T);
+    -- Attention, la fonction Ieme commence à 0 et non 1
+    pragma Assert(Ieme(T,3) = elem4);
+    elem_trouver := Trouver(T);
+    pragma Assert(elem_trouver = elem2);
+    Extraire(elem_trouver, T);
+    pragma Assert(elem_trouver = elem2);
+    Afficher_T(T);
+    pragma Assert(Taille(T) = 3);
+    Put("Les fonctions Inserer, Trouver et Extraire fonctionnent bien !");
+  end Tester_Inserer_Extraire_Trouver;
 
 
 
@@ -135,9 +187,14 @@ begin
   Tester_Ajouter_Debut_Premier_Supprimer;
   Tester_Taille_Est_Present_Vider;
   Tester_Inserer_Apres_Ieme;
+  Tester_Inserer_Extraire_Trouver;
 
-  Put_Line ("Fin des tests : OK.");
-  Put_Line ("******************************************************");
-  Put_Line ("RAJOUTER LES TESTS POUR INSERER ET TROUVER ET EXTRAIRE");
-  Put_Line ("******************************************************");
+
+  Put_Line("");
+  Put_Line("");
+  Put_Line("##################################################");
+  Put_Line("#################### ALL OK ! ####################");
+  Put_Line("##################################################");
+  Put_Line("");
+
 end Test_Liste_Chainee;
