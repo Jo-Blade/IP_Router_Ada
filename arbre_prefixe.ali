@@ -1,0 +1,89 @@
+V "GNAT Lib v9"
+A -gnatc
+A -mtune=generic
+A -march=x86-64
+P NO FX
+
+RN
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_ELABORATION_CODE
+RV SPARK_05
+
+U arbre_prefixe%s	arbre_prefixe.ads	3f6f3b1c EE OO PK GE
+
+D arbre_prefixe.ads	20230113135921 3f6f3b1c arbre_prefixe%s
+X 1 arbre_prefixe.ads
+3+10 T_Element 43r76 46r60 54r70 83r65 98r62 100r63 123r46 123r71 123r89
+. 125r60 137r23
+5+10 T_Cle 12r42 43r56 50r57 83r51 98r42 100r106 136r19
+8i5 Nombre_Prefixes{natural} 132r32
+12V19 Lire_Prefixe{natural} 12>33 12>49
+12*33 Cle{5+10}
+12i49 Indice{natural}
+14k9*Arbre_Prefixe 3z10 5z10 8z5 12z19 129E10 141l5 141e18
+16P10*T_Trie 24r40 28r37 32r35 36r38 42r55 43r39 46r45 50r42 54r50 58r43
+. 58r71 72r45 73r55 74r51 80r44 81r52 83r34 99r55 100r89 122r45 124r55 125r86
+. 129c10 132r52
+17R10*T_Noeud 129r27 134c10 139e19
+19X5*Element_Absent_Error
+24U15*Initialiser 24<28
+24p28 Arbre{16P10} 25r26
+28U15*Vider 28=22
+28p22 Arbre{16P10} 29r26
+32V14*Est_Vide{boolean} 25s17 29s17 32>24 47s20 51s20 55s20
+32p24 Arbre{16P10}
+36V14*Est_Feuille{boolean} 36>27 59s20
+36p27 Arbre{16P10}
+42U24 Post_Traitement 42=41
+42p41 Arbre{16P10}
+43u15*Ajouter 43=24 43>47 43>63
+43p24 Arbre{16P10}
+43*47 Cle{5+10}
+43*63 Element{3+10}
+46V14*Lire_Donnee_Racine{3+10} 46>34
+46p34 Arbre{16P10} 47r29
+50V14*Lire_Cle_Racine{5+10} 50>31
+50p31 Arbre{16P10} 51r29
+54U15*Ecrire_Donnee_Tete 54=35 54>58
+54p35 Arbre{16P10} 55r29
+54*58 Donnee{3+10}
+58V14*Lire_Ieme_Enfant{16P10} 58>32 58>51
+58p32 Arbre{16P10} 59r32
+58i51 i{natural}
+72V23 Selection{boolean} 72>34
+72p34 Arbre{16P10}
+73U24 Post_Traitement 73=41
+73p41 Arbre{16P10}
+74u15*Supprimer_Selection 74=36
+74p36 Arbre{16P10}
+80U24 Traiter 80>33
+80p33 Arbre{16P10}
+81u15*Parcours_Profondeur_Post 81>41
+81p41 Arbre{16P10}
+83V14*Trouver{3+10} 83>23 83>42
+83p23 Arbre{16P10}
+83*42 Cle{5+10}
+98V23 Verifier{boolean} 98>33 98>49
+98*33 Cle{5+10}
+98*49 Element{3+10}
+99U24 Post_Traitement 99=41
+99p41 Arbre{16P10}
+100u15*Chercher_Et_Verifier_Post 100<42 100=74 100>97
+100*42 Element_Trouve{3+10}
+100p74 Arbre{16P10}
+100*97 Cle{5+10}
+122V23 Selection{boolean} 122>34
+122p34 Arbre{16P10}
+123V23 Choisir{3+10} 123>32 123>57
+123*32 Element1{3+10}
+123*57 Element2{3+10}
+124U24 Post_Traitement 124=41
+124p41 Arbre{16P10}
+125u15*Trouver_Selection_Post 125<39 125=71
+125*39 Element_Trouve{3+10}
+125p71 Arbre{16P10}
+132A10 T_Enfants(16P10)<integer> 138r23
+136*13 Cle{5+10}
+137*13 Element{3+10}
+138a13 Enfants{132A10}
+

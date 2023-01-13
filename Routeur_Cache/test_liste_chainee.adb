@@ -126,48 +126,53 @@ procedure Test_Liste_Chainee is
   end Tester_Inserer_Apres_Ieme;
 
 
-    procedure Tester_Inserer_Extraire_Trouver is
-        
-        function Plus_Petit(A : in Unbounded_String; B : in Unbounded_String) return Boolean is
-        begin
-            return (Texte_Vers_Entier(A) =< Texte_Vers_Entier(B));
-        end Plus_Petit;
+  procedure Tester_Inserer_Extraire_Trouver is
 
-        procedure Inserer_Element is new Inserer(Plus_Petit => Plus_Petit);
-        
-        function Selection(A : in Unbounded_String) return Boolean is
-        begin
-            return (A = To_Unbounded_String("2"));
-        end Selection;
-
-        procedure Trouver is new Trouver(Selection => Selection);
-        procedure Extraire is new Extraire(Selection => Selection);
-        T : T_LC;
-        elem1 : Unbounded_String;
-        elem2 : Unbounded_String;
-        elem3 : Unbounded_String;
-        elem4 : Unbounded_String;
-        elem_trouver : Unbounded_String;
-        
+    function Plus_Petit(A : in Unbounded_String; B : in Unbounded_String) return Boolean is
     begin
-        
-        elem1 := To_Unbounded_String("1");
-        elem2 := To_Unbounded_String("2");
-        elem3 := To_Unbounded_String("3");
-        elem4 := To_Unbounded_String("4");
-        Initialiser(T);
-        
-        Ajouter_Debut(T,elem1);
-        Ajouter_Debut(T,elem2);
-        Ajouter_Debut(T,elem3);
-        
-        Inserer_Element(T, elem4);
-        pragma Assert(Ieme(T,4) = elem4);
-        elem_trouver := Trouver(T);
-        pragma Assert(elem_trouver = elem2);
-        Extraire(elem_trouver, T);
-        pragma Assert(elem_trouver = elem2);
-    end Tester_Inserer_Extraire_Trouver;
+      return (Texte_Vers_Entier(To_String(A)) <= Texte_Vers_Entier(To_String(B)));
+    end Plus_Petit;
+
+    procedure Inserer_Element is new Inserer(Plus_Petit => Plus_Petit);
+
+    function Selection(A : in Unbounded_String) return Boolean is
+    begin
+      return (A = To_Unbounded_String("2"));
+    end Selection;
+
+    function Trouver is new Liste_Chainee_String.Trouver(Selection => Selection);
+    
+    procedure Extraire is new Liste_Chainee_String.Extraire(Selection => Selection);
+
+    T : T_LC;
+    elem1 : Unbounded_String;
+    elem2 : Unbounded_String;
+    elem3 : Unbounded_String;
+    elem4 : Unbounded_String;
+    elem_trouver : Unbounded_String;
+
+  begin
+
+    elem1 := To_Unbounded_String("1");
+    elem2 := To_Unbounded_String("2");
+    elem3 := To_Unbounded_String("3");
+    elem4 := To_Unbounded_String("4");
+    Initialiser(T);
+
+    -- Attention, quand on ajoute au début, ça donne la liste inversée
+    Ajouter_Debut(T,elem3);
+    Ajouter_Debut(T,elem2);
+    Ajouter_Debut(T,elem1);
+
+    Inserer_Element(T, elem4);
+    Afficher_T(T);
+    -- Attention, la fonction Ieme commence à 0 et non 1
+    pragma Assert(Ieme(T,3) = elem4);
+    elem_trouver := Trouver(T);
+    pragma Assert(elem_trouver = elem2);
+    Extraire(elem_trouver, T);
+    pragma Assert(elem_trouver = elem2);
+  end Tester_Inserer_Extraire_Trouver;
 
 
 
