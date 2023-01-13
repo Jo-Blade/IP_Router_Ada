@@ -1,27 +1,70 @@
 - Système indice dans l'arbre: 
+    Afin de savoir quel élément est: le plus ancien, le moins recemment utilisé, le moins fréquement utilisé, on a décidé de rajouter un paramètre Id de type Natural tel que, quel que soit la politique
+    utilisée, l’élément à supprimer en cas de dépassement de la capacité du cache soit celui avec la valeur de Id minimale.
+    - FIFO : Id contient le numéro de la i-eme insertion à laquelle la route a été ajoutée au cache
+    - LRU : Id contient le numéro de la i-eme utilisation réussie du cache pour laquelle la route a été utilisé
+    - LFU : Id contient la fréquence d’utilisation de la route
 
 - Garder une fréquence pour tout type de cache dans le cas LL
-    Lors de la création du type T_Cache, 2 slutions se sont offertes à nous. La première consistait à réutiliser T_Table pour les politiques FIFO et LFU et utiliser un type T_Cache 
+    Lors de la création du type T_Cache, 2 solutions se sont offertes à nous. La première consistait à réutiliser T_Table pour les politiques FIFO et LFU et utiliser un type T_Cache 
     distinct avec la fréquence en plus dans T_Element, ou bien d'ajouter la fréquence pour toute politque.
     Le premier choix permet de sauver de la RAM lors de l'éxécution du programme, puisque hors LFU chaque cellule contient un entier de moins. Néanmoins ce gain est minime et nous avons
-    estimé que pour un routeur, de nos jours, l'écart de RAM engendré par le second choix est négligeable sur la facilité d'implémentation, lisibilité et compréhensibilité du code.
+    estimé que étant donné qu’un cache a une capacité faible (afin d’être efficace), l'écart de RAM engendré par le second choix est négligeable sur la facilité d'implémentation, lisibilité et compréhensibilité du code.
 
 - Limite théorique des indices de l'arbre assez élevée mais peut être améliorée
-    Dans la mêm lignée que le choix précédent, nous avons choisi d'affecter à chaque route enregitrée dans l'arbre un indice qui lui est propre. Celà implique que le routeur finira par
+    Dans la même lignée que le choix précédent, nous avons choisi d'affecter à chaque route enregistrée dans l'arbre un indice qui lui est propre. Celà implique que le routeur finira par
     atteindre la limite théorique des indices, leur type étant Natural, cette limite est de 2^16. Puisque celà prendra plus d'une année à atteindre par un routeur recevant 10 requettes
-    par secondes une fois le cache plein, nous avons décidé que ce problème est négligeable. 
-    Une solution possible pour régler ce problème est de "remettre à 0" les indices à partir d'une certaine limite. C'est à dire qu'au delà d'un seuil fixé (indice > 2^15 par exemple)
-    Un parcours de l'arbre serait lancé de telle sorte que le plus petit indice soit remit à 1 et ainsi de suite en concervant l'ordre déjà établi des indices.
+    par secondes une fois le cache plein, nous avons décidé que cela restait suffisant pour ce projet, même si cela reste une piste d’amélioration possible :
+      - Une solution possible pour régler ce problème est de "remettre à 0" les indices à partir d'une certaine limite. C'est à dire qu'au delà d'un seuil fixé (indice > 2^15 par exemple)
+      - Un parcours de l'arbre serait lancé de telle sorte que le plus petit indice soit remit à 1 et ainsi de suite en concervant l'ordre déjà établi des indices.
 
 - Cache : liste chainee ou tableau 
+    Nous avions envisagé de multiples implémentations possible pour le cache LL :
+        - une liste doublement chaînée : algorithmes plus performants pour le tri du cache (pas besoin de reparcourir depuis le début à chaque fois). Algorithmes beaucoup plus difficile à écrire
+                                       (on doit mettre à jour jusqu’à 4 pointeurs dans le bon ordre lors de l’utilisation)
+        - une liste simplement chaînée avec stockage de l’indice du dernier élement (un FIFO) : algorithme en temps constant pour ajouter/supprimer des éléments dans le cas de la politique FIFO.
+                                       Pas d’avantage notable pour les autres politiques (LFU,LRU)
+        - un tableau : cela est possible puisque le cache a une capacité maximale connue. algorithme plus simples (pas besoin de gérer dynamiquement la mémoire) mais moins performants (même si
+                                       on conserve une classe de complexité linéaire)
+        - une liste simplement chaînée : choix retenu, car imposé par le sujet, et permet un bon équilibre entre complexité temporelle, spatiale et pour écrire le code
 
 - Choix private ou limited
+    - Pour les structures chaînées, on a choisi de les mettre en type "limited private" afin de s’assurer de garder une cohérence des listes, du cache et d’éviter des erreurs de la part de l’utisateur.
+           Cependant, cela nous impose d’écrire beaucoup plus de procedures et de remplacer beaucoup de fonctions par des procédures (puisqu’on ne peut plus faire d’affectations), ce qui est plus lourd
+           à manipuler.
+           Le choix limited nous a également imposé d’écrire beaucoup de procédure qui prennent en paramètre des procedures génériques afin de pouvoir réaliser certaines actions n’ayant pas été pensées
+           par le développeur originel (voir module Arbres_Prefixes).
+    - Pour le type T_IP, on a choisi de mettre le type en "private" et non "limited private" car on considère qu’il est pertinent de pouvoir faire des affectations et des comparaisons d’adresses IP dans
+           le code des utilisateurs. (le type T_IP étant relativement simple, et ne contenant pas d’allocation dynamique par exemple qui pourraient permettre à l’utilisateur de faire des choses incohérentes
+           contrairement à précédemment. Par exemple)
 
-- Arbre prefixe plusieur fils, versatile 
+- Arbre prefixe plusieurs fils, versatile 
+    Nous avons décidé d’implémenter un module Arbre_Prefixe générique pour la gestion du cache LA. Ce module est capable de gérer tout type d’arbres préfixes avec une Arité/Nombre de Fils arbitraire.
+    Il peut être utilisé pour modéliser/reconnaître des langages avec des alphabets génériques (un mot étant considéré terminal s’il mène jusqu’à une feuille de l’arbre). Pour parvenir à ses fins, ce module
+    prend comme paramètre de généricité une fonction Lire_Préfixe donnée par l’utilisateur qui permet d’associer à chaque symbole de l’alphabet considéré, un unique entier de 1..Nombre_Prefixes.
+
+    Dans le cadre de ce projet, nous devons considérér le langage des adresses IP constitué de l’alphabet "0,1". Nous allons donc l’instantier avec Nombre_Prefixes = 2 (arbre binaire) et
+    "Lire_Prefixe(IP, Position) = Lire_Bit(IP,Position) + 1"
+
+    Afin de convenir à un nombre maximal de cas d’usages, la majorité des procédures du module prennent des procédure génériques "Post_Traitement" en paramètre de généricité (et doivent donc être instanciées)
+    qui permet à chaque fois d’appliquer un Post_Traitement aux différents nœuds visités par la procédure en question (après que celle-ci se soit terminée, et dans l’ordre de bas en haut). Cela nous sera utile
+    pour maintenir des relations entre les nœuds et leurs fils après chaque modification.
+
+    Ce module, bien que suffisant pour notre projet, reste cependant non exhaustif des fonctions sur les Arbres_Prefixes. Et peut être étoffé de nouvelles procédure lors d’utilisation dans de futurs projets.
+
+    -----
+
+    Nous avons également pris le temps dans ce projet d’ajouter au module Routage_LA la gestion des trois types de cache (LFU, LRU, FIFO) bien que seul la politique LRU soit exigée par le sujet. Nous avons également
+    écrit une fonction Trouver_Interface_Table() qui est inutilisée dans ce projet, mais qui aurait pu servir pour trouver l’interface dans notre arbre binaire, si celui-ci était utilisé directement comme table de routage
+    plutôt que comme un cache.
+    La différence majeure étant que le cache est plus strict sur les masques (en raison de la gestion de la cohérence du cache), tandis que pour une table de routage, on est obligé de parcourir la totalité de l’arbre
+    afin de s’assurer de choisir le masque le plus long en cas de plusieurs interfaces possibles.
+    (On constate d’ailleurs que dans ce cas les arbres binaires n’apportent pas d’avantage pour la complexité temporelle. C’est pour cela qu’il sont utilisés uniquement pour le cache dans ce projet).
 
 - Adresse ip cherchées
 difficultés : LA : trouver rapidement l'element à supprimer quand taille trop grande
 solution : explication
+    Nous avons été soumis à un problème lors de l’implémentation des différentes politiques du cache LA.
 
 Gestion d'un grand nombre de module au sein du même projet
     Ce projet se constitue en un nombre important de modules liés les uns aux autres. LA création de ces modules fût une chose, mais proprement les relier et gérer les types privés et limité privé
