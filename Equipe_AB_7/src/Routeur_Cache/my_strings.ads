@@ -12,7 +12,7 @@ package My_Strings is
     -- Convertit un caractère en chiffre
     -- c : caractère à convertir
     -- ex : '8' -> 8
-    function Caractere_Vers_Entier (c : Character) return Integer 
+    function Caractere_Vers_Entier (c : in Character) return Integer 
     with Pre => ('0' <= c) and (c <= '9'),
     Post => (0 <= Caractere_Vers_Entier'Result) and 
         (Caractere_Vers_Entier'Result <= 9);
@@ -21,12 +21,12 @@ package My_Strings is
     -- les espaces sont ignorés et respecte le signe
     -- texte : string à convertir
     -- ex : "132" -> 132
-    function Texte_Vers_Entier (texte : String) return Integer; 
+    function Texte_Vers_Entier (texte : in String) return Integer; 
 
     -- Convertit un entier positif en texte
     -- sans rajouter d’espace avant ou après le nombre
     -- n : entier à convertir
-    function Entier_Positif_Vers_Texte (n : Integer) return String
+    function Entier_Positif_Vers_Texte (n : in Integer) return String
     with Pre => (n >= 0);
 
 end My_Strings;
