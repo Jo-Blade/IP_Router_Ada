@@ -62,11 +62,17 @@
     (On constate d’ailleurs que dans ce cas les arbres binaires n’apportent pas d’avantage pour la complexité temporelle. C’est pour cela qu’il sont utilisés uniquement pour le cache dans ce projet).
 
 - Adresse ip cherchées
+    Nous avons décidé de mettre dans le cache directement les adresses ip que l’on a routé, plutôt que de masquer celles-ci pour qu’elles se finissent pas des "….0.0" comme montré dans le sujet
+    Nous avons effectivement jugé cela non utile puisque les bits restants ne sont de toute manière jamais regardé par l’ensemble des fonctions du programme.
 
 
 difficultés : LA : trouver rapidement l'element à supprimer quand taille trop grande
 solution : explication
-    Nous avons été soumis à un problème lors de l’implémentation des différentes politiques du cache LA.
+    Nous avons été soumis à un problème lors de l’implémentation des différentes politiques du cache LA. Il fallait pouvoir trouver rapidement l’élément d’indice minimal quand le cache est plein
+    afin de le supprimer. Afin d’éviter de parcourir tout l’arbre (ce qui ferait perdre l’avantage de l’utilisation de structures d’arbres avec une complexité très élevée), nous avons décidé
+    de conserver dans chaque nœud intermédiaire de l’arbre, le numéro "Id" le plus petit de tous ces nœuds enfants.
+    Ainsi on connaîtra directement la valeur de l’Id minimal en regardant celui de la racine de l’arbre, et on pourra chercher uniquement dans les branches qui conservent cet Id minimal plutôt
+    que de tout parcourir.
 
 
 
