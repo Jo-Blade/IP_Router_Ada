@@ -62,9 +62,13 @@
     (On constate d’ailleurs que dans ce cas les arbres binaires n’apportent pas d’avantage pour la complexité temporelle. C’est pour cela qu’il sont utilisés uniquement pour le cache dans ce projet).
 
 - Adresse ip cherchées
+
+
 difficultés : LA : trouver rapidement l'element à supprimer quand taille trop grande
 solution : explication
     Nous avons été soumis à un problème lors de l’implémentation des différentes politiques du cache LA.
+
+
 
 Gestion d'un grand nombre de module au sein du même projet
     Ce projet se constitue en un nombre important de modules liés les uns aux autres. LA création de ces modules fût une chose, mais proprement les relier et gérer les types privés et limité privé

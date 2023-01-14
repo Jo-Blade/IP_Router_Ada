@@ -4,5 +4,5 @@ Temps total : ~25h
     - tests : ~15h
     - rapport : ~1h
 
-Pour ma part, ce projet a été très intéressant car il traite d'un système qui est omniprésent dans notre monde moderne. Il m'a permis de mieux le comprendre et d'apréhender son fonctionnement en profondeur. De plus, j'ai pu comprendre de nouvelle méthode de programmation grâce à mes partenaires.
-De plus, ce projet en groupe m'a permis d'apprendre à utiliser git pour les projets de code collaboratifs. Il m'a aussi permis d'apprendre à partager des idées à un groupe mais aussi à débatre des différentes propositions.
+Pour ma part, ce projet a été très intéressant car il traite d'un système qui est omniprésent dans notre monde moderne. Il m'a permis de mieux le comprendre et d'appréhender son fonctionnement en profondeur. De plus, j'ai pu comprendre de nouvelle méthode de programmation grâce à mes partenaires.
+De plus, ce projet en groupe m'a permis d'apprendre à utiliser git pour les projets de code collaboratifs. Il m'a aussi permis d'apprendre à partager des idées à un groupe mais aussi à débattre des différentes propositions.

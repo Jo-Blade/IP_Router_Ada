@@ -8,7 +8,7 @@ Temps total : ~40h
 Ayant déjà mené des projets, celui-ci demeure toutefois le plus long d’entre eux (environ 3000 lignes, tout compris).
 La nouveauté fut également pour moi le travail en équipe et la découverte de git dont je n’avais jamais eu l’utilité avant.
 J’ai beaucoup œuvré à l’élaboration de l’architecture du projet, au choix des structures
-utilisées, aux spécification et écriture des modules primaires (indépendent de tous les autres modules) afin d’offrir à mes
+utilisées, aux spécification et écriture des modules primaires (indépendant de tous les autres modules) afin d’offrir à mes
 camarades des outils pratiques pour la suite du projet. La difficulté fut notamment de choisir les types d’accès ("limited",
 "private") les plus stricts prévenir les erreurs de manipulation des données. Ce qui nécessite d’écrire des procédures
 suffisamment versatiles pour ne pas engendrer de blocage dans la suite du projet sans influer sur l’efficacité des algorithmes
