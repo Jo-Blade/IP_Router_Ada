@@ -92,7 +92,7 @@ begin
             Ligne := To_Unbounded_String(Get_Line (Fichier_Paquet));
             Trim (Ligne, Both);
             -- Gestion du de la ligne
-            if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '2' then     -- la ligne est un paquet
+            if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '9' then     -- la ligne est un paquet
                 i := i + 1;
                 begin
                     Interface_Nom := Trouver_Interface(Table, Texte_Vers_IP(Ligne));
