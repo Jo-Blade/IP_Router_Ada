@@ -132,7 +132,7 @@ begin
             Ligne := To_Unbounded_String(Get_Line (Fichier_Paquet));
             Trim (Ligne, Both);
             -- Gestion du de la ligne
-            if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '2' then     -- la ligne est un paquet
+            if To_String(Ligne)(1) >= '0' and To_String(Ligne)(1) <= '9' then     -- la ligne est un paquet
                 -- On cherche dans le cache si une route correspond, si c'est le cas la route est ajoutée
                 -- Le cas échéant, une exception Route_Pas_Dans_Cache est levée.
                 -- Il s'agit alors de mettre le cache à jour, tout en routant avec la table de routage.
