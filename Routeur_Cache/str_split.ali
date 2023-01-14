@@ -1,0 +1,82 @@
+V "GNAT Lib v12"
+A -gnata
+A -gnatwa
+P SS ZX
+
+RN
+RV NO_EXCEPTIONS
+RV NO_DYNAMIC_SIZED_OBJECTS
+
+U str_split%b		str_split.adb		e1c6bb71 NE OO PK GE
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W my_strings%s		my_strings.adb		my_strings.ali
+
+U str_split%s		str_split.ads		6824ddf1 BN EE NE OO PK GE
+W ada%s			ada.ads			ada.ali
+W ada.strings%s		a-string.ads		a-string.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+
+D ada.ads		20221121095525 76789da1 ada%s
+D a-charac.ads		20221121095525 2d3ec45b ada.characters%s
+D a-chlat1.ads		20221121095525 e0d72e76 ada.characters.latin_1%s
+D a-except.ads		20221121095525 2a7d8d70 ada.exceptions%s
+D a-finali.ads		20221121095525 bf4f806b ada.finalization%s
+D a-stream.ads		20221121095525 119b8fb3 ada.streams%s
+D a-string.ads		20221121095525 90ac6797 ada.strings%s
+D a-strmap.ads		20221121095525 233229cd ada.strings.maps%s
+D a-sttebu.ads		20221121095525 18209c64 ada.strings.text_buffers%s
+D a-strunb.ads		20221121095525 5837d881 ada.strings.unbounded%s
+D a-stuten.ads		20221121095525 33c54060 ada.strings.utf_encoding%s
+D a-tags.ads		20221121095525 9eaa38c6 ada.tags%s
+D a-unccon.ads		20221121095525 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20221121095525 edec285f interfaces%s
+D my_strings.ads	20230102175716 0966e67b my_strings%s
+D str_split.ads		20230102175716 30130570 str_split%s
+D str_split.adb		20230102175716 d8b3587a str_split%b
+D system.ads		20221121095525 a2da961d system%s
+D s-atocou.ads		20221121095525 dc18efc3 system.atomic_counters%s
+D s-exctab.ads		20221121095525 91bef6ef system.exception_table%s
+D s-finroo.ads		20221121095525 4ff27390 system.finalization_root%s
+D s-parame.ads		20221121095525 d494a4a6 system.parameters%s
+D s-putima.ads		20221121095525 4e095881 system.put_images%s
+D s-secsta.ads		20221121095525 62cd9202 system.secondary_stack%s
+D s-soflin.ads		20221121095525 df77073e system.soft_links%s
+D s-stache.ads		20221121095525 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20221121095525 1c9580f6 system.standard_library%s
+D s-stoele.ads		20221121095525 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20221121095525 8f5a9db6 system.storage_elements%b
+D s-stratt.ads		20221121095525 f7dfd786 system.stream_attributes%s
+D s-traent.ads		20221121095525 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20221121095525 fa2a7f59 system.unsigned_types%s
+D unchconv.ads		20221121095525 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z s b [str_split standard 6 9 none]
+X 1 ada.ads
+16K9*Ada 20e8 16|1r6 1r36
+X 7 a-string.ads
+16K13*Strings 35e16 16|1r10 1r40
+X 10 a-strunb.ads
+85K21*Unbounded 765e26 16|1w18 1r48
+90R9*Unbounded_String<5|43R9> 744e15 16|7r41 25r54 17|5r54
+120V13*To_String{string} 17|6s28 8s41
+X 15 my_strings.ads
+3K9*My_Strings 32e15 17|1w6 1r27
+9V14*To_Unbounded_String_N{10|90R9} 17|24s39 41s27
+X 16 str_split.ads
+4i5 NbrArgs{integer} 7r29 17|21r28 38r16
+6k9*Str_Split 4z5 27l5 27e14 17|3b14 47l5 47t14
+7A10*T_TAB(10|90R9)<integer> 25r35 17|5r35
+12X5*Erreur_Nombre_Arguments 17|22r31 43r19
+25U15*Split 25<21 25>42 25>72 17|5b15 45l9 45t14
+25a21 Tableau{7A10} 17|5b21 24m25 41m13
+25r42 Chaine{10|90R9} 17|5b42 6r38 8r51
+25e72 Caractere{character} 17|5b72 16r32
+X 17 str_split.adb
+6a9 Buffer{string} 24r61 32m17 40m13 41r49
+7i9 i{integer} 13m9 18r21 24r69 25m25 31m17 31r22 32r24 39m13 39r18 40r20
+. 41r57
+8a9 Chaine_Str{string} 14r14 15r19 16r16 32r30 40r26
+9i9 j{integer} 14m9 15r15 16r27 32r41 35m13 35r18 40r37
+10i9 n{integer} 12m9 21r24 24r33 27m21 27r26 38r12 41r21
+

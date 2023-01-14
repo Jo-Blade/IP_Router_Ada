@@ -1,0 +1,169 @@
+V "GNAT Lib v12"
+M P W=b
+A -gnata
+A -gnatwa
+P ZX
+
+RN
+RV NO_ALLOCATORS
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_LOCAL_ALLOCATORS
+RV NO_RECURSION
+RV NO_STANDARD_ALLOCATORS_AFTER_ELABORATION
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_ASPECT_SPECIFICATIONS
+RV NO_IMPLICIT_LOOPS
+
+U test%b		test.adb		185d28d1 NE OO SU
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+Z ada.unchecked_deallocation%s
+W arbre_prefixe%s	arbre_prefixe.adb	arbre_prefixe.ali
+Z system%s		system.ads		system.ali
+Z system.assertions%s	s-assert.adb		s-assert.ali
+Z system.atomic_operations.test_and_set%s  s-aotase.adb  s-aotase.ali
+Z system.concat_4%s	s-conca4.adb		s-conca4.ali
+Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.img_int%s	s-imgint.ads		s-imgint.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20221121095525 76789da1 ada%s
+D a-assert.ads		20221121095525 ba465f5c ada.assertions%s
+D a-except.ads		20221121095525 2a7d8d70 ada.exceptions%s
+D a-ioexce.ads		20221121095525 40018c65 ada.io_exceptions%s
+D a-stream.ads		20221121095525 119b8fb3 ada.streams%s
+D a-string.ads		20221121095525 90ac6797 ada.strings%s
+D a-sttebu.ads		20221121095525 18209c64 ada.strings.text_buffers%s
+D a-stuten.ads		20221121095525 33c54060 ada.strings.utf_encoding%s
+D a-tags.ads		20221121095525 9eaa38c6 ada.tags%s
+D a-textio.ads		20221121095525 deada98a ada.text_io%s
+D a-unccon.ads		20221121095525 0e9b276f ada.unchecked_conversion%s
+D a-uncdea.ads		20221121095525 c3a8ac65 ada.unchecked_deallocation%s
+D arbre_prefixe.ads	20230109143818 3f6f3b1c arbre_prefixe%s
+D arbre_prefixe.adb	20230109143825 33bf5b3e arbre_prefixe%b
+D interfac.ads		20221121095525 edec285f interfaces%s
+D i-c.ads		20221121095525 2284bf7c interfaces.c%s
+D i-cstrea.ads		20221121095525 e53d8b8e interfaces.c_streams%s
+D system.ads		20221121095525 a2da961d system%s
+D s-assert.ads		20221121095525 9c4520c7 system.assertions%s
+D s-atoope.ads		20221121095525 c7637a25 system.atomic_operations%s
+D s-aotase.ads		20221121095525 90cf94ab system.atomic_operations.test_and_set%s
+D s-aotase.adb		20221121095525 e581b407 system.atomic_operations.test_and_set%b
+D s-atopri.ads		20221121095525 1b132436 system.atomic_primitives%s
+D s-conca4.ads		20221121095525 d29d9dac system.concat_4%s
+D s-crtl.ads		20221121095525 8a0692f8 system.crtl%s
+D s-exctab.ads		20221121095525 91bef6ef system.exception_table%s
+D s-ficobl.ads		20221121095525 dc5161d4 system.file_control_block%s
+D s-imagei.ads		20221121095525 0d3f86a7 system.image_i%s
+D s-imgint.ads		20221121095525 bdb6f5ec system.img_int%s
+D s-parame.ads		20221121095525 d494a4a6 system.parameters%s
+D s-putima.ads		20221121095525 4e095881 system.put_images%s
+D s-secsta.ads		20221121095525 62cd9202 system.secondary_stack%s
+D s-soflin.ads		20221121095525 df77073e system.soft_links%s
+D s-stache.ads		20221121095525 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20221121095525 1c9580f6 system.standard_library%s
+D s-stoele.ads		20221121095525 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20221121095525 8f5a9db6 system.storage_elements%b
+D s-traent.ads		20221121095525 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20221121095525 fa2a7f59 system.unsigned_types%s
+D s-wchcon.ads		20221121095525 d9032363 system.wch_con%s
+D test.adb		20230110160333 f99fba47 test%b
+D unchconv.ads		20221121095525 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z b b [test standard 4 11 none]
+G r i none [test standard 4 11 none] [arbre_prefixe standard 11 9 none]
+X 1 ada.ads
+16K9*Ada 20e8 41|1r6 1r27
+X 10 a-textio.ads
+58K13*Text_IO 727e16 41|1w10 1r31
+263U14*New_Line 41|117s9 122s9 130s5 131s5 134s5 159s5
+464U14*Put 41|26s9 116s9 121s9
+507U14*Put_Line 41|132s5 133s5 137s5 139s5 141s5 142s5 146s5 149s9 153s13
+. 155s5 157s5
+X 13 arbre_prefixe.ads
+2+10 T_Element 41|16r44
+3+10 T_Cle 41|16r66
+5i5 Nombre_Prefixes{natural} 41|16r82
+9V19 Lire_Prefixe{natural} 41|17r5
+11k9*Arbre_Prefixe 116e18 41|2w6 16r30
+13P10 T_Trie 41|20r13[16] 22r40[16] 32r39[16] 32r59[16] 47r39[16] 49r49[16]
+. 65r53[16] 68r40[16] 73r50[16] 87r75[16] 89r50[16]
+16X5 Element_Absent_Error 41|152r14[16]
+20U15 Initialiser 41|114s5[16]
+23U15 Vider 41|162s5[16]
+26V14 Est_Vide{boolean} 41|34s12[16] 34s33[16] 36s15[16] 38s15[16] 51s16[16]
+28V14 Est_Feuille{boolean} 41|51s35[16] 91s16[16] 115s12[16] 120s8[16]
+35U24 Post_Traitement 41|58r59[16]
+36u15 Ajouter 41|58r50[16]
+40V14 Lire_Donnee_Racine{integer} 41|24s39[16] 37s20[16] 39s20[16] 40s15[16]
+. 40s44[16] 41s20[16] 43s20[16] 66s35[16] 70s20[16] 75s16[16]
+43V14 Lire_Cle_Racine{41|5M10} 41|23s39[16]
+47U15 Ecrire_Donnee_Tete 41|54s17[16] 76s17[16] 92s17[16] 94s17[16]
+52V14 Lire_Ieme_Enfant{13P10[41|16]} 41|54s55[16] 54s83[16] 76s55[16] 76s83[16]
+. 94s55[16] 94s83[16]
+61V23 Selection{boolean} 41|82r60[16]
+62U24 Post_Traitement 41|82r84[16]
+63u15 Supprimer_Selection 41|82r40[16]
+74U24 Traiter 41|29r57[16]
+75u15 Parcours_Profondeur_Post 41|29r31[16]
+77V14 Trouver{integer} 41|132s28[16] 133s28[16] 139s28[16] 142s28[16] 146s28[16]
+. 149s32[16] 155s28[16] 157s28[16]
+89V23 Verifier{boolean} 41|107r79[16]
+90U24 Post_Traitement 41|107r101[16]
+91u15 Chercher_Et_Verifier_Post 41|107r52[16]
+X 41 test.adb
+4U11*Test 4b11 163l5 163t9
+5M10 T_Cle 7r37 16r75 23r28 47r56 87r92 98r39
+7V14 Lire_Prefixe{natural} 7b14 7>28 7>44 14l9 14t21 17r21
+7m28 Cle{5M10} 9r20
+7i44 Indice{natural} 9r37
+16K13 Triebin5b[13|11] 18r9 58r40
+20p5 Arbre{13|13P10[16]} 114m17 114r17 115r24 119m13 119r13 120r20 124m13
+. 124r13 125m13 125r13 126m13 126r13 127m13 127r13 128r14 132r36 133r36 138r14
+. 139r36 140m30 140r30 142r36 143r14 145m27 145r27 146r36 147m27 147r27 149r40
+. 155r36 156m27 156r27 157r36 158m27 158r27 160r14 162m11 162r11
+22U15 Afficher_Cle 22b15 22>29 27l9 27t21 29r68
+22p29 Arbre{13|13P10[16]} 23r55 24r58
+23m9 Cle{5M10} 26r35
+24i9 Element{integer} 26r66
+29U15 Afficher[13|75] 128s5 138s5 143s5 160s5
+32V14 Min_Temps_2{integer} 32b14 32>27 32>47 45l9 45t20 54s43 76s43 94s43
+32p27 Arbre1{13|13P10[16]} 34r21 36r24 39r39 40r34 41r39
+32p47 Arbre2{13|13P10[16]} 34r42 37r39 38r24 40r63 43r39
+47U15 Ajouter 47b15 47=24 47>47 47>63 62l9 62t16 119s5 124s5 125s5 126s5
+. 127s5
+47p24 Arbre{13|13P10[16]} 61m23
+47m47 Cle{5M10} 61r30
+47i63 Temps{integer} 61r35
+49U19 Mettre_A_Jour 49b19 49=34 56l13 56t26 58r78
+49p34 Arbre{13|13P10[16]} 51r25 51r47 54m36 54r72 54r100
+58U19 Ajouter_Arbre[13|36] 61s9
+65U15 Supprimer_Plus_Ancien 65b15 65=38 85l9 85t30 145s5 147s5 156s5 158s5
+65p38 Arbre{13|13P10[16]} 66r54 84m23
+66i9 Min{integer} 70r48 75r44
+68V18 Selection{boolean} 68b18 68>29 71l13 71t22 82r73
+68p29 Arbre{13|13P10[16]} 70r39
+73U19 Post_Traitement 73b19 73=35 80l13 80t28 82r103
+73p35 Arbre{13|13P10[16]} 75r35 76m36 76r72 76r100
+82U19 Supprimer_bis[13|63] 84s9
+87U15 Trouver_Et_Actualiser 87b15 87<38 87=60 87>83 87>99 110l9 110t30 140s5
+87i38 Donnee{integer} 109m36
+87p60 Arbre{13|13P10[16]} 109m44
+87m83 Cle{5M10} 100r24 109r51
+87i99 T{integer} 92r44
+89U19 Post_Traitement 89b19 89=35 96l13 96t28 107r120
+89p35 Arbre{13|13P10[16]} 91r28 92m37 94m36 94r72 94r100
+98V18 Verifier{boolean} 98b18 98>28 98>46 105l13 105t21 107r91
+98m28 A_Cle{5M10} 100r16
+98i46 A_Donnee{integer} 100r32
+107U19 Trouver_Et_Actualiser_Bis[13|91] 109s9
+112i5 A{integer} 140m27 141r28
+

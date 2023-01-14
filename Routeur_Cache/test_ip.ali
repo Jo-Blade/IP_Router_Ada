@@ -1,0 +1,141 @@
+V "GNAT Lib v12"
+M P W=b
+A -gnata
+A -gnatwa
+P SS ZX
+
+RN
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_NESTED_FINALIZATION
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_DEFAULT_INITIALIZATION
+
+U test_ip%b		test_ip.adb		d352a776 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.strings%s		a-string.ads		a-string.ali
+Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
+W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W ip%s			ip.adb			ip.ali
+Z system%s		system.ads		system.ali
+Z system.assertions%s	s-assert.adb		s-assert.ali
+Z system.atomic_operations.test_and_set%s  s-aotase.adb  s-aotase.ali
+Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20221121095525 76789da1 ada%s
+D a-assert.ads		20221121095525 ba465f5c ada.assertions%s
+D a-charac.ads		20221121095525 2d3ec45b ada.characters%s
+D a-chlat1.ads		20221121095525 e0d72e76 ada.characters.latin_1%s
+D a-except.ads		20221121095525 2a7d8d70 ada.exceptions%s
+D a-finali.ads		20221121095525 bf4f806b ada.finalization%s
+D a-ioexce.ads		20221121095525 40018c65 ada.io_exceptions%s
+D a-stream.ads		20221121095525 119b8fb3 ada.streams%s
+D a-string.ads		20221121095525 90ac6797 ada.strings%s
+D a-strmap.ads		20221121095525 233229cd ada.strings.maps%s
+D a-sttebu.ads		20221121095525 18209c64 ada.strings.text_buffers%s
+D a-strunb.ads		20221121095525 5837d881 ada.strings.unbounded%s
+D a-stuten.ads		20221121095525 33c54060 ada.strings.utf_encoding%s
+D a-tags.ads		20221121095525 9eaa38c6 ada.tags%s
+D a-textio.ads		20221121095525 deada98a ada.text_io%s
+D a-unccon.ads		20221121095525 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20221121095525 edec285f interfaces%s
+D i-c.ads		20221121095525 2284bf7c interfaces.c%s
+D i-cstrea.ads		20221121095525 e53d8b8e interfaces.c_streams%s
+D ip.ads		20230107191445 7bdfa37c ip%s
+D system.ads		20221121095525 a2da961d system%s
+D s-assert.ads		20221121095525 9c4520c7 system.assertions%s
+D s-atocou.ads		20221121095525 dc18efc3 system.atomic_counters%s
+D s-atoope.ads		20221121095525 c7637a25 system.atomic_operations%s
+D s-aotase.ads		20221121095525 90cf94ab system.atomic_operations.test_and_set%s
+D s-aotase.adb		20221121095525 e581b407 system.atomic_operations.test_and_set%b
+D s-atopri.ads		20221121095525 1b132436 system.atomic_primitives%s
+D s-crtl.ads		20221121095525 8a0692f8 system.crtl%s
+D s-exctab.ads		20221121095525 91bef6ef system.exception_table%s
+D s-ficobl.ads		20221121095525 dc5161d4 system.file_control_block%s
+D s-finroo.ads		20221121095525 4ff27390 system.finalization_root%s
+D s-memory.ads		20221121095525 5b8432d0 system.memory%s
+D s-parame.ads		20221121095525 d494a4a6 system.parameters%s
+D s-putima.ads		20221121095525 4e095881 system.put_images%s
+D s-secsta.ads		20221121095525 62cd9202 system.secondary_stack%s
+D s-soflin.ads		20221121095525 df77073e system.soft_links%s
+D s-stache.ads		20221121095525 0b81c1fe system.stack_checking%s
+D s-stalib.ads		20221121095525 1c9580f6 system.standard_library%s
+D s-stalib.adb		20221121095525 eb464a47 system.standard_library%b
+D s-stoele.ads		20221121095525 6d8e1ff4 system.storage_elements%s
+D s-stoele.adb		20221121095525 8f5a9db6 system.storage_elements%b
+D s-stratt.ads		20221121095525 f7dfd786 system.stream_attributes%s
+D s-traent.ads		20221121095525 c81cbf8c system.traceback_entries%s
+D s-unstyp.ads		20221121095525 fa2a7f59 system.unsigned_types%s
+D s-wchcon.ads		20221121095525 d9032363 system.wch_con%s
+D test_ip.adb		20230107191826 2e177501 test_ip%b
+D unchconv.ads		20221121095525 ca2f9e18 unchecked_conversion%s
+G a e
+G c Z b b [test_ip standard 5 11 none]
+G r c none [test_ip standard 5 11 none] [texte_vers_ip ip 20 14 none]
+G r c none [test_ip standard 5 11 none] [egalite_ip ip 30 14 none]
+G r c none [test_ip standard 5 11 none] [lire_bit ip 26 14 none]
+G r c none [test_ip standard 5 11 none] [ip_vers_texte ip 23 14 none]
+G r c none [test_ip standard 5 11 none] [entier_vers_ip ip 15 14 none]
+G r c none [test_ip standard 5 11 none] [longueur_ip ip 34 14 none]
+G r c none [test_ip standard 5 11 none] [discriminant ip 38 14 none]
+X 1 ada.ads
+16K9*Ada 20e8 46|1r6 1r36 2r6 2r28
+X 9 a-string.ads
+16K13*Strings 35e16 46|1r10 1r40
+X 12 a-strunb.ads
+85K21*Unbounded 765e26 46|1w18 1r48
+90R9*Unbounded_String<6|43R9> 744e15 46|15r12 16r12
+107V13*To_Unbounded_String{90R9} 46|22s26 23s26 24s26 25s30 26s30 33s25 42s26
+. 44s26 46s26 47s26 49s30 58s26 61s26 62s26 67s26 69s26 72s28 79s26 80s26
+120V13*To_String{string} 46|81s14 82s14 83s14
+242V14*"="{boolean} 46|46s24 47s24
+X 15 a-textio.ads
+58K13*Text_IO 727e16 46|2w10 2r32
+464U14*Put 46|53s13 75s13
+507U14*Put_Line 46|81s5 82s5 83s5 85s5 86s5 87s5 88s5 89s5 90s5
+X 20 ip.ads
+5K9*IP 45e7 46|3w6 3r19
+7M10*T_IP 46|8r11 9r11 10r11 11r9 12r15 13r15 14r17
+9X5*Erreur_Chaine_Non_IP 46|52r14
+10X5*Erreur_Masque_Invalide 46|74r14
+15V14*Entier_Vers_IP{7M10} 46|57s18 60s18
+20V14*Texte_Vers_IP{7M10} 46|22s12 23s12 24s12 25s16 26s16 33s11 42s12 44s12
+. 49s16 58s12 61s12 62s12 67s12 69s12 72s14 79s12 80s12
+23V14*IP_Vers_Texte{12|90R9} 46|43s13 45s13 81s24 82s24 83s24
+26V14*Lire_Bit{integer} 46|35s24 38s24
+30V14*Egalite_IP{boolean} 46|27s19 28s19 29s23 30s19 59s19 63s19 64s19
+34V14*Longueur_IP{integer} 46|68s20 70s20
+38V14*Discriminant{7M10} 46|83s38
+X 21 system.ads
+67M9*Address
+X 32 s-memory.ads
+51V13*Alloc{21|67M9} 101i<c,__gnat_malloc>22
+66U14*Free 102i<c,__gnat_free>22
+74V13*Realloc{21|67M9} 103i<c,__gnat_realloc>22
+X 39 s-stalib.adb
+87U14 Break_Start 88i<c,__gnat_break_start>22
+X 46 test_ip.adb
+5U11*test_ip 5b11 93l5 93t12
+6X5 Erreur_Exception_Non_Levee 50r15
+8m5 IP1{20|7M10} 22m5 27r30 28r30 29r34 30r30 67m5 68r32 69m5 70r32 72m7
+. 79m5 81r38 83r51
+9m5 IP2{20|7M10} 23m5 27r34 28r34 42m5 43r27 49m9 58m5 59r30 61m5 63r30 80m5
+. 82r38 83r55
+10m5 IP3{20|7M10} 24m5 29r38 30r34 44m5 45r27 62m5 64r30
+11m5 Nb{20|7M10} 33m5 35r33 38r33
+12m5 Masque1{20|7M10} 25m5 27r38 29r42 59r44 63r44 64r44
+13m5 Masque2{20|7M10} 26m5 28r38 30r38
+14m5 IP_Entier{20|7M10} 57m5 59r34 60m5 63r34 64r34
+15r5 txt1{12|90R9} 43m5 46r19
+16r5 txt2{12|90R9} 45m5 47r19
+34i9 i{integer} 35r37
+37i9 i{integer} 38r37
+
